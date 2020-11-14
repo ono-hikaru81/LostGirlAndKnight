@@ -18,6 +18,9 @@ public:
 
 public:
 	bool CheckHit();
+
+public://ƒƒ“ƒo•Ï”
+	float P_Speed = 1.0f;
 };
 
 #endif // !PLAYER_H

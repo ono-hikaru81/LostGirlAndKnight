@@ -11,6 +11,10 @@ Player::~Player()
 
 void Player::Move()
 {
+	if (CheckHitKey(KEY_INPUT_A) == true)
+	{
+		P_Speed *= -1;
+	}
 }
 
 void Player::Draw()
