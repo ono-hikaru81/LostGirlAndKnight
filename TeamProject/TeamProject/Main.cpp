@@ -12,7 +12,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ChangeWindowMode(TRUE);
 	SetGraphMode(WindowWidth, WindowHeight, 32);
 	SetBackgroundColor(0, 0, 120);
-	SetMainWindowText("アクションゲーム");
+	SetMainWindowText("井本組のゲーム");
 	if (DxLib_Init() == -1)
 	{
 		return -1;			// エラーが起きたら直ちに終了
@@ -37,9 +37,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// ----------------------------------------------------
 		ClearDrawScreen();
 		clsDx();
-
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
-		LoadGraphScreen(50, 100, "data/Unitychan_Blink_1.png", TRUE); // 画像を描画する
 
 		// =================
 		// 処理関数呼び出し
