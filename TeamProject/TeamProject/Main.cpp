@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "Main.h"
 #include "Processing.h"
+#include"Player.h"
 
 Processing processing;
 
@@ -26,7 +27,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// =============================
 	// 以下、毎フレーム更新する処理
 	// =============================
-
+	
+	
 
 	// =============
 	// メインループ
@@ -44,7 +46,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		processing.Game();
 
 		processing.Draw();
-
+		
 		// =====================================================================
 		// ＤＸライブラリを使う上で、モニターへゲーム画面を表示するためのお約束
 		// 必ずループの最後で呼び出す

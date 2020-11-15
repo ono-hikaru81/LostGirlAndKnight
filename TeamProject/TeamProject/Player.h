@@ -20,7 +20,9 @@ public:
 	bool CheckHit();
 
 public://メンバ変数
-	float P_Speed = 1.0f;	//仮数値
+	float P_Posx;	//Player座標(一人)
+	float P_Posy;
+	int HP;			//多分いる
 };
 
 #endif // !PLAYER_H
