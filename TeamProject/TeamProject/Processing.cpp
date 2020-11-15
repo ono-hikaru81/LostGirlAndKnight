@@ -4,6 +4,8 @@
 #include "Player.h"
 #include "Enemy.h"
 
+Map map;
+
 Processing::Processing()
 {
 }
@@ -18,4 +20,5 @@ void Processing::Game()
 
 void Processing::Draw()
 {
+	map.Draw();
 }
