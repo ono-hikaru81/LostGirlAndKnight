@@ -20,7 +20,7 @@ public:
 	bool CheckHit();
 
 public://ƒƒ“ƒo•Ï”
-	float P_Speed = 1.0f;
+	float P_Speed = 1.0f;	//‰¼”’l
 };
 
 #endif // !PLAYER_H

@@ -10,9 +10,9 @@ enum InputState
 	Releasad,
 };
 
-bool InputGetKey(int Key);
-bool InputGetKeyUp(int Key);
-bool InputGetKeyDown(int Key);
+bool IsKeyHold(int Key);
+bool IsKeyPushed(int Key);
+bool IsKeyReleased(int Key);
 
 
 #endif // !INPUTKEY_H

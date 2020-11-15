@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "Player.h"
+#include"InputKey.h"
 
 Player::Player()
 {
@@ -11,9 +12,9 @@ Player::~Player()
 
 void Player::Move()
 {
-	if (CheckHitKey(KEY_INPUT_A) == true)
+	if (IsKeyHold(KEY_INPUT_A))
 	{
-		P_Speed *= -1;
+		P_Posx *= -1;
 	}
 }
 
