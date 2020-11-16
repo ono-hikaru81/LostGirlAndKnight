@@ -16,6 +16,7 @@ Processing::~Processing()
 
 void Processing::Game()
 {
+	player.Move();
 }
 
 void Processing::Draw()

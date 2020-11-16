@@ -17,17 +17,17 @@ Player::~Player()
 
 void Player::Move()
 {
-	if (IsKeyHold(KEY_INPUT_A))//左移動
+	if (CheckHitKey(KEY_INPUT_A))//左移動
 	{
-		P_Posx += -1;
+		P_Posx -= 4;
 	}
 
-	if (IsKeyHold(KEY_INPUT_D))//右移動
+	if (CheckHitKey(KEY_INPUT_D))//右移動
 	{
-		P_Posx += 1;
+		P_Posx += 4;
 	}
 
-	if (IsKeyHold(KEY_INPUT_W))//ジャンプ
+	if (CheckHitKey(KEY_INPUT_W))//ジャンプ
 	{
 		//ジャンプの物理演算 
 	}
