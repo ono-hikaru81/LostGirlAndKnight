@@ -17,7 +17,19 @@ public:
 	void Draw();
 
 public:
-	bool CheckHit();
+	bool CheckHit(float x, float y, float width, float height);
+
+private:
+	int m_slime;
+	int m_skull;
+	int m_orc;
+
+private:
+	float hp;
+	float pow;
+	float m_speed;
+	float m_gravity;
+	
 };
 
 #endif // !ENEMY_H
