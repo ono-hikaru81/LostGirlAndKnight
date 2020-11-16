@@ -1,7 +1,6 @@
 #include "DxLib.h"
 #include "Player.h"
-#include"InputKey.h"
-
+#include"Main.h"
 
 
 Player::Player()
@@ -9,6 +8,7 @@ Player::Player()
 	P_Posx = 100;
 	P_Posy = 100;
 	HP = 1;
+	Gravity = 0.98f;
 }
 
 Player::~Player()
@@ -31,11 +31,15 @@ void Player::Move()
 	{
 		//ƒWƒƒƒ“ƒv‚Ì•¨—‰‰Z 
 	}
+	if (P_Posy < WindowHeight - 180)//d—Í‰Á‘¬
+	{
+		P_Posy /= Gravity;
+	}
 }
 
 void Player::Draw()
 {
-	LoadGraphScreen(P_Posx, 100, "Res/taiki_R.png", TRUE);
+	LoadGraphScreen(P_Posx, P_Posy, "Res/taiki_R.png", TRUE);
 }
 
 bool Player::CheckHit()

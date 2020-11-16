@@ -23,6 +23,7 @@ public://ƒƒ“ƒo•Ï”
 	float P_Posx;	//PlayerÀ•W(ˆêl)
 	float P_Posy;
 	int HP;			//‘½•ª‚¢‚é
+	float Gravity;
 };
 
 #endif // !PLAYER_H
