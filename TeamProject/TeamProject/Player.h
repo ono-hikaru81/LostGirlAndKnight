@@ -23,7 +23,10 @@ public://ƒƒ“ƒo•Ï”
 	float P_Posx;	//PlayerÀ•W(ˆêl)
 	float P_Posy;
 	int HP;			//‘½•ª‚¢‚é
-	float Gravity;
+	const float Gravity = 9.8f;
+	float Jump;
+	bool Jump_exec;
+	float Clone_Jump;
 };
 
 #endif // !PLAYER_H

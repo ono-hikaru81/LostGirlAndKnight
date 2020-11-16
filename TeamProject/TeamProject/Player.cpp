@@ -2,13 +2,14 @@
 #include "Player.h"
 #include"Main.h"
 
-
 Player::Player()
 {
-	P_Posx = 100;
-	P_Posy = 100;
+	P_Posx = 100.0f;
+	P_Posy = 100.0f;
 	HP = 1;
-	Gravity = 0.98f;
+	Jump = -50;
+	Jump_exec = false;
+	Clone_Jump = Jump;
 }
 
 Player::~Player()
@@ -29,11 +30,19 @@ void Player::Move()
 
 	if (CheckHitKey(KEY_INPUT_W))//ジャンプ
 	{
-		//ジャンプの物理演算 
+		Jump_exec = true;
 	}
+	if (Jump_exec == true)
+	{
+		P_Posy += Clone_Jump;
+		Jump += Gravity;
+		Jump_exec = false;
+	}
+
+	
 	if (P_Posy < WindowHeight - 180)//重力加速
 	{
-		P_Posy /= Gravity;
+		P_Posy += Gravity;
 	}
 }
 
