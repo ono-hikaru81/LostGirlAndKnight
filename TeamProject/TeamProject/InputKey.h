@@ -1,18 +1,22 @@
-
 #ifndef INPUTKEY_H
 #define INPUTKEY_H
 
+#include <dinput.h>
+
 enum InputState
 {
-	Nohold,
+	NoHold,
 	Pushed,
 	Hold,
-	Releasad,
+	Released,
 };
 
-bool IsKeyHold(int Key);
-bool IsKeyPushed(int Key);
-bool IsKeyReleased(int Key);
+bool InputInit();
+void InputRelease();
+void InputUpdate();
 
+bool IsKeyHeld(int key);
+bool IsKeyPushed(int key);
+bool IsKeyReleased(int key);
 
 #endif // !INPUTKEY_H

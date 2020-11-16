@@ -4,6 +4,11 @@
 #include "Processing.h"
 #include"Player.h"
 
+#pragma comment(lib,"d3dx9.lib")
+#pragma comment(lib,"d3d9.lib")
+#pragma comment(lib,"dinput8.lib")
+#pragma comment(lib,"dxguid.lib")
+
 Processing processing;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
