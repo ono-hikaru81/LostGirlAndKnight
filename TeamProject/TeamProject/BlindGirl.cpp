@@ -52,8 +52,7 @@ void Girl::Move()
 			m_floating = false;
 			m_gravity = 0.0f;
 		}
-	}
-	
+	}	
 }
 
 void Girl::Draw()
