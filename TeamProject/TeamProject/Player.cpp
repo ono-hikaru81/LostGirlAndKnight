@@ -4,12 +4,12 @@
 
 Player::Player()
 {
-	P_Posx = 100.0f;
-	P_Posy = 100.0f;
-	HP = 1;
-	Jump = -50;
-	Jump_exec = false;
-	Clone_Jump = Jump;
+	m_PlayerPosx = 100.0f;
+	m_PlayerPosy= WindowHeight - 180.0f;
+	m_HP = 1;
+	m_Jump = -50;
+	m_Jump_exec = false;
+	m_Gravity = 0.0f;
 }
 
 Player::~Player()
@@ -20,35 +20,44 @@ void Player::Move()
 {
 	if (CheckHitKey(KEY_INPUT_A))//左移動
 	{
-		P_Posx -= 4;
+		m_PlayerPosx -= 4;
+		if (CheckHitKey(KEY_INPUT_W) && m_PlayerPosy >= WindowHeight - 180)//ジャンプ
+		{
+			m_Gravity = -5.0f;
+			m_Jump_exec = true;
+		}
 	}
 
 	if (CheckHitKey(KEY_INPUT_D))//右移動
 	{
-		P_Posx += 4;
+		m_PlayerPosx += 4;
+		if (CheckHitKey(KEY_INPUT_W) && m_PlayerPosy >= WindowHeight - 180)//ジャンプ
+		{
+			m_Gravity = -5.0f;
+			m_Jump_exec = true;
+		}
 	}
 
-	if (CheckHitKey(KEY_INPUT_W))//ジャンプ
+	if (CheckHitKey(KEY_INPUT_W) && m_PlayerPosy >= WindowHeight - 180)//ジャンプ
 	{
-		Jump_exec = true;
+		m_Gravity = -5.0f;
+		m_Jump_exec = true;
 	}
-	if (Jump_exec == true)
+	if (m_Jump_exec == true)
 	{
-		P_Posy += Clone_Jump;
-		Jump += Gravity;
-		Jump_exec = false;
-	}
-
-	
-	if (P_Posy < WindowHeight - 180)//重力加速
-	{
-		P_Posy += Gravity;
-	}
+		m_PlayerPosy += m_Gravity;
+		m_Gravity += 0.2f;
+		if (m_PlayerPosy >= WindowHeight - 180)//重力加速
+		{
+			m_Jump_exec = false;
+			m_Gravity += 0.0f;
+		}
+	}	
 }
 
 void Player::Draw()
 {
-	LoadGraphScreen(P_Posx, P_Posy, "Res/taiki_R.png", TRUE);
+	LoadGraphScreen(m_PlayerPosx, m_PlayerPosy, "Res/taiki_R.png", TRUE);
 }
 
 bool Player::CheckHit()

@@ -20,13 +20,12 @@ public:
 	bool CheckHit();
 
 public://メンバ変数
-	float P_Posx;	//Player座標(一人)
-	float P_Posy;
-	int HP;			//多分いる
-	const float Gravity = 9.8f;
-	float Jump;
-	bool Jump_exec;
-	float Clone_Jump;
+	float m_PlayerPosx;	//Player座標(一人)
+	float m_PlayerPosy;
+	int m_HP;			//多分いる
+	float m_Gravity;
+	float m_Jump;
+	bool m_Jump_exec;
 };
 
 #endif // !PLAYER_H
