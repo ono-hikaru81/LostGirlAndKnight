@@ -20,12 +20,18 @@ public:
 	bool CheckHit();
 
 public://メンバ変数
+	int m_HP;			//多分いる
+	int m_stop;			//止まる
+	int m_walk;			//歩く
+	int m_attack;		//攻撃
+	int m_Jump;			//ジャンプ
 	float m_PlayerPosx;	//Player座標(一人)
 	float m_PlayerPosy;
-	int m_HP;			//多分いる
 	float m_Gravity;
-	float m_Jump;
 	bool m_Jump_exec;
+	bool m_stop_exec;
+	bool m_walk_exec;
+	bool m_attacl_exec;
 };
 
 #endif // !PLAYER_H
