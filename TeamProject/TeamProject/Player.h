@@ -27,6 +27,7 @@ public://メンバ変数
 	int m_Jump;			//ジャンプ
 	int m_RightMotionMAX;
 	int m_count;
+	int m_MotionCooltime;
 	float m_PlayerPosx;	//Player座標(一人)
 	float m_PlayerPosy;
 	float m_Gravity;

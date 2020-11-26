@@ -16,6 +16,7 @@ Player::Player()
 	m_RightMotionMAX = 4;
 	m_RightMotion[m_RightMotionMAX];
 	m_count = 0;
+	m_MotionCooltime = 0;
 }
 
 Player::~Player()
@@ -53,23 +54,26 @@ void Player::Move()
 		}
 	}
 
-	else if (CheckHitKey(KEY_INPUT_W) && m_PlayerPosy >= WindowHeight - 180)//ジャンプ
+	if (CheckHitKey(KEY_INPUT_W) && m_PlayerPosy >= WindowHeight - 180)//ジャンプ
 	{
 		m_stop_exec = false;
-		m_Gravity = -5.0f;
+		m_Gravity = -10.0f;
 		m_jump_exec = true;
 	}
+
 	if (m_jump_exec == true)
 	{
+		m_stop_exec = false;
 		m_PlayerPosy += m_Gravity;
-		m_Gravity += 0.2f;
+		m_Gravity += 0.5f;
 		if (m_PlayerPosy >= WindowHeight - 180)//重力加速
 		{
 			m_jump_exec = false;
 			m_Gravity += 0.0f;
 		}
 	}
-	else if (CheckHitKey(KEY_INPUT_SPACE) && m_PlayerPosy >= WindowHeight - 180)
+
+	if (CheckHitKey(KEY_INPUT_SPACE) && m_PlayerPosy >= WindowHeight - 180)
 	{
 		m_stop_exec = false;
 		m_attacl_exec = true;
@@ -93,8 +97,20 @@ void Player::Draw()
 	}
 	else if (m_walk_exec == true)
 	{
-		DrawGraph(m_PlayerPosx, m_PlayerPosy, m_walk, TRUE);
-		//DrawGraph(m_PlayerPosx, m_PlayerPosy, m_RightMotion[m_count], TRUE);
+		//DrawGraph(m_PlayerPosx, m_PlayerPosy, m_walk, TRUE);
+
+		if (m_count == 2)
+		{
+			m_count = 0;
+		}
+		DrawGraph(m_PlayerPosx, m_PlayerPosy, m_RightMotion[m_count], TRUE);
+		m_MotionCooltime++;
+		if (m_MotionCooltime == 15)
+		{
+			m_count++;
+			m_MotionCooltime = 0;
+			
+		}
 	}
 	else if (m_attacl_exec == true)
 	{
@@ -108,13 +124,15 @@ void Player::Draw()
 
 bool Player::CheckHit(int x, int y, int Width, int Height)
 {
-	x = m_PlayerPosx;
-	y = m_PlayerPosy;
-
-	if (x < Width || x + 120 > Width || y < Height || y + 180 > Height)
+	if ((m_PlayerPosx > x && m_PlayerPosx < Width) ||
+		(m_PlayerPosy > y && m_PlayerPosy < Height)||
+		(m_PlayerPosx+120 > x && m_PlayerPosx +120 < Width)||
+		(m_PlayerPosy + 180 > x && m_PlayerPosy + 180 <Height))
 	{
-
+		return true;
 	}
-
-	return false;
+	else
+	{
+		return false;
+	}
 }
