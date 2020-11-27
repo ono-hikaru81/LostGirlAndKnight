@@ -9,6 +9,23 @@
 class Enemy:public Base
 {
 public:
+	// 
+	int m_SlimeMax = 0;
+
+	// ˆÊ’uÀ•W
+	int m_PosX;
+	int m_PosY;
+
+	// ‰æ‘œ•Û‘¶
+	int m_SlimeGraph;
+	int m_SkullGraph;
+	int m_OrcGraph;
+
+	// ¶‚«‚Ä‚éH
+	bool m_SlimeAlive;
+	
+
+public:
 	Enemy();
 	virtual ~Enemy();
 
@@ -17,19 +34,17 @@ public:
 	void Draw();
 
 public:
-	bool CheckHit(float x, float y, float width, float height);
+	bool CheckHit(float x, float y, float width, float height);	
+};
 
-private:
-	int m_slime;
-	int m_skull;
-	int m_orc;
-
-private:
-	float hp;
-	float pow;
-	float m_speed;
-	float m_gravity;
-	
+struct EnemyType
+{
+	int m_Slime;
+	int m_Skull;
+	int m_Orc;
+	int m_Werewolf;
+	int m_Vampire;
+	int m_Doragon;
 };
 
 #endif // !ENEMY_H

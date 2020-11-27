@@ -20,5 +20,4 @@ void Processing::Game()
 
 void Processing::Draw()
 {
-	enemy.Draw();
 }

@@ -3,6 +3,12 @@
 
 Enemy::Enemy()
 {
+	m_SlimeGraph = NULL;
+	m_SkullGraph = NULL;
+	m_OrcGraph = NULL;
+	m_PosX = 1360;
+	m_PosY = 540;
+	m_SlimeAlive = true;
 }
 
 Enemy::~Enemy()
@@ -15,20 +21,17 @@ void Enemy::Move()
 
 void Enemy::Draw()
 {
-	m_slime = LoadGraph("Res/Enemy/slime.png");
-	m_skull = LoadGraph("Res/Enemy/skull.png");
-	m_orc = LoadGraph("Res/Enemy/orc.png");
+	m_SlimeGraph = LoadGraph("Res/Enemy/slime.png");
+	m_SkullGraph = LoadGraph("Res/Enemy/skull.png");
+	m_OrcGraph   = LoadGraph("Res/Enemy/orc.png");
 
-//	LoadGraphScreen(0, 0, "Res/Enemy/slime.png", TRUE);
-
-	DrawRotaGraph(200, 200, 0.1, 0.0, m_slime,TRUE);
-	DrawRotaGraph(300, 200, 0.15, 0.0, m_skull,TRUE);
-	DrawRotaGraph(400, 200, 0.3, 0.0, m_orc,TRUE);
+	DrawGraph(m_PosX, m_PosY, m_SlimeGraph,TRUE);
 }
 
 bool Enemy::CheckHit(float x, float y, float width, float height)
 {
-	/*if ()
+	if ((m_PosX >= x && m_PosX <= width) && (m_PosY >= y && m_PosY <= height) ||
+		(m_PosX + 120 >= x && m_PosX + 120 <= width) && (m_PosY + 180 >= y && m_PosY + 180 <= height))
 	{
 		return true;
 	}
@@ -36,5 +39,4 @@ bool Enemy::CheckHit(float x, float y, float width, float height)
 	{
 		return false;
 	}
-	*/
 }
