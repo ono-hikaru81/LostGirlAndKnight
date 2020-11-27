@@ -4,8 +4,6 @@
 #include "Player.h"
 #include "Enemy.h"
 
-Enemy enemy;
-
 Processing::Processing()
 {
 }
