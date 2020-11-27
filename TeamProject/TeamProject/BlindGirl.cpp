@@ -1,20 +1,25 @@
 #include "DxLib.h"
 #include "BlindGirl.h"
-#include <time.h>
+#include "Main.h"
 
 Girl::Girl()
 {
-	m_wait = 0;
-	m_walk = 0;
-	m_jamp = 0;
-	m_timer = 0.0f;	
-	m_girlposx = 100.0f;
-	m_girlposy = 450.0f;
-	m_speed = 4.0f;
-	m_gravity = 0.0f;
-	m_waiting = false;
-	m_walking = false;
-	m_floating  = false;
+	// ステータス
+	m_Hp = 2;
+
+	// 位置座標 
+	m_PosX = 80;
+	m_PosY = WindowHeight - 450;
+
+	// 実行確認
+	m_StopExec = true;
+	m_WalkExec = false;
+	m_JumpExec = false;
+
+	// 画像保存
+	m_WaitGraph = NULL;
+	m_WalkGraph = NULL;
+	m_JumpGraph = NULL;
 }
 
 Girl::~Girl()
@@ -23,66 +28,24 @@ Girl::~Girl()
 
 void Girl::Move()
 {
-	if (CheckHitKey(KEY_INPUT_LEFT) && m_girlposx >= 15.0f)
-	{
-		m_girlposx -= m_speed;
-		m_walking = true;
-
-		if (CheckHitKey(KEY_INPUT_UP) && m_girlposy >= 450.0f)
-		{
-			m_gravity = -5.0f;
-			m_floating = true;
-		}
-	}
-	else if (CheckHitKey(KEY_INPUT_RIGHT) && m_girlposx <= 625.0f)
-	{
-		m_girlposx += m_speed;
-		m_walking = true;
-
-		if (CheckHitKey(KEY_INPUT_UP) && m_girlposy >= 450.0f)
-		{
-			m_gravity = -5.0f;
-			m_floating = true;
-		}
-	}
-	else if (CheckHitKey(KEY_INPUT_UP) && m_girlposy >= 450.0f)
-	{
-		m_gravity = -5.0f;
-		m_floating = true;
-	}
-
-	if (m_floating == true)
-	{
-		m_girlposy += m_gravity;
-		m_gravity += 0.2f;
-		if (m_girlposy >= 450.0f)
-		{
-			m_floating = false;
-			m_gravity = 0.0f;
-		}
-	}
-	else
-	{
-		m_waiting = true;
-	}
 }
 
 void Girl::Draw()
 {
-	m_wait = LoadGraph("Res/Girl/taikiB_R.png");
-	m_walk = LoadGraph("Res/Girl/girl_walk1.png");
-	m_jamp = LoadGraph("Res/Girl/junp_R_B.png");
+	m_WaitGraph = LoadGraph("res/Character/raf/taikiB_R.png");
+	m_WalkGraph = LoadGraph("res/Character/raf/girl_walk1.png");
+	m_JumpGraph = LoadGraph("res/Character/raf/junp_R_B.png");
 
-	if (m_floating == true)
+	if (m_StopExec == true)
 	{
-		DrawRotaGraph(m_girlposx, m_girlposy, 0.3, 0.0, m_jamp, TRUE);
+		DrawRotaGraph(m_PosX, m_PosY, 1.0, 0.0, m_WaitGraph, TRUE);
 	}
-	else if (m_walking == true)
+	else if (m_WalkExec == true)
 	{
-		DrawRotaGraph(m_girlposx, m_girlposy, 0.3, 0.0, m_walk, TRUE);
+		DrawRotaGraph(m_PosX, m_PosY, 1.0, 0.0, m_WalkGraph, TRUE);
 	}
-	else if(m_waiting == true)
+	else if (m_JumpExec == true)
 	{
-		DrawRotaGraph(m_girlposx, m_girlposy, 0.3, 0.0, m_wait, TRUE);
+		DrawRotaGraph(m_PosX, m_PosY, 1.0, 0.0, m_JumpGraph, TRUE);
 	}
 }
