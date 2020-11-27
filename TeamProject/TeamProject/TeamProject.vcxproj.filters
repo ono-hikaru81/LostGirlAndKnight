@@ -28,6 +28,9 @@
     <ClCompile Include="InputKey.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Bridge.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Processing.h">
@@ -51,5 +54,6 @@
     <ClInclude Include="InputKey.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Bridge.h" />
   </ItemGroup>
 </Project>
