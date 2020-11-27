@@ -5,8 +5,6 @@
 #include "Enemy.h"
 #include "BlindGirl.h"
 
-Girl girl;
-
 Processing::Processing()
 {
 }
