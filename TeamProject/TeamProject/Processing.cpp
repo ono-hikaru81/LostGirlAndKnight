@@ -15,10 +15,8 @@ Processing::~Processing()
 
 void Processing::Game()
 {
-	girl.Move();
 }
 
 void Processing::Draw()
 {
-	girl.Draw();
 }
