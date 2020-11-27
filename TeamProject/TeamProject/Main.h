@@ -7,4 +7,10 @@
 const int WindowWidth  = 640;
 const int WindowHeight = 480;
 
+// =====================
+// マップチップ縦幅、横幅
+// =====================
+const int MapChipWidth = 120;
+const int MapChipHeight = 120;
+
 #endif // !MAIN_H
