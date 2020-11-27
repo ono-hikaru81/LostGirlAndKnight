@@ -3,7 +3,6 @@
 #include "Map.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "BlindGirl.h"
 
 Processing::Processing()
 {
