@@ -25,9 +25,6 @@
     <ClCompile Include="Base.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="BlindGirl.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Processing.h">
@@ -46,9 +43,6 @@
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Base.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="BlindGirl.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
