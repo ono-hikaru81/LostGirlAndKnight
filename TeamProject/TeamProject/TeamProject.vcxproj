@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="BlindGirl.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -167,6 +168,7 @@
   <ItemGroup>
     <ClInclude Include="BlindGirl.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Fade.h" />
     <ClInclude Include="Gimmick.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Input.h" />

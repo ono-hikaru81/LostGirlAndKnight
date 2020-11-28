@@ -7,7 +7,7 @@ void DrawMap()
 {
 	int MapChip[1];
 
-	LoadDivGraph("Res/ver.a/MapChip/block.png", 1, 1, 1, MapChipWidth, MapChipHeight, MapChip);
+	LoadDivGraph("Res/MapChip/G_kusa.png", 1, 1, 1, MapChipWidth, MapChipHeight, MapChip);
 	char TestMap[9][45] =
 	{
 		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
