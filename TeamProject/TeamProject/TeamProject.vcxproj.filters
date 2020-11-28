@@ -22,13 +22,16 @@
     <ClCompile Include="Main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Base.cpp">
+    <ClCompile Include="Input.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="InputKey.cpp">
+    <ClCompile Include="Gimmick.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Bridge.cpp">
+    <ClCompile Include="BlindGirl.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,12 +51,17 @@
     <ClInclude Include="Main.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Base.h">
+    <ClInclude Include="Input.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="InputKey.h">
+    <ClInclude Include="Gimmick.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Bridge.h" />
+    <ClInclude Include="BlindGirl.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

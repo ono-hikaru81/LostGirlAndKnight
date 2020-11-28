@@ -154,20 +154,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Base.cpp" />
-    <ClCompile Include="Bridge.cpp" />
+    <ClCompile Include="BlindGirl.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="InputKey.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Processing.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base.h" />
-    <ClInclude Include="Bridge.h" />
+    <ClInclude Include="BlindGirl.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Gimmick.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="InputKey.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />

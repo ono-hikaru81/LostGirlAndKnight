@@ -1,12 +1,10 @@
 #ifndef ENEMY_H
 #define EMEMY_H
 
-#include "Base.h"
-
 // ===============
 // エネミークラス
 // ===============
-class Enemy:public Base
+class Enemy
 {
 public:
 	// 

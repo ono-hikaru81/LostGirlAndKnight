@@ -1,12 +1,16 @@
 #include "DxLib.h"
 #include "Processing.h"
 #include "Map.h"
+#include "Input.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "Bridge.h"
+#include "BlindGirl.h"
+#include "Gimmick.h"
 
 Player player;
-Bridge bridge;
+Enemy enemy;
+Girl girl;
+Gimmick gimmick;
 
 Processing::Processing()
 {
@@ -19,11 +23,12 @@ Processing::~Processing()
 void Processing::Game()
 {
 	player.Move();
-	bridge.Move();
+	gimmick.BridgeMove();
 }
 
 void Processing::Draw()
 {
+	DrawMap();
 	player.Draw();
-	bridge.Draw();
+	gimmick.BridgeDraw();
 }

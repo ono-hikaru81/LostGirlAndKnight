@@ -6,9 +6,8 @@
 void DrawMap()
 {
 	int MapChip[1];
-	int cameraX = 150;
 
-	LoadDivGraph("res/Map/block.png", 1, 1, 1, MapChipWidth, MapChipHeight, MapChip);
+	LoadDivGraph("Res/ver.a/MapChip/block.png", 1, 1, 1, MapChipWidth, MapChipHeight, MapChip);
 	char TestMap[9][45] =
 	{
 		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -26,8 +25,23 @@ void DrawMap()
 	{
 		for (int x = 0; x < 45; x++)
 		{
-			DrawGraph(x * MapChipWidth - cameraX, y * MapChipHeight, MapChip[TestMap[y][x]], FALSE);
+			DrawGraph(x * MapChipWidth, y * MapChipHeight, MapChip[TestMap[y][x]], FALSE);
 		}
 	}
 }
 
+Map::Map()
+{
+}
+
+Map::~Map()
+{
+}
+
+void Map::Data()
+{
+}
+
+void Map::Draw()
+{
+}
