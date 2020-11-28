@@ -16,7 +16,6 @@ public:
 	int m_PosY;
 	int MaxWidth;
 	int MaxHeight;
-	int MapChip[][];
 };
 
 void DrawMap();
