@@ -7,7 +7,7 @@ class Gimmick
 public:
 	int m_TreeDraw;//–Ø‚Ì‰æ‘œ•Û‘¶
 	int m_Angle;
-	int m_Radian;
+	float m_Radian;
 	int m_cooltime;
 
 public:

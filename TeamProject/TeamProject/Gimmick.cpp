@@ -20,13 +20,17 @@ void Gimmick::BridgeMove()
 	if (0 < m_Angle)
 	{
 		m_cooltime++;
-		if (m_cooltime == 60)
+		if (m_cooltime == 1)
 		{
-			if (m_Radian != 180)
+			if (m_Radian <= 90)
 			{
-				m_Radian = 3.14 / 180 * m_Angle;
+				m_Radian = (3.14 / 180 * m_Angle);
 				m_Angle--;
 				m_cooltime = 0;
+				if (m_Angle == 0)
+				{
+					m_Radian = 0;
+				}
 			}
 		}
 	}
