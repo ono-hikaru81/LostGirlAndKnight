@@ -13,7 +13,7 @@ Map::~Map()
 
 void Map::Data()
 {
-	MapChip[3];
+	MapChip[2];
 
 	LoadDivGraph("Res/MapChip/MapChip.png", 3, 3, 1, MapChipWidth, MapChipHeight, MapChip);
 
