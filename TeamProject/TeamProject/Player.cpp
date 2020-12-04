@@ -12,7 +12,7 @@ Player::Player()
 
 	//Player座標
 	m_PosX = 143;
-	m_PosY = WindowHeight - 540;
+	m_PosY = WindowHeight - MapChipHeight - 180;
 
 	// 管理変数
 	m_RightMotionMAX = 4;
@@ -47,7 +47,7 @@ void Player::Move()
 		m_WalkExec = true;
 		m_PosX -= m_Speed;
 		// ジャンプ
-		if (CheckHitKey(KEY_INPUT_W) && m_PosY >= WindowHeight - 540)
+		if (CheckHitKey(KEY_INPUT_W) && m_PosY >= WindowHeight - MapChipHeight - 180)
 		{
 			m_JumpExec = true;
 			m_Jump = -20;
@@ -60,20 +60,20 @@ void Player::Move()
 		m_WalkExec = true;
 		m_PosX += m_Speed;
 		// ジャンプ
-		if (CheckHitKey(KEY_INPUT_W) && m_PosY >= WindowHeight - 540)
+		if (CheckHitKey(KEY_INPUT_W) && m_PosY >= WindowHeight - MapChipHeight - 180)
 		{
 			m_JumpExec = true;
 			m_Jump = -20;
 		}
 	}
 	// ジャンプ
-	else if (CheckHitKey(KEY_INPUT_W) && m_PosY >= WindowHeight - 540)
+	else if (CheckHitKey(KEY_INPUT_W) && m_PosY >= WindowHeight - MapChipHeight - 180)
 	{
 		m_StopExec = false;
 		m_JumpExec = true;
 		m_Jump = -20;
 	}
-	else if (CheckHitKey(KEY_INPUT_SPACE) && m_PosY >= WindowHeight - 540)
+	else if (CheckHitKey(KEY_INPUT_SPACE) && m_PosY >= WindowHeight - MapChipHeight - 180)
 	{
 		m_StopExec = false;
 		m_AttackExec = true;
@@ -89,7 +89,7 @@ void Player::Move()
 		m_PosY += m_Jump;
 		m_Jump += 1;
 		m_StopExec = false;
-		if (m_PosY >= WindowHeight - 540)//重力加速
+		if (m_PosY >= WindowHeight - MapChipHeight - 180)//重力加速
 		{
 			m_StopExec = true;
 			m_JumpExec = false;
@@ -100,10 +100,10 @@ void Player::Move()
 
 void Player::Draw()
 {
-	m_StopGraph		 = LoadGraph( "Res/Character/Rough/taiki_R.png");
-	m_WalkGraph		 = LoadGraph("Res/Character/Rough/walk_R2r.png");
-	m_AttackGraph	 = LoadGraph("Res/Character/Rough/attack_R2.png");
-	m_JumpGraph		 = LoadGraph("Res/Character/Rough/junp_R.png");
+	m_StopGraph		 = LoadGraph( "Res/Character/taiki_R.png");
+	m_WalkGraph		 = LoadGraph("Res/Character/taiki_R.png");
+	m_AttackGraph	 = LoadGraph("Res/Character/taiki_R.png");
+	m_JumpGraph		 = LoadGraph("Res/Character/taiki_R.png");
 	m_RightMotion[0] = LoadGraph("Res/Character/Rough/walk_R.png");
 	m_RightMotion[1] = LoadGraph("Res/Character/Rough/walk_R2.png");
 	m_RightMotion[2] = LoadGraph("Res/Character/Rough/walk_R2r.png");

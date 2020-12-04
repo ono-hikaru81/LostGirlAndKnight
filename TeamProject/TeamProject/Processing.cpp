@@ -24,6 +24,8 @@ void Processing::Game()
 {
 	player.Move();
 	gimmick.BridgeMove();
+	gimmick.BottonMove();
+	gimmick.TrapMove();
 }
 
 void Processing::Draw()
@@ -31,4 +33,6 @@ void Processing::Draw()
 	DrawMap();
 	player.Draw();
 	gimmick.BridgeDraw();
+	gimmick.BottonDraw();
+	gimmick.TrapDraw();
 }
