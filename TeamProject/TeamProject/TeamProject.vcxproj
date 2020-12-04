@@ -154,41 +154,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BlindGirl.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Fade.cpp" />
-    <ClCompile Include="Gimmick.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Manager\SceneManager.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Processing.cpp" />
-    <ClCompile Include="Scene\InGameScene.cpp" />
-    <ClCompile Include="Scene\ResultScene.cpp" />
-    <ClCompile Include="Scene\SceneBase.cpp" />
-    <ClCompile Include="Scene\StageSelectScene.cpp" />
-    <ClCompile Include="Scene\TitleScene.cpp" />
+    <ClCompile Include="Src\Character\BlindGirl.cpp" />
+    <ClCompile Include="Src\Character\Player.cpp" />
+    <ClCompile Include="Src\Enemy\Enemy.cpp" />
+    <ClCompile Include="Src\Function\Camera.cpp" />
+    <ClCompile Include="Src\Function\Fade.cpp" />
+    <ClCompile Include="Src\Function\Input.cpp" />
+    <ClCompile Include="Src\Gimmick\Gimmick.cpp" />
+    <ClCompile Include="Src\Main.cpp" />
+    <ClCompile Include="Src\Manager\SceneManager.cpp" />
+    <ClCompile Include="Src\Processing.cpp" />
+    <ClCompile Include="Src\Scene\InGameScene.cpp" />
+    <ClCompile Include="Src\Scene\ResultScene.cpp" />
+    <ClCompile Include="Src\Scene\SceneBase.cpp" />
+    <ClCompile Include="Src\Scene\StageSelectScene.cpp" />
+    <ClCompile Include="Src\Scene\TitleScene.cpp" />
+    <ClCompile Include="Src\Stage\Map.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BlindGirl.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Difinition.h" />
-    <ClInclude Include="Fade.h" />
-    <ClInclude Include="Gimmick.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Main.h" />
-    <ClInclude Include="Manager\SceneManager.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Processing.h" />
-    <ClInclude Include="Scene\InGameScene.h" />
-    <ClInclude Include="Scene\ResultScene.h" />
-    <ClInclude Include="Scene\SceneBase.h" />
-    <ClInclude Include="Scene\StageSelectScene.h" />
-    <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="Src\Character\BlindGirl.h" />
+    <ClInclude Include="Src\Character\Player.h" />
+    <ClInclude Include="Src\Difinition.h" />
+    <ClInclude Include="Src\Enemy\Enemy.h" />
+    <ClInclude Include="Src\Function\Camera.h" />
+    <ClInclude Include="Src\Function\Fade.h" />
+    <ClInclude Include="Src\Function\Input.h" />
+    <ClInclude Include="Src\Gimmick\Gimmick.h" />
+    <ClInclude Include="Src\Main.h" />
+    <ClInclude Include="Src\Manager\SceneManager.h" />
+    <ClInclude Include="Src\Processing.h" />
+    <ClInclude Include="Src\Scene\InGameScene.h" />
+    <ClInclude Include="Src\Scene\ResultScene.h" />
+    <ClInclude Include="Src\Scene\SceneBase.h" />
+    <ClInclude Include="Src\Scene\StageSelectScene.h" />
+    <ClInclude Include="Src\Scene\TitleScene.h" />
+    <ClInclude Include="Src\Stage\Map.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

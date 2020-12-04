@@ -2,7 +2,7 @@
 #include "DxLib.h"
 #include "Main.h"
 #include "Processing.h"
-#include"Player.h"
+#include "../Src/Character/Player.h"
 
 Processing processing;
 

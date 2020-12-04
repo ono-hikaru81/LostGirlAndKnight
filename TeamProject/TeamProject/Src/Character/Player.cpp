@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include "Player.h"
-#include"Main.h"
+#include"../Main.h"
 
 Player::Player()
 {

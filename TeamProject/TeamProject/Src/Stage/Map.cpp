@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include "Map.h"
-#include "Player.h"
+#include "../Character/Player.h"
 
 Map::Map()
 {

@@ -1,7 +1,7 @@
 #include "DxLib.h"
 #include "Gimmick.h"
-#include"Main.h"
-#include"Input.h"
+#include"../Main.h"
+#include"../Function/Input.h"
 
 Gimmick::Gimmick()
 {

@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include "BlindGirl.h"
-#include "Main.h"
+#include "../Main.h"
 
 Girl::Girl()
 {

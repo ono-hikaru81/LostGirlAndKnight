@@ -1,11 +1,11 @@
 #include "DxLib.h"
 #include "Processing.h"
-#include "Map.h"
-#include "Input.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "BlindGirl.h"
-#include "Gimmick.h"
+#include "../Src/Stage/Map.h"
+#include "../Src/Function/Input.h"
+#include "../Src/Character/Player.h"
+#include "../Src/Enemy/Enemy.h"
+#include "../Src/Character/BlindGirl.h"
+#include "../Src/Gimmick/Gimmick.h"
 
 Player player;
 Enemy enemy;
