@@ -52,9 +52,6 @@
     <ClCompile Include="Src\Character\Player.cpp">
       <Filter>ソース ファイル\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Enemy\Enemy.cpp">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Gimmick\Gimmick.cpp">
       <Filter>ソース ファイル\Gimmick</Filter>
     </ClCompile>
@@ -75,6 +72,27 @@
     </ClCompile>
     <ClCompile Include="Src\Processing.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Enemy\EnemyBase.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Enemy\Slime.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Enemy\Skull.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Enemy\Orc.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Enemy\Vampire.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Enemy\Wolfman.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Enemy\Dragon.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,9 +120,6 @@
     <ClInclude Include="Src\Character\Player.h">
       <Filter>ソース ファイル\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Enemy\Enemy.h">
-      <Filter>ソース ファイル\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Gimmick\Gimmick.h">
       <Filter>ソース ファイル\Gimmick</Filter>
     </ClInclude>
@@ -128,6 +143,27 @@
     </ClInclude>
     <ClInclude Include="Src\Processing.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Enemy\EnemyBase.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Enemy\Slime.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Enemy\Skull.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Enemy\Orc.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Enemy\Vampire.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Enemy\Wolfman.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Enemy\Dragon.h">
+      <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

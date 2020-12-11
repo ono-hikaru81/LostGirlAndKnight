@@ -1,35 +1,27 @@
-#ifndef ENEMY_H
-#define EMEMY_H
+#ifndef ENEMYBASE_H
+#define EMEMYBASE_H
 
 // ===============
 // エネミークラス
 // ===============
-class Enemy
+class EnemyBase
 {
 public:
-	// 
-	int m_SlimeMax = 0;
-
 	// 位置座標
 	int m_PosX;
 	int m_PosY;
-
-	// 画像保存
-	int m_SlimeGraph;
-	int m_SkullGraph;
-	int m_OrcGraph;
 
 	// 生きてる？
 	bool m_SlimeAlive;
 	
 
 public:
-	Enemy();
-	virtual ~Enemy();
+	EnemyBase();
+	virtual ~EnemyBase();
 
 public:
-	void Move();
-	void Draw();
+	virtual void Move();
+	virtual void Draw();
 
 public:
 	bool CheckHit(float x, float y, float width, float height);	

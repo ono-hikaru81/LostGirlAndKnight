@@ -156,7 +156,13 @@
   <ItemGroup>
     <ClCompile Include="Src\Character\BlindGirl.cpp" />
     <ClCompile Include="Src\Character\Player.cpp" />
-    <ClCompile Include="Src\Enemy\Enemy.cpp" />
+    <ClCompile Include="Src\Enemy\Dragon.cpp" />
+    <ClCompile Include="Src\Enemy\EnemyBase.cpp" />
+    <ClCompile Include="Src\Enemy\Orc.cpp" />
+    <ClCompile Include="Src\Enemy\Skull.cpp" />
+    <ClCompile Include="Src\Enemy\Slime.cpp" />
+    <ClCompile Include="Src\Enemy\Vampire.cpp" />
+    <ClCompile Include="Src\Enemy\Wolfman.cpp" />
     <ClCompile Include="Src\Function\Camera.cpp" />
     <ClCompile Include="Src\Function\Fade.cpp" />
     <ClCompile Include="Src\Function\Input.cpp" />
@@ -175,7 +181,13 @@
     <ClInclude Include="Src\Character\BlindGirl.h" />
     <ClInclude Include="Src\Character\Player.h" />
     <ClInclude Include="Src\Difinition.h" />
-    <ClInclude Include="Src\Enemy\Enemy.h" />
+    <ClInclude Include="Src\Enemy\Dragon.h" />
+    <ClInclude Include="Src\Enemy\EnemyBase.h" />
+    <ClInclude Include="Src\Enemy\Orc.h" />
+    <ClInclude Include="Src\Enemy\Skull.h" />
+    <ClInclude Include="Src\Enemy\Slime.h" />
+    <ClInclude Include="Src\Enemy\Vampire.h" />
+    <ClInclude Include="Src\Enemy\Wolfman.h" />
     <ClInclude Include="Src\Function\Camera.h" />
     <ClInclude Include="Src\Function\Fade.h" />
     <ClInclude Include="Src\Function\Input.h" />

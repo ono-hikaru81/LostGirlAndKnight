@@ -3,12 +3,12 @@
 #include "../Src/Stage/Map.h"
 #include "../Src/Function/Input.h"
 #include "../Src/Character/Player.h"
-#include "../Src/Enemy/Enemy.h"
+#include "../Src/Enemy/Orc.h"
 #include "../Src/Character/BlindGirl.h"
 #include "../Src/Gimmick/Gimmick.h"
 
 Player player;
-Enemy enemy;
+Orc orc;
 Girl girl;
 Gimmick gimmick;
 
@@ -26,6 +26,7 @@ void Processing::Game()
 	gimmick.BridgeMove();
 	gimmick.BottonMove();
 	gimmick.TrapMove();
+	orc.Exec();
 }
 
 void Processing::Draw()
@@ -35,4 +36,5 @@ void Processing::Draw()
 	gimmick.BridgeDraw();
 	gimmick.BottonDraw();
 	gimmick.TrapDraw();
+	orc.Draw();
 }
