@@ -10,8 +10,10 @@ public:
 	~Map();
 
 public:
-	void Data();
+	void Data(enum Stage number_);
+	void ConvertPos();
 	void Draw();
+	bool CheckHit(int x_, int y_, int width_, int height_);
 
 public:
 	int m_PosX;
