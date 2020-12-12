@@ -5,6 +5,7 @@
 
 class Vampire : public EnemyBase
 {
+public:
 	Vampire();
 	virtual ~Vampire();
 

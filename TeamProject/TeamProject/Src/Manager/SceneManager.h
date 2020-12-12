@@ -1,3 +1,6 @@
+#ifndef STAGE_MANAGER_H
+#define STAGE_MANAGER_H
+
 #include "../Difinition.h"
 
 class SceneManager
@@ -18,3 +21,5 @@ private:
 	class SceneBase* m_pScene;
 	static SceneID m_NextSceneID;
 };
+
+#endif // !STAGE_MANAGER_H

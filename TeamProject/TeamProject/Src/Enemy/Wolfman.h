@@ -5,6 +5,7 @@
 
 class Wolfman : public EnemyBase
 {
+public:
 	Wolfman();
 	virtual ~Wolfman();
 
