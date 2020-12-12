@@ -3,6 +3,7 @@
 #include "Main.h"
 #include "Processing.h"
 #include "../Src/Character/Player.h"
+#include "Manager/SceneManager.h"
 
 Processing processing;
 
@@ -23,6 +24,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// ===============
 	// 各種初期化処理
 	// ===============
+	SceneManager* pSceneMng = new SceneManager();
 
 	// =============================
 	// 以下、毎フレーム更新する処理
@@ -43,9 +45,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// =================
 		// 処理関数呼び出し
 		// =================
-		processing.Game();
+//		processing.Game();
+		pSceneMng->Exec();
 
-		processing.Draw();
+//		processing.Draw();
+		pSceneMng->Draw();
 		
 		// =====================================================================
 		// ＤＸライブラリを使う上で、モニターへゲーム画面を表示するためのお約束
@@ -53,8 +57,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// =====================================================================
 		ScreenFlip();
 	}
-
-	WaitKey();				// キー入力待ち
 
 	DxLib_End();			// ＤＸライブラリ使用の終了処理
 	return 0;				// ソフトの終了 
