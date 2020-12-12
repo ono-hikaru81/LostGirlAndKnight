@@ -1,6 +1,7 @@
 #include "TitleScene.h"
 #include "DxLib.h"
 #include "../Manager/SceneManager.h"
+#include "../Function/Input.h"
 
 TitleScene::TitleScene()
 {
@@ -14,19 +15,23 @@ TitleScene::~TitleScene()
 
 void TitleScene::Exec()
 {
-	m_Step++;
-	if ( m_Step >= 120 )
+	if (UpdateKeyState() != 0) return;
+
+	if (GetKeyStatus(KEY_INPUT_RETURN) == InputState::Pushed)
 	{
-		SceneManager::SetNextScene( SceneID_StageSelect );
+		SceneManager::SetNextScene(SceneID_StageSelect);
 	}
 }
 
 void TitleScene::Draw()
 {
-	DrawString(20, 20, "TitleScene", GetColor(255, 0, 0));
+	int TitleGraph = LoadGraph("Res/bg/title.png");
+
+	DrawGraph(0, 0, TitleGraph, TRUE);
 }
 
 bool TitleScene::IsEnd() const
 {
-	return ( m_Step >= 120 );
+	return (GetKeyStatus(KEY_INPUT_RETURN) == TRUE);
 }
+
