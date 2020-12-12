@@ -6,10 +6,14 @@ class Girl
 public:
 	// ステータス
 	int m_Hp;
+	int m_Speed;
 
 	// 位置座標
 	int m_PosX;
 	int m_PosY;
+
+	// 管理変数
+	int m_count;
 
 	// 実行確認
 	bool m_StopExec;
