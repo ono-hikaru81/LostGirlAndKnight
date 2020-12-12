@@ -1,5 +1,5 @@
 #ifndef ENEMYBASE_H
-#define EMEMYBASE_H
+#define ENEMYBASE_H
 
 // ===============
 // エネミークラス
