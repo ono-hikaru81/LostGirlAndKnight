@@ -28,6 +28,9 @@ void TitleScene::Draw()
 	int TitleGraph = LoadGraph("Res/bg/title.png");
 
 	DrawGraph(0, 0, TitleGraph, TRUE);
+
+	DrawString(960, 540, "Title", GetColor(255, 0, 0));
+	DrawString(960, 980, "PLEASE PUSH ENTER", GetColor(255, 0, 0));
 }
 
 bool TitleScene::IsEnd() const

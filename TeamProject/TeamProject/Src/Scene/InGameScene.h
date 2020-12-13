@@ -3,18 +3,6 @@
 
 #include "SceneBase.h"
 
-class InGameScene :public SceneBase
-{
-public:
-	InGameScene();
-	virtual ~InGameScene();
-
-	virtual void Exec();
-	virtual void Draw();
-
-	virtual bool IsEnd() const;
-};
-
 enum StageID
 {
 	StageID_1,
@@ -32,6 +20,18 @@ enum StageID
 
 	StageID_Max,
 	StageID_InValid
+};
+
+class InGameScene :public SceneBase
+{
+public:
+	InGameScene();
+	virtual ~InGameScene();
+
+	virtual void Exec();
+	virtual void Draw();
+
+	virtual bool IsEnd() const;
 };
 
 #endif // !INGAME_SCENE_H

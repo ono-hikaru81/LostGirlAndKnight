@@ -25,9 +25,8 @@ void StageSelectScene::Exec()
 
 void StageSelectScene::Draw()
 {
-	int SelectGraph = LoadGraph("Res/bg/select.png");
+	int SelectGraph = LoadGraph("Res/bg/forest.png");
 
-	DrawString(20, 20, "StageSelectScene", GetColor(0, 255, 0));
 	DrawGraph(0, 0, SelectGraph, TRUE);
 }
 

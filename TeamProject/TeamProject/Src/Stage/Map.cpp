@@ -4,7 +4,7 @@
 
 Map::Map()
 {
-
+	Speed = 0;
 }
 
 Map::~Map()
@@ -13,9 +13,8 @@ Map::~Map()
 
 void Map::Data(Stage number_)
 {
-	MapChip[2];
-
-	LoadDivGraph("Res/MapChip/MapChip.png", 3, 3, 1, MapChipWidth, MapChipHeight, MapChip);
+	MapChip[5];
+	LoadDivGraph("Res/MapChip/MapChip.png", 6, 3, 3, MapChipWidth, MapChipHeight, MapChip);
 
 	switch (number_)
 	{
@@ -177,7 +176,7 @@ void Map::Draw()
 	{
 		for (int x = 0; x < 60; x++)
 		{
-			DrawGraph(x * MapChipWidth, y * MapChipHeight, MapChip[Info[y][x]], FALSE);
+			DrawGraph(x * MapChipWidth - Speed, y * MapChipHeight, MapChip[Info[y][x]], FALSE);
 		}
 	}
 }
