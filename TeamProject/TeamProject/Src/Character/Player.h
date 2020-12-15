@@ -28,6 +28,8 @@ public:
 	int m_PosX;
 	int m_PosY;
 
+	int* m_pPosX;
+
 	// ŠÇ—•Ï”
 	int m_RightMotionMAX;
 	int m_count;

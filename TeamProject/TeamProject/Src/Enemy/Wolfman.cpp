@@ -4,10 +4,9 @@
 Wolfman::Wolfman()
 {
 	m_Wolfman = 0;
-	m_WolfmanPosx = 500;
-	m_WolfmanPosy = 400;
+	m_Posx = 500;
+	m_Posy = 400;
 	m_MoveTime = 0;
-	m_WaitTime = 0;
 }
 
 Wolfman::~Wolfman()
@@ -19,9 +18,14 @@ void Wolfman::Exec()
 	m_MoveTime++;
 	if (m_MoveTime < 180)
 	{
-		m_WolfmanPosx++;
-		m_Wolfman = 7;
-
+		m_PosX++;
+		if (--m_ActWait <= 0)
+		{
+			m_Wolfman = m_ActMotionR[m_ActIndex];
+			m_ActIndex++;
+			m_ActWait = m_ActSpeed;
+			m_ActIndex %= m_MotionMax;
+		}
 	}
 	else if (180 <= m_MoveTime && m_MoveTime < 240)
 	{
@@ -29,8 +33,14 @@ void Wolfman::Exec()
 	}
 	else if (240 <= m_MoveTime && m_MoveTime < 420)
 	{
-		m_WolfmanPosx--;
-		m_Wolfman = 1;
+		m_PosX--;
+		if (--m_ActWait <= 0)
+		{
+			m_Wolfman = m_ActMotionL[m_ActIndex];
+			m_ActIndex++;
+			m_ActWait = m_ActSpeed;
+			m_ActIndex %= m_MotionMax;
+		}
 	}
 	else if (m_MoveTime < 480)
 	{
@@ -46,7 +56,7 @@ void Wolfman::Draw()
 {
 	LoadDivGraph("Res/Monster/side/Wolfman/Wolfmans.png", m_WolfmanMax, 4, 3, 180, 210, m_Wolfmans, TRUE);
 
-	DrawGraph(m_WolfmanPosx, m_WolfmanPosy, m_Wolfmans[m_Wolfman], TRUE);
+	DrawGraph(m_Posx, m_Posy, m_Wolfmans[m_Wolfman], TRUE);
 }
 
 bool Wolfman::CheckHit(float x, float y, float width, float height)

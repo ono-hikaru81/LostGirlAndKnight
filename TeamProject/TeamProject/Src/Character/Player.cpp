@@ -83,6 +83,8 @@ void Player::Move()
 		m_StopExec = true;
 		m_WalkExec = false;
 	}
+	
+	m_pPosX = &m_PosX;
 
 	if (m_JumpExec == true)
 	{

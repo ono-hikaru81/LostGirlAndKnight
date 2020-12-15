@@ -4,10 +4,9 @@
 Skull::Skull()
 {
 	m_Skull = 0;
-	m_SkullPosx = 500;
-	m_SkullPosy = 400;
+	m_Posx = 500;
+	m_Posy = 400;
 	m_MoveTime = 0;
-	m_WaitTime = 0;
 }
 
 Skull::~Skull()
@@ -19,9 +18,14 @@ void Skull::Exec()
 	m_MoveTime++;
 	if (m_MoveTime < 180)
 	{
-		m_SkullPosx++;
-		m_Skull = 7;
-
+		m_PosX++;
+		if (--m_ActWait <= 0)
+		{
+			m_Skull = m_ActMotionR[m_ActIndex];
+			m_ActIndex++;
+			m_ActWait = m_ActSpeed;
+			m_ActIndex %= m_MotionMax;
+		}
 	}
 	else if (180 <= m_MoveTime && m_MoveTime < 240)
 	{
@@ -29,8 +33,14 @@ void Skull::Exec()
 	}
 	else if (240 <= m_MoveTime && m_MoveTime < 420)
 	{
-		m_SkullPosx--;
-		m_Skull = 1;
+		m_PosX--;
+		if (--m_ActWait <= 0)
+		{
+			m_Skull = m_ActMotionL[m_ActIndex];
+			m_ActIndex++;
+			m_ActWait = m_ActSpeed;
+			m_ActIndex %= m_MotionMax;
+		}
 	}
 	else if (m_MoveTime < 480)
 	{
@@ -46,7 +56,7 @@ void Skull::Draw()
 {
 	LoadDivGraph("Res/Monster/side/Skull/Skulls.png", m_SkullMax, 4, 3, 180, 210, m_Skulls, TRUE);
 
-	DrawGraph(m_SkullPosx, m_SkullPosy, m_Skulls[m_Skull], TRUE);
+	DrawGraph(m_Posx, m_Posy, m_Skulls[m_Skull], TRUE);
 }
 
 bool Skull::CheckHit(float x, float y, float width, float height)
