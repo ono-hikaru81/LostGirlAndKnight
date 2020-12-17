@@ -13,6 +13,9 @@ public:
 	virtual void Draw();
 
 	virtual bool IsEnd() const;
+
+private:
+	int TitleGraph;
 };
 
 #endif // !TITLE_SCENE_H
