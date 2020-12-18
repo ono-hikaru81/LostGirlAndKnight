@@ -3,7 +3,7 @@
 #include"../Character/Player.h"
 #include"../Main.h"
 
-static Player player;
+//static Player player;
 
 Orc::Orc()
 {
@@ -13,13 +13,20 @@ Orc::Orc()
 	m_MoveTime = 0;
 	m_ActIndex = 0;
 	m_ActSpeed = 10;
+	m_AttIndex = 0;
+	
 }
 
 Orc::~Orc()
 {
+	//loadGraph‚Ì‰ğ•ú
+	/*for (int  i = 0; i < m_OrcMax; i++)
+	{
+		DeleteGraph(m_Orcs[i]);
+	}*/
 }
 
-void Orc::Exec()
+void Orc::Exec(Player player)
 {
 	m_MoveTime++;
 	if (m_MoveTime < 180)
@@ -55,45 +62,44 @@ void Orc::Exec()
 	else
 	{
 		m_MoveTime = 0;
+		m_ActIndex = 0;
 	}
 
-	/*if (player.m_PosX - 50 <= m_PosX + 180)//UŒ‚‚ÌğŒ(‰EŒü‚«)
+	if (m_PosX + 90 > player.m_PosX + 90)
 	{
-		player.m_PosY = 500;
-	}
-
-	if (player.m_PosX - 50 >= m_PosX + 180 )//UŒ‚‚ÌğŒ(‰EŒü‚«)
-	{
-		m_PosY = 100;
-
-
-		if (m_Orc == 8)
+		if (player.m_PosX <= m_PosX + 180)//UŒ‚‚ÌğŒ(‰EŒü‚«)
 		{
-			m_Orc = 9;
-		}
-		else
-		{
-			m_Orc = 8;
+			if (--m_ActWait <= 0)
+			{
+				m_Orc = m_AttMotionL[m_AttIndex];
+				m_AttIndex++;
+				m_ActWait = m_ActSpeed;
+				m_AttIndex %= m_AttackMax;
+			}
+
 		}
 	}
-
-	if (player.m_PosX + 180 + 50 >= m_PosX)//UŒ‚‚ÌğŒ(¶Œü‚«)
+	else
 	{
-		if (m_Orc == 3)
+		if (player.m_PosX + 180 >= m_PosX)//UŒ‚‚ÌğŒ(¶Œü‚«)
 		{
-			m_Orc = 4;
+			if (--m_ActWait <= 0)
+			{
+				m_Orc = m_AttMotionR[m_AttIndex];
+				m_AttIndex++;
+				m_ActWait = m_ActSpeed;
+				m_AttIndex %= m_AttackMax;
+			}
 		}
-		else
-		{
-			m_Orc = 3;
-		}
-	}*/
+	}
+	
+	
+	
 }
 
 void Orc::Draw()
 {
-	LoadDivGraph("Res/Monster/side/Orc/Orcs.png", m_OrcMax, 4, 3, 180, 210, m_Orcs,TRUE);
-	
+	LoadDivGraph("Res/Monster/side/Orc/Orcs.png", m_OrcMax, 4, 3, 180, 210, m_Orcs, TRUE);
 	DrawGraph(m_PosX, m_PosY, m_Orcs[m_Orc], TRUE);
 }
 
