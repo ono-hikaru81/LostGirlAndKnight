@@ -21,11 +21,11 @@ public:
 	int m_ActIndex;
 	int m_ActWait;
 	int m_ActSpeed;
-	static const int m_MotionMax = 4;
-	static const int m_SlimeMax = 12;
+	static const int m_MotionMax = 3;
+	static const int m_SlimeMax = 10;
 	int m_Slimes[m_SlimeMax];
-	int  m_ActMotionL[m_MotionMax] = { 1,0,2,0 };
-	int  m_ActMotionR[m_MotionMax] = { 6,5,7,5 };
+	int  m_ActMotionL[m_MotionMax] = { 0,1,2 };
+	int  m_ActMotionR[m_MotionMax] = { 4,5,6 };
 };
 
 #endif // !SLIME_H

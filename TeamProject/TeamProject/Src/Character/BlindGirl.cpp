@@ -3,8 +3,6 @@
 #include "../Main.h"
 #include "../Character/Player.h"
 
-static Player player;
-
 Girl::Girl()
 {
 	// ステータス
@@ -12,8 +10,8 @@ Girl::Girl()
 	m_Speed = 4;
 
 	// 位置座標 
-	m_PosX = player.m_PosX - 63;
-	m_PosY = player.m_PosY; // WindowHeight - 450
+//	m_PosX = player.m_PosX - 63;
+//	m_PosY = player.m_PosY; // WindowHeight - 450
 
 	// 管理変数
 	m_count = 0;
@@ -35,14 +33,14 @@ Girl::~Girl()
 
 void Girl::Move()
 {
-	if (player.m_WalkExec == true)
-	{
-		m_count++;
-		if (m_count >= 120)
-		{
-			m_PosX += m_Speed;
-		}
-	}
+	//if (player.m_WalkExec == true)
+	//{
+	//	m_count++;
+	//	if (m_count >= 120)
+	//	{
+	//		m_PosX += m_Speed;
+	//	}
+	//}
 }
 
 void Girl::Draw()

@@ -21,10 +21,12 @@ public:
 	int m_ActIndex;
 	int m_ActWait;
 	int m_ActSpeed;
-	static const int m_MotionMax = 4;
+	static const int m_MotionMax = 2;
 	static const int m_WolfmanMax = 12;
 	int m_Wolfmans[m_WolfmanMax];
-	int  m_ActMotionL[m_MotionMax] = { 1,0,2,0 };
-	int  m_ActMotionR[m_MotionMax] = { 6,5,7,5 };
+	int  m_ActMotionL[m_MotionMax] = { 1,2 };
+	int  m_ActMotionR[m_MotionMax] = { 6,7 };
+	int  m_AttMotionL[m_MotionMax] = { 3,4 };
+	int  m_AttMotionR[m_MotionMax] = { 8,9 };
 };
 #endif // !WOLFMAN_H

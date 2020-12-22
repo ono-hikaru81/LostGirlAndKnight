@@ -48,7 +48,7 @@ void InGameScene::Exec()
 	girl.Move();
 	slime.Exec();
 	skull.Exec();
-	orc.Exec();
+	orc.Exec(player.m_PosX);
 	wolfman.Exec();
 	vampire.Exec();
 	dragon.Exec();

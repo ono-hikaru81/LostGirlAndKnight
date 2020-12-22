@@ -7,6 +7,8 @@ Wolfman::Wolfman()
 	m_Posx = 500;
 	m_Posy = 400;
 	m_MoveTime = 0;
+	m_ActIndex = 0;
+	m_ActSpeed = 10;
 }
 
 Wolfman::~Wolfman()

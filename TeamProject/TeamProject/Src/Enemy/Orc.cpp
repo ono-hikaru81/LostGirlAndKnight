@@ -14,7 +14,7 @@ Orc::Orc()
 	m_ActIndex = 0;
 	m_ActSpeed = 10;
 	m_AttIndex = 0;
-	
+	m_ActWait = m_ActSpeed;
 }
 
 Orc::~Orc()
@@ -26,7 +26,7 @@ Orc::~Orc()
 	}*/
 }
 
-void Orc::Exec(Player player)
+void Orc::Exec(int x_)
 {
 	m_MoveTime++;
 	if (m_MoveTime < 180)
@@ -65,9 +65,9 @@ void Orc::Exec(Player player)
 		m_ActIndex = 0;
 	}
 
-	if (m_PosX + 90 > player.m_PosX + 90)
+	if (m_PosX + 90 > x_ + 90)
 	{
-		if (player.m_PosX <= m_PosX + 180)//UŒ‚‚ÌğŒ(‰EŒü‚«)
+		if (x_ <= m_PosX + 180)//UŒ‚‚ÌğŒ(‰EŒü‚«)
 		{
 			if (--m_ActWait <= 0)
 			{
@@ -81,7 +81,7 @@ void Orc::Exec(Player player)
 	}
 	else
 	{
-		if (player.m_PosX + 180 >= m_PosX)//UŒ‚‚ÌğŒ(¶Œü‚«)
+		if (x_ + 180 >= m_PosX)//UŒ‚‚ÌğŒ(¶Œü‚«)
 		{
 			if (--m_ActWait <= 0)
 			{
