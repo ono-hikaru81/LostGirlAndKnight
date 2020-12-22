@@ -12,6 +12,9 @@
 #include "../Enemy/Vampire.h"
 #include "../Enemy/Dragon.h"
 #include "../Gimmick/Gimmick.h"
+#include "../Function/Camera.h"
+
+static Camera camera;
 
 static Player player;
 static Girl girl;
@@ -37,21 +40,40 @@ InGameScene::InGameScene()
 
 InGameScene::~InGameScene()
 {
+	DeleteGraph(player.m_StopGraph);
+	DeleteGraph(player.m_WalkGraph);
+	DeleteGraph(player.m_AttackGraph);
+	DeleteGraph(player.m_JumpGraph);
+	DeleteGraph(player.m_RightMotion[0]);
+	DeleteGraph(player.m_RightMotion[1]);
+	DeleteGraph(player.m_RightMotion[2]);
+	DeleteGraph(player.m_RightMotion[3]);
 
+	for (i = 0; i < 6; i++)
+	{
+		DeleteGraph(map.MapChip[i]);
+	}
 }
 
 void InGameScene::Exec()
 {
 	if (UpdateKeyState() != 0) return;
 
+	camera.Update();
+
 	player.Move();
 	girl.Move();
 	slime.Exec();
 	skull.Exec();
-	orc.Exec();
+	orc.Exec(player.m_PosX);
 	wolfman.Exec();
 	vampire.Exec();
 	dragon.Exec();
+
+	WorldMapPosX = 0;
+	WorldMapPosY = 0;
+	ScreenMapPosX = camera.ConvertPosXWorldToScreen(WorldMapPosX);
+	ScreenMapPosY = camera.ConvertPosYWorldToScreen(WorldMapPosY);
 
 	if (GetKeyStatus(KEY_INPUT_1) == InputState::Pushed)
 	{
@@ -156,7 +178,9 @@ void InGameScene::Draw()
 		dragon.Draw();
 	}
 
-	map.Draw();
+	map.Draw(ScreenMapPosX, ScreenMapPosY);
+	player.Draw();
+	girl.Draw();
 }
 
 bool InGameScene::IsEnd() const
