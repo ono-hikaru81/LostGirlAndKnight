@@ -1,6 +1,18 @@
 #include "DxLib.h"
 #include "Player.h"
 #include"../Main.h"
+#include"../Function/Input.h"
+
+//各キーの動き
+/*
+	W	　↑		
+	A	　←
+	D	　→
+	Space 攻撃 (Hold)
+
+	(モーション確認用キー)
+	V 	　死 (Hold)
+*/
 
 Player::Player()
 {
@@ -15,85 +27,142 @@ Player::Player()
 	m_PosY = WindowHeight - MapChipHeight - 180;
 
 	// 管理変数
-	m_RightMotionMAX = 4;
-	m_count = 0;
+	m_Player = 0;
+	m_count    = 0;
+	m_ActSpeed = 20;
+	m_ActIndex = 0;
+	m_AttIndex = 0;
 	m_MotionCooltime = 0;
+	m_WaitIndex = 0;
+	m_DeiIndex = 0;
+	m_ActStop = m_ActSpeed;
 
 	// 実行確認
-	m_StopExec	  = true;
 	m_JumpExec	  = false;
-	m_WalkExec	  = false;
-	m_AttackExec  = false;
-	m_Instraction = false;
+	m_DeiExec	  = false;
+	m_IsRight	  = false;
 
 	// 画像保存
-	m_StopGraph	  = NULL;
-	m_WalkGraph   = NULL;
-	m_JumpGraph   = NULL;
-	m_AttackGraph = NULL;
-	m_RightMotion[m_RightMotionMAX];
+	//LoadDivGraph("Res/Character/Players.png", m_PlayerMax, 4, 8, 180, 180, m_Players);
 }
 
 Player::~Player()
 {
+	for (int i = 0; i < m_PlayerMax; i++)
+	{
+		DeleteGraph(m_Players[i]);
+	}
 }
 
 void Player::Move()
 {
 	// 左移動
-	if (CheckHitKey(KEY_INPUT_A) && m_PosX >= -30)
+	if (GetKeyStatus(KEY_INPUT_A) == InputState::Hold && m_PosX >= -30)
 	{
-		m_StopExec = false;
-		m_WalkExec = true;
+		if (--m_ActStop <= 0)
+		{
+			m_Player = m_WlkMotionL[m_ActIndex];
+			m_ActIndex++;
+			m_ActStop = m_ActSpeed;
+			m_ActIndex %= m_MotionMax;
+		}
 		m_PosX -= m_Speed;
+
+
+		m_IsRight = false;
+		
 		// ジャンプ
-		if (CheckHitKey(KEY_INPUT_W) && m_PosY >= WindowHeight - MapChipHeight - 180)
+		if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
 		{
 			m_JumpExec = true;
 			m_Jump = -20;
 		}
 	}
 	// 右移動
-	else if (CheckHitKey(KEY_INPUT_D) && m_PosX <= 1900)
+	else if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold && m_PosX <= 1900)
 	{
-		m_StopExec = false;
-		m_WalkExec = true;
+		if (--m_ActStop <= 0)
+		{
+			m_Player = m_WlkMotionR[m_ActIndex];
+			m_ActIndex++;
+			m_ActStop = m_ActSpeed;
+			m_ActIndex %= m_MotionMax;
+		}
 		m_PosX += m_Speed;
+
+		m_IsRight = true;
 		// ジャンプ
-		if (CheckHitKey(KEY_INPUT_W) && m_PosY >= WindowHeight - MapChipHeight - 180)
+		if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
 		{
 			m_JumpExec = true;
 			m_Jump = -20;
 		}
 	}
 	// ジャンプ
-	else if (CheckHitKey(KEY_INPUT_W) && m_PosY >= WindowHeight - MapChipHeight - 180)
+	else if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
 	{
-		m_StopExec = false;
 		m_JumpExec = true;
 		m_Jump = -20;
 	}
-	else if (CheckHitKey(KEY_INPUT_SPACE) && m_PosY >= WindowHeight - MapChipHeight - 180)
+	//攻撃
+	else if (GetKeyStatus(KEY_INPUT_SPACE) == InputState::Hold && m_PosY >= WindowHeight - MapChipHeight - 180)
 	{
-		m_StopExec = false;
-		m_AttackExec = true;
+		if (--m_ActStop <= 0)
+		{
+			if (m_IsRight == true)
+			{
+				m_Player = m_AttMotionR[m_AttIndex];
+			}
+			else
+			{
+				m_Player = m_AttMotionL[m_AttIndex];
+			}
+			m_AttIndex++;
+			m_ActStop = m_ActSpeed;
+			m_AttIndex %= m_AttMotionMax;
+		}
+	}
+	else if (GetKeyStatus(KEY_INPUT_V) == InputState::Hold)
+	{
+		if (--m_ActStop <= 0)
+		{
+			if (m_IsRight == true)
+			{
+				m_Player = m_DeiMotionR[m_DeiIndex];
+			}
+			else
+			{
+				m_Player = m_DeiMotionL[m_DeiIndex];
+			}
+			m_DeiIndex++;
+			m_ActStop = m_ActSpeed;
+			m_DeiIndex %= m_DeiMotionMax;
+		}
 	}
 	else
 	{
-		m_StopExec = true;
-		m_WalkExec = false;
+		if (--m_ActStop <= 0)
+		{
+			if (m_IsRight == true)
+			{
+				m_Player = m_WaiMotionR[m_WaitIndex];
+			}
+			else
+			{
+				m_Player = m_WaiMotionL[m_WaitIndex];
+			}
+			m_WaitIndex++;
+			m_ActStop = m_ActSpeed;
+			m_WaitIndex %= m_MotionMax;
+		}
 	}
-	
-	m_pPosX = &m_PosX;
 
 	if (m_JumpExec == true)
 	{
 		m_PosY += m_Jump;
 		m_Jump += 1;
-		m_StopExec = false;
 		if (m_PosY >= WindowHeight - MapChipHeight - 180)//重力加速
 		{
-			m_StopExec = true;
 			m_JumpExec = false;
 			m_Jump = 0;
 		}
@@ -102,43 +171,23 @@ void Player::Move()
 
 void Player::Draw()
 {
-	m_StopGraph		 = LoadGraph( "Res/Character/taiki_R.png");
-	m_WalkGraph		 = LoadGraph("Res/Character/taiki_R.png");
-	m_AttackGraph	 = LoadGraph("Res/Character/taiki_R.png");
-	m_JumpGraph		 = LoadGraph("Res/Character/taiki_R.png");
-	m_RightMotion[0] = LoadGraph("Res/Character/Rough/walk_R.png");
-	m_RightMotion[1] = LoadGraph("Res/Character/Rough/walk_R2.png");
-	m_RightMotion[2] = LoadGraph("Res/Character/Rough/walk_R2r.png");
-	m_RightMotion[3] = LoadGraph("Res/Character/Rough/walk_Rl.png");
+	LoadDivGraph("Res/Character/Players.png", m_PlayerMax, 4, 8, 180, 180, m_Players);
 
-	if (m_StopExec == true)
-	{
-		DrawGraph(m_PosX, m_PosY, m_StopGraph, TRUE);
-	}
-	else if (m_WalkExec == true)
-	{
-		if (m_count == 2)
-		{
-			m_count = 0;
-		}
-		DrawGraph(m_PosX, m_PosY, m_RightMotion[m_count], TRUE);
-		m_MotionCooltime++;
-		if (m_MotionCooltime == 15)
-		{
-			m_count++;
-			m_MotionCooltime = 0;
-			
-		}
-	}
-	else if (m_AttackExec == true)
-	{
-		DrawGraph(m_PosX, m_PosY, m_AttackGraph, TRUE);
-	}
-	else if (m_JumpExec == true)
-	{
-		DrawGraph(m_PosX, m_PosY, m_JumpGraph, TRUE);
-	}
+	DrawGraph(m_PosX, m_PosY, m_Players[m_Player], TRUE);
 }
+
+//init関数
+/*bool Player::InitDrawGraphic()
+{
+	LoadDivGraph("Res/Character/Players.png", m_PlayerMax, 4, 8, 180, 180, m_Players);
+	if (m_Players[m_PlayerMax - 1] == -1)
+	{
+		return false;
+	}
+
+	return true;
+
+}*/
 
 bool Player::CheckHit(int x, int y, int Width, int Height)
 {
@@ -154,3 +203,4 @@ bool Player::CheckHit(int x, int y, int Width, int Height)
 		return false;
 	}
 }
+

@@ -10,7 +10,7 @@ public:
 	Orc();
 	virtual ~Orc();
 
-	virtual void Exec(Player player);
+	virtual void Exec(int x_);
 	virtual void Draw();
 
 	bool CheckHit(float x, float y, float width, float height);

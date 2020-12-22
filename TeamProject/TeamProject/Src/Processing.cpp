@@ -7,7 +7,7 @@
 #include "../Src/Character/BlindGirl.h"
 #include "../Src/Gimmick/Gimmick.h"
 
-Player player;
+static Player player;
 Orc orc;
 Girl girl;
 Gimmick gimmick;
@@ -26,7 +26,7 @@ void Processing::Game()
 	gimmick.BridgeMove();
 	gimmick.BottonMove();
 	gimmick.TrapMove();
-	orc.Exec();
+	//orc.Exec(player.m_PosX);
 }
 
 void Processing::Draw()
@@ -35,5 +35,5 @@ void Processing::Draw()
 	gimmick.BridgeDraw();
 	gimmick.BottonDraw();
 	gimmick.TrapDraw();
-	orc.Draw();
+	//orc.Draw();
 }
