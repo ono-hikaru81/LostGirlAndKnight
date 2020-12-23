@@ -40,15 +40,6 @@ InGameScene::InGameScene()
 
 InGameScene::~InGameScene()
 {
-	DeleteGraph(player.m_StopGraph);
-	DeleteGraph(player.m_WalkGraph);
-	DeleteGraph(player.m_AttackGraph);
-	DeleteGraph(player.m_JumpGraph);
-	DeleteGraph(player.m_RightMotion[0]);
-	DeleteGraph(player.m_RightMotion[1]);
-	DeleteGraph(player.m_RightMotion[2]);
-	DeleteGraph(player.m_RightMotion[3]);
-
 	for (i = 0; i < 6; i++)
 	{
 		DeleteGraph(map.MapChip[i]);

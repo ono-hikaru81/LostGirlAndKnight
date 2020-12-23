@@ -32,6 +32,13 @@ public:
 	virtual void Draw();
 
 	virtual bool IsEnd() const;
+
+private:
+	int i;
+	int WorldMapPosX;
+	int WorldMapPosY;
+	int ScreenMapPosX;
+	int ScreenMapPosY;
 };
 
 #endif // !INGAME_SCENE_H
