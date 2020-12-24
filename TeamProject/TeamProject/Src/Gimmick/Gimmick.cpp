@@ -8,8 +8,10 @@ Gimmick::Gimmick()
 	m_BridgeDraw = NULL;
 	m_Angle  = 90;
 	m_Radian = 0;
-	m_ActBotton = 0;
-	m_ActTrap   = 0;
+	m_Botton = 0;
+	m_Trap   = 0;
+	m_Rock   = 0;
+	m_HitCount = 0;
 	m_BottonExec = false;
 	m_TrapExec   = false;
 	m_BridgeExec = false;
@@ -38,7 +40,7 @@ void Gimmick::BridgeMove()
 void Gimmick::BridgeDraw()
 {
 	m_BridgeDraw = LoadGraph("Res/Gimmick/Bridge.png");
-	DrawRotaGraph2(200, 400, 120.0f, 40.0f, 1.2f, m_Radian, m_BridgeDraw, TRUE);
+	DrawRotaGraph2(200, 400, 120, 40, 1.2f, m_Radian, m_BridgeDraw, TRUE);
 }
 
 void Gimmick::BottonMove()
@@ -47,11 +49,11 @@ void Gimmick::BottonMove()
 	//if (m_BottonExec == true)
 	if (GetKeyStatus(KEY_INPUT_X) == InputState::Hold)
 	{
-		m_ActBotton = 1;
+		m_Botton = 1;
 	}
 	else
 	{
-		m_ActBotton = 0;
+		m_Botton = 0;
 	}
 }
 
@@ -59,8 +61,7 @@ void Gimmick::BottonDraw()
 {
 	LoadDivGraph("Res/Gimmick/Bottons.png", m_BottonMax, 2, 1, 120, 30, m_Bottons);
 
-	DrawGraph(120, 30, m_Bottons[m_ActBotton], TRUE);
-	DrawGraph(120, 60, m_Bottons[m_ActBotton], TRUE);
+	DrawGraph(120, 60, m_Bottons[m_Botton], TRUE);
 }
 
 void Gimmick::TrapMove()
@@ -73,11 +74,11 @@ void Gimmick::TrapMove()
 
 	if (m_TrapExec == true)
 	{
-		m_ActTrap++;
-		if (m_ActTrap == 3)
+		m_Trap++;
+		if (m_Trap == 3)
 		{
 			m_TrapExec = false;
-			m_ActTrap = 2;
+			m_Trap = 2;
 		}
 	}
 }
@@ -86,7 +87,24 @@ void Gimmick::TrapDraw()
 {
 	LoadDivGraph("Res/Gimmick/Traps.png",m_TrapMax, 3, 1, 132, 70, m_Traps);
 
-	DrawGraph(300, 70, m_Traps[m_ActTrap], TRUE);
+	DrawGraph(300, 70, m_Traps[m_Trap], TRUE);
+}
+
+void Gimmick::RockMove()
+{
+	//çUåÇÇéÛÇØÇÈ
+	if (GetKeyStatus(KEY_INPUT_C) == InputState::Hold)
+	{
+		m_HitCount++;
+		m_Rock = m_Rocks[m_HitCount];
+	}
+
+}
+
+void Gimmick::RockDraw()
+{
+	LoadDivGraph("Res/MapChip/Rocks.png", m_RockMax, 1, 3, 360, 120, m_Rocks);
+	DrawGraph(400, 70, m_Rocks[m_Rock],TRUE);
 }
 
 bool Gimmick::CheckHit()
