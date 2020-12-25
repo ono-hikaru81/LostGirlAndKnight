@@ -1,26 +1,15 @@
 #include "DxLib.h"
 #include "Player.h"
-#include"../Main.h"
-#include"../Function/Input.h"
-
-//各キーの動き
-/*
-	W	　↑		
-	A	　←
-	D	　→
-	Space 攻撃 (Hold)
-
-	(モーション確認用キー)
-	V 	　死 (Hold)
-*/
+#include "../Main.h"
+#include "../Function/Input.h"
 
 Player::Player()
 {
 	//ステータス
-	m_Hp     = 10;
+	m_Hp = 10;
 	m_Attack = 0;
-	m_Speed  = 4;
-	m_Jump   = 0;
+	m_Speed = 4;
+	m_Jump = 0;
 
 	//Player座標
 	m_PosX = 143;
@@ -28,7 +17,7 @@ Player::Player()
 
 	// 管理変数
 	m_Player = 0;
-	m_count    = 0;
+	m_count = 0;
 	m_ActSpeed = 20;
 	m_ActIndex = 0;
 	m_AttIndex = 0;
@@ -38,20 +27,16 @@ Player::Player()
 	m_ActStop = m_ActSpeed;
 
 	// 実行確認
-	m_JumpExec	  = false;
-	m_DeiExec	  = false;
-	m_IsRight	  = false;
+	m_JumpExec = false;
+	m_DeiExec = false;
+	m_IsRight = false;
 
-	// 画像保存
-	//LoadDivGraph("Res/Character/Players.png", m_PlayerMax, 4, 8, 180, 180, m_Players);
+	InitTexture();
 }
 
 Player::~Player()
 {
-	for (int i = 0; i < m_PlayerMax; i++)
-	{
-		DeleteGraph(m_Players[i]);
-	}
+	ReleaseTexture();
 }
 
 void Player::Move()
@@ -59,7 +44,6 @@ void Player::Move()
 	// 左移動
 	if (GetKeyStatus(KEY_INPUT_A) == InputState::Hold && m_PosX >= -30)
 	{
-		m_IsRight = false;
 		if (--m_ActStop <= 0)
 		{
 			m_Player = m_WlkMotionL[m_ActIndex];
@@ -67,8 +51,11 @@ void Player::Move()
 			m_ActStop = m_ActSpeed;
 			m_ActIndex %= m_MotionMax;
 		}
-		m_PosX -= m_Speed;	
-		
+		m_PosX -= m_Speed;
+
+
+		m_IsRight = false;
+
 		// ジャンプ
 		if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
 		{
@@ -77,10 +64,8 @@ void Player::Move()
 		}
 	}
 	// 右移動
-	else if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold && m_PosX <= 1900)
+	else if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold)
 	{
-		m_IsRight = true;
-
 		if (--m_ActStop <= 0)
 		{
 			m_Player = m_WlkMotionR[m_ActIndex];
@@ -90,6 +75,7 @@ void Player::Move()
 		}
 		m_PosX += m_Speed;
 
+		m_IsRight = true;
 		// ジャンプ
 		if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
 		{
@@ -168,32 +154,29 @@ void Player::Move()
 	}
 }
 
-void Player::Draw()
+void Player::InitTexture()
 {
 	LoadDivGraph("Res/Character/Players.png", m_PlayerMax, 4, 8, 180, 180, m_Players);
-
-	DrawGraph(m_PosX, m_PosY, m_Players[m_Player], TRUE);
 }
 
-//init関数
-/*bool Player::InitDrawGraphic()
+void Player::Draw(Camera camera)
 {
-	LoadDivGraph("Res/Character/Players.png", m_PlayerMax, 4, 8, 180, 180, m_Players);
-	if (m_Players[m_PlayerMax - 1] == -1)
-	{
-		return false;
-	}
+	int DrawPosX = camera.ConvertPosXWorldToScreen(m_PosX);
+	int DrawPosY = camera.ConvertPosYWorldToScreen(m_PosY);
 
-	return true;
+	DrawGraph(DrawPosX, DrawPosY, m_Players[m_Player], TRUE);
+}
 
-}*/
+void Player::ReleaseTexture()
+{
+}
 
 bool Player::CheckHit(int x, int y, int Width, int Height)
 {
 	if ((m_PosX > x && m_PosX < Width) ||
-		(m_PosY > y && m_PosY < Height)||
-		(m_PosX+120 > x && m_PosX +120 < Width)||
-		(m_PosY+ 180 > x && m_PosY + 180 <Height))
+		(m_PosY > y && m_PosY < Height) ||
+		(m_PosX + 120 > x && m_PosX + 120 < Width) ||
+		(m_PosY + 180 > x && m_PosY + 180 < Height))
 	{
 		return true;
 	}
@@ -202,4 +185,3 @@ bool Player::CheckHit(int x, int y, int Width, int Height)
 		return false;
 	}
 }
-

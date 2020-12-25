@@ -5,7 +5,7 @@
 
 StageSelectScene::StageSelectScene()
 {
-
+	SelectGraph = LoadGraph("Res/bg/forest.png");
 }
 
 StageSelectScene::~StageSelectScene()
@@ -19,18 +19,25 @@ void StageSelectScene::Exec()
 
 	if (GetKeyStatus(KEY_INPUT_RETURN) == InputState::Pushed)
 	{
-		SceneManager::SetNextScene( SceneID_InGame );
+		SceneManager::SetNextScene(SceneID_InGame);
+		DeleteGraph(SelectGraph);
 	}
+}
+
+void StageSelectScene::InitTexture()
+{
 }
 
 void StageSelectScene::Draw()
 {
-	int SelectGraph = LoadGraph("Res/bg/forest.png");
-
 	DrawGraph(0, 0, SelectGraph, TRUE);
+}
+
+void StageSelectScene::ReleaseTexture()
+{
 }
 
 bool StageSelectScene::IsEnd() const
 {
-	return ( GetKeyStatus(KEY_INPUT_RETURN) == TRUE );
+	return (GetKeyStatus(KEY_INPUT_RETURN) == TRUE);
 }

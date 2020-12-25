@@ -180,7 +180,6 @@
   <ItemGroup>
     <ClInclude Include="Src\Character\BlindGirl.h" />
     <ClInclude Include="Src\Character\Player.h" />
-    <ClInclude Include="Src\Difinition.h" />
     <ClInclude Include="Src\Enemy\Dragon.h" />
     <ClInclude Include="Src\Enemy\EnemyBase.h" />
     <ClInclude Include="Src\Enemy\Orc.h" />
@@ -195,13 +194,14 @@
     <ClInclude Include="Src\Main.h" />
     <ClInclude Include="Src\Manager\SceneManager.h" />
     <ClInclude Include="Src\Processing.h" />
+    <ClInclude Include="Src\SceneDifinition.h" />
     <ClInclude Include="Src\Scene\InGameScene.h" />
     <ClInclude Include="Src\Scene\ResultScene.h" />
     <ClInclude Include="Src\Scene\SceneBase.h" />
     <ClInclude Include="Src\Scene\StageSelectScene.h" />
     <ClInclude Include="Src\Scene\TitleScene.h" />
+    <ClInclude Include="Src\StageDifinition.h" />
     <ClInclude Include="Src\Stage\Map.h" />
-    <ClInclude Include="Vec.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

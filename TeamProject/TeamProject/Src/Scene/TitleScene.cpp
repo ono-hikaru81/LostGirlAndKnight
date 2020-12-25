@@ -5,12 +5,12 @@
 
 TitleScene::TitleScene()
 {
-	TitleGraph = LoadGraph("Res/bg/title.png");
+	InitTexture();
 }
 
 TitleScene::~TitleScene()
 {
-
+	ReleaseTexture();
 }
 
 void TitleScene::Exec()
@@ -19,10 +19,13 @@ void TitleScene::Exec()
 
 	if (GetKeyStatus(KEY_INPUT_RETURN) == InputState::Pushed)
 	{
-
 		SceneManager::SetNextScene(SceneID_StageSelect);
-		DeleteGraph(TitleGraph);
 	}
+}
+
+void TitleScene::InitTexture()
+{
+	TitleGraph = LoadGraph("Res/bg/title.png");
 }
 
 void TitleScene::Draw()
@@ -32,8 +35,12 @@ void TitleScene::Draw()
 	DrawString(960, 980, "PLEASE PUSH ENTER", GetColor(255, 0, 0));
 }
 
-bool TitleScene::IsEnd() const
-{	
-	return (GetKeyStatus(KEY_INPUT_RETURN) == TRUE);
+void TitleScene::ReleaseTexture()
+{
+	DeleteGraph(TitleGraph);
 }
 
+bool TitleScene::IsEnd() const
+{
+	return (GetKeyStatus(KEY_INPUT_RETURN) == TRUE);
+}

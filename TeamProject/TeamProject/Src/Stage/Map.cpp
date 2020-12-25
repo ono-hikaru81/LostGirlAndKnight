@@ -4,17 +4,17 @@
 
 Map::Map()
 {
-	Speed = 0;
+	InitTexture();
 }
 
 Map::~Map()
 {
+	ReleaseTexture();
 }
 
 void Map::Data(Stage number_)
 {
 	MapChip[5];
-	LoadDivGraph("Res/MapChip/MapChip.png", 6, 3, 3, MapChipWidth, MapChipHeight, MapChip);
 
 	switch (number_)
 	{
@@ -140,7 +140,7 @@ void Map::Data(Stage number_)
 
 		break;
 	case Stage::Twelve:
-		
+
 		for (int y = 0; y < 9; y++)
 		{
 			for (int x = 0; x < 60; x++)
@@ -153,43 +153,114 @@ void Map::Data(Stage number_)
 	};
 }
 
-void Map::ConvertPos()
+int Map::GetChipPos(int x_, int y_)
 {
-	for (int x = 0; x <= 60; x++)
-	{
-		for (int y = 0; y <= 9; y++)
-		{
-			m_PosX = x * 120;
-			m_PosY = y * 120;
+	int ChipX = x_ / MapChipWidth;
+	int ChipY = y_ / MapChipHeight;
 
-			int SizeX = m_PosX / 120;
-			int SizeY = m_PosY / 120;
+	if (ChipX >= MaxMapWidth || ChipY >= MaxMapHeight || x_ < 0 || y_ < 0) { return 0; }
 
-			Info[SizeY][SizeX];
-		}
-	}
+	return Info[ChipY][ChipX];
 }
 
-void Map::Draw()
+void Map::Draw(Camera camera)
 {
+	int DrawPosX;
+	int DrawPosY;
+
 	for (int y = 0; y < 9; y++)
 	{
 		for (int x = 0; x < 60; x++)
 		{
-			DrawGraph(x * MapChipWidth - Speed, y * MapChipHeight, MapChip[Info[y][x]], FALSE);
+			DrawPosX = camera.ConvertPosXWorldToScreen(x * MapChipWidth);
+			DrawPosY = camera.ConvertPosYWorldToScreen(y * MapChipHeight);
+
+			DrawGraph(DrawPosX, DrawPosY, MapChip[Info[y][x]], FALSE);
 		}
 	}
 }
 
-bool Map::CheckHit(int x_, int y_, int width_, int height_)
+void Map::InitTexture()
 {
-	if ((m_PosX >= x_ && m_PosX <= width_) && (m_PosY >= y_ && m_PosY <= height_) ||
-		(m_PosX + 120 >= x_ && m_PosX + 120 <= width_) && (m_PosY + 120 >= y_ && m_PosY + 120 <= height_))
+	LoadDivGraph("Res/MapChip/MapChip.png", 6, 3, 3, MapChipWidth, MapChipHeight, MapChip);
+}
+
+void Map::ReleaseTexture()
+{
+	for (int i = 0; i < g_MapChipNumber; i++)
 	{
-		return true;
+		DeleteGraph(MapChip[i]);
 	}
-	else
+}
+
+int Map::CheckHit(int x_, int y_, int* MoveX, int* MoveY)
+{
+	int MapHitCheck(float X, float Y,
+		float* MoveX, float* MoveY);
+	float afX, afY;
+
+	// 移動量を足す
+	afX = x_ + *MoveX;
+	afY = y_ + *MoveY;
+
+	// 当たり判定のあるブロックに当たっているかチェック
+	if (GetChipPos(afX, afY) == 1)
 	{
-		return false;
+		int blx, bty, brx, bby;
+
+		// 当たっていたら壁から離す処理を行う
+
+		// ブロックの上下左右の座標を算出
+		blx = (float)((int)afX / MapChipWidth) * MapChipWidth;        // 左辺の X 座標
+		brx = (float)((int)afX / MapChipWidth + 1) * MapChipWidth;    // 右辺の X 座標
+
+		bty = (float)((int)afY / MapChipHeight) * MapChipHeight;        // 上辺の Y 座標
+		bby = (float)((int)afY / MapChipHeight + 1) * MapChipHeight;    // 下辺の Y 座標
+
+		// 上辺に当たっていた場合
+		if (*MoveY > 0)
+		{
+			// 移動量を補正する
+			*MoveY = bty - y_ - 1;
+
+			// 上辺に当たったと返す
+			return 3;
+		}
+
+		// 下辺に当たっていた場合
+		if (*MoveY < 0)
+		{
+			// 移動量を補正する
+			*MoveY = bby - y_ + 1;
+
+			// 下辺に当たったと返す
+			return 4;
+		}
+
+		// 左辺に当たっていた場合
+		if (*MoveX > 0)
+		{
+			// 移動量を補正する
+			*MoveX = blx - x_ - 1;
+
+			// 左辺に当たったと返す
+			return 1;
+		}
+
+		// 右辺に当たっていた場合
+		if (*MoveX < 0)
+		{
+			// 移動量を補正する
+			*MoveX = brx - x_ + 1;
+
+			// 右辺に当たったと返す
+			return 2;
+		}
+
+		// ここに来たら適当な値を返す
+		return 4;
 	}
+
+	// どこにも当たらなかったと返す
+	return 0;
 }

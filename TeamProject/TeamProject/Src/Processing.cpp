@@ -31,7 +31,7 @@ void Processing::Game()
 
 void Processing::Draw()
 {
-	player.Draw();
+//	player.Draw();
 	gimmick.BridgeDraw();
 	gimmick.BottonDraw();
 	gimmick.TrapDraw();

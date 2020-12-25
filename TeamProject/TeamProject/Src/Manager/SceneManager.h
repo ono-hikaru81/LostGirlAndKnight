@@ -1,7 +1,7 @@
 #ifndef STAGE_MANAGER_H
 #define STAGE_MANAGER_H
 
-#include "../Difinition.h"
+#include "../SceneDifinition.h"
 
 class SceneManager
 {

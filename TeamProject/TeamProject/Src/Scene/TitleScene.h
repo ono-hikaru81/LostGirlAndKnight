@@ -10,7 +10,9 @@ public:
 	virtual ~TitleScene();
 
 	virtual void Exec();
+	virtual void InitTexture();
 	virtual void Draw();
+	virtual void ReleaseTexture();
 
 	virtual bool IsEnd() const;
 

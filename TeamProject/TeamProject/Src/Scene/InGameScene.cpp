@@ -4,46 +4,27 @@
 #include "../Function/Input.h"
 #include "../Stage/Map.h"
 #include "../Character/Player.h"
-#include "../Character/BlindGirl.h"
-#include "../Enemy/Slime.h"
-#include "../Enemy/Skull.h"
-#include "../Enemy/Orc.h"
-#include "../Enemy/Wolfman.h"
-#include "../Enemy/Vampire.h"
-#include "../Enemy/Dragon.h"
-#include "../Gimmick/Gimmick.h"
 #include "../Function/Camera.h"
 
 static Camera camera;
 
 static Player player;
-static Girl girl;
-static Slime slime;
-static Skull skull;
-static Orc orc;
-static Wolfman wolfman;
-static Vampire vampire;
-static Dragon dragon;
-static Gimmick gimmick;
 static Map map;
 static StageID nextStage = StageID_1;
 
 InGameScene::InGameScene()
 {
-	static Slime Slimes[50];
-	static Skull Skulls[50];
-	static Orc Orcs[50];
-	static Gimmick Bridges[50];
-	static Gimmick Botton[50];
-	static Gimmick Traps[50];
+	InitTexture();
+	player.InitTexture();
+	map.InitTexture();
+
+	BgPosX = camera.ConvertPosXWorldToScreen(0);
+	BgPosY = camera.ConvertPosYWorldToScreen(0);
 }
 
 InGameScene::~InGameScene()
 {
-	for (i = 0; i < 6; i++)
-	{
-		DeleteGraph(map.MapChip[i]);
-	}
+	ReleaseTexture();
 }
 
 void InGameScene::Exec()
@@ -53,18 +34,6 @@ void InGameScene::Exec()
 	camera.Update();
 
 	player.Move();
-	girl.Move();
-	slime.Exec();
-	skull.Exec();
-	orc.Exec(player.m_PosX);
-	wolfman.Exec();
-	vampire.Exec();
-	dragon.Exec();
-
-	WorldMapPosX = 0;
-	WorldMapPosY = 0;
-	ScreenMapPosX = camera.ConvertPosXWorldToScreen(WorldMapPosX);
-	ScreenMapPosY = camera.ConvertPosYWorldToScreen(WorldMapPosY);
 
 	if (GetKeyStatus(KEY_INPUT_1) == InputState::Pushed)
 	{
@@ -87,25 +56,18 @@ void InGameScene::Exec()
 	{
 		SceneManager::SetNextScene(SceneID_Result);
 	}
+}
 
-	if (GetKeyStatus(KEY_INPUT_D))
-	{
-		map.Speed += 240;
-	}
-	else if (GetKeyStatus(KEY_INPUT_A))
-	{
-		map.Speed -= 120;
-	}
+void InGameScene::InitTexture()
+{
+	Bg = LoadGraph("Res/bg/1.png");
 }
 
 void InGameScene::Draw()
 {
-	DrawString(20, 20, "InGameScene", GetColor(0, 0, 255));
-	int Bg = LoadGraph("Res/bg/1.png");
-
 	if (nextStage == StageID_1)
 	{
-		DrawGraph(0, 0, Bg, TRUE);
+		DrawGraph(BgPosX, BgPosY, Bg, TRUE);
 		map.Data(One);
 	}
 	else if (nextStage == StageID_2)
@@ -117,7 +79,7 @@ void InGameScene::Draw()
 	{
 		DrawGraph(0, 0, Bg, TRUE);
 		map.Data(Three);
-	
+
 	}
 	else if (nextStage == StageID_4)
 	{
@@ -138,7 +100,6 @@ void InGameScene::Draw()
 	{
 		DrawGraph(0, 0, Bg, TRUE);
 		map.Data(Seven);
-		wolfman.Draw();
 	}
 	else if (nextStage == StageID_8)
 	{
@@ -160,21 +121,23 @@ void InGameScene::Draw()
 	{
 		DrawGraph(0, 0, Bg, TRUE);
 		map.Data(Eleven);
-		vampire.Draw();
 	}
 	else if (nextStage == StageID_12)
 	{
 		DrawGraph(0, 0, Bg, TRUE);
 		map.Data(Twelve);
-		dragon.Draw();
 	}
 
-	map.Draw(ScreenMapPosX, ScreenMapPosY);
-	player.Draw();
-	girl.Draw();
+	map.Draw(camera);
+	player.Draw(camera);
+}
+
+void InGameScene::ReleaseTexture()
+{
+	DeleteGraph(Bg);
 }
 
 bool InGameScene::IsEnd() const
 {
-	return ( GetKeyStatus(KEY_INPUT_RETURN) == TRUE );
+	return (GetKeyStatus(KEY_INPUT_RETURN) == TRUE);
 }

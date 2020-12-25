@@ -1,5 +1,5 @@
-#ifndef DIFINITION_H
-#define DIFINITION_H
+#ifndef SCENE_DIFINITION_H
+#define SCENE_DIFINITION_H
 
 enum SceneID
 {
@@ -12,5 +12,4 @@ enum SceneID
 	SceneID_Invalid,
 };
 
-
-#endif // !DIFINITION_H
+#endif // !SCENE_DIFINITION_H

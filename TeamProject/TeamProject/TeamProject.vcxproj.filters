@@ -135,9 +135,6 @@
     <ClInclude Include="Src\Stage\Map.h">
       <Filter>ソース ファイル\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Difinition.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Main.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
@@ -165,7 +162,10 @@
     <ClInclude Include="Src\Enemy\Dragon.h">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Vec.h">
+    <ClInclude Include="Src\SceneDifinition.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\StageDifinition.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>

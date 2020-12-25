@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "../Function/Camera.h"
+
 // =================
 // プレイヤークラス
 // =================
@@ -12,13 +14,14 @@ public:
 
 public:
 	void Move();
-	void Draw();
+	void InitTexture();
+	void Draw(Camera camera);
+	void ReleaseTexture();
 
 public:
-	bool InitDrawGraphic();
-	bool CheckHit(int x,int y,int Width,int Height);
+	bool CheckHit(int x, int y, int Width, int Height);
 
-public:				//プライベートにする予定だったもの
+public:
 	//ステータス
 	int m_Hp;
 	int m_Attack;
@@ -46,15 +49,15 @@ public:				//プライベートにする予定だったもの
 	static const int m_DeiMotionMax = 3;
 	static const int m_PlayerMax = 32;
 	//----左向き---
-	int m_WaiMotionL[m_MotionMax] = { 0, 1, 2, 1};
-	int m_WlkMotionL[m_MotionMax] = { 3, 5, 4, 5};
-	int m_AttMotionL[m_AttMotionMax] = { 7, 8, 9,10,11,10, 9};
-	int m_DeiMotionL[m_DeiMotionMax] = {13,14,15};
+	int m_WaiMotionL[m_MotionMax] = { 0, 1, 2, 1 };
+	int m_WlkMotionL[m_MotionMax] = { 3, 5, 4, 5 };
+	int m_AttMotionL[m_AttMotionMax] = { 7, 8, 9,10,11,10, 9 };
+	int m_DeiMotionL[m_DeiMotionMax] = { 13,14,15 };
 	//----右向き---
-	int m_WaiMotionR[m_MotionMax] = {16,17,16,18};
-	int m_WlkMotionR[m_MotionMax] = {19,21,20,21};
-	int m_AttMotionR[m_AttMotionMax] = {23,24,25,26,27,26,25};
-	int m_DeiMotionR[m_DeiMotionMax] = {29,30,31};
+	int m_WaiMotionR[m_MotionMax] = { 16,17,16,18 };
+	int m_WlkMotionR[m_MotionMax] = { 19,21,20,21 };
+	int m_AttMotionR[m_AttMotionMax] = { 23,24,25,26,27,26,25 };
+	int m_DeiMotionR[m_DeiMotionMax] = { 29,30,31 };
 
 	// 実行確認
 	bool m_JumpExec;

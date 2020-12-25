@@ -10,10 +10,11 @@ public:
 	virtual ~ResultScene();
 
 	virtual void Exec();
+	virtual void InitTexture();
 	virtual void Draw();
+	virtual void ReleaseTexture();
 
 	virtual bool IsEnd() const;
 };
 
 #endif // !RESULT_SCENE_H
-

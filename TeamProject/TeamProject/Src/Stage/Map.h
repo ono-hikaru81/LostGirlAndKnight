@@ -2,22 +2,10 @@
 #define MAP_H
 
 #include "../Main.h"
+#include "../StageDifinition.h"
+#include "../Function/Camera.h"
 
-enum Stage
-{
-	One,
-	Two,
-	Three,
-	Four,
-	Five,
-	Six,
-	Seven,
-	Eight,
-	Nine,
-	Ten,
-	Eleven,
-	Twelve
-};
+const int g_MapChipNumber = 6;
 
 class Map
 {
@@ -27,18 +15,22 @@ public:
 
 public:
 	void Data(Stage number_);
-	void ConvertPos();
-	void Draw();
-	bool CheckHit(int x_, int y_, int width_, int height_);
+	void Draw(Camera camera);
+	void InitTexture();
+	void ReleaseTexture();
+	int GetChipPos(int x_, int y_);
+	int CheckHit(int x_, int y_, int* MoveX, int* MoveY);
 
 public:
 	int m_PosX;
 	int m_PosY;
 	int Info[MaxMapHeight][MaxMapWidth];
 	int Number;
-	int Speed;
-	int MapChip[6];
+	
 private:
+	int MapChipTexture;
+	int MapChip[g_MapChipNumber];
+
 	int Info1[MaxMapHeight][MaxMapWidth] =
 	{
 		6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
@@ -187,7 +179,5 @@ private:
 		0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 	};
 };
-
-void DrawMap();
 
 #endif // !MAP_H

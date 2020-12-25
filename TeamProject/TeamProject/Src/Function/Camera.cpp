@@ -1,13 +1,15 @@
 #include "Camera.h"
-#include "../Function/Input.h"
+#include "Input.h"
 #include "DxLib.h"
 #include "../Main.h"
 #include "../Character/Player.h"
 
+static Player player;
+
 Camera::Camera()
 {
-	m_PosX = WindowWidth / 2;
-	m_PosY = WindowHeight / 2;
+	m_PosX = WindowHalfWidth;
+	m_PosY = WindowHalfHeight;
 }
 
 Camera::~Camera()
@@ -16,31 +18,32 @@ Camera::~Camera()
 
 void Camera::Update()
 {
+
 	if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold)
 	{
-		m_PosX += 4;
+		m_PosX += player.m_Speed;
 	}
-	else if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold)
+	else if (GetKeyStatus(KEY_INPUT_A) == InputState::Hold)
 	{
-		m_PosY -= 4;
+		m_PosX -= player.m_Speed;
 	}
 
 	if (m_PosX <= WindowHalfWidth)
 	{
 		m_PosX = WindowHalfWidth;
 	}
-	else if (m_PosX >= WindowWidth - WindowHalfWidth)
+	else if (m_PosX >= FieldWidth - WindowHalfWidth)
 	{
-		m_PosX = WindowWidth - WindowHalfWidth;
+		m_PosX = FieldWidth - WindowHalfWidth;
 	}
 
 	if (m_PosY <= WindowHalfHeight)
 	{
 		m_PosY = WindowHalfHeight;
 	}
-	else if (m_PosY >= WindowHeight - WindowHalfHeight)
+	else if (m_PosY >= FieldHeight - WindowHalfHeight)
 	{
-		m_PosY = WindowHeight - WindowHalfHeight;
+		m_PosY = FieldHeight - WindowHalfHeight;
 	}
 }
 

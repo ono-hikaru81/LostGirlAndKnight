@@ -45,11 +45,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// =================
 		// 処理関数呼び出し
 		// =================
-		processing.Game();
-	//	pSceneMng->Exec();
+	//	processing.Game();
+		pSceneMng->Exec();
 
-		processing.Draw();
-	//	pSceneMng->Draw();
+	//	processing.Draw();
+		pSceneMng->Draw();
 		
 		// =====================================================================
 		// ＤＸライブラリを使う上で、モニターへゲーム画面を表示するためのお約束
@@ -57,6 +57,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// =====================================================================
 		ScreenFlip();
 	}
+	delete pSceneMng;
+	pSceneMng = nullptr;
 
 	DxLib_End();			// ＤＸライブラリ使用の終了処理
 	return 0;				// ソフトの終了 
