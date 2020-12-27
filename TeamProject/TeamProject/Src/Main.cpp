@@ -1,11 +1,8 @@
 ﻿#include <stdio.h>
 #include "DxLib.h"
 #include "Main.h"
-#include "Processing.h"
 #include "../Src/Character/Player.h"
 #include "Manager/SceneManager.h"
-
-Processing processing;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
