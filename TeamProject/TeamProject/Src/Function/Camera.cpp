@@ -16,16 +16,16 @@ Camera::~Camera()
 {
 }
 
-void Camera::Update()
+void Camera::Update(int x_, int speed_)
 {
 
-	if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold)
+	if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold && x_ >= WindowHalfWidth)
 	{
-		m_PosX += player.m_Speed;
+		m_PosX += speed_;
 	}
 	else if (GetKeyStatus(KEY_INPUT_A) == InputState::Hold)
 	{
-		m_PosX -= player.m_Speed;
+		m_PosX -= speed_;
 	}
 
 	if (m_PosX <= WindowHalfWidth)

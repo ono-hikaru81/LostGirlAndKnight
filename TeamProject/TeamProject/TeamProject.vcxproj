@@ -169,7 +169,6 @@
     <ClCompile Include="Src\Gimmick\Gimmick.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Manager\SceneManager.cpp" />
-    <ClCompile Include="Src\Processing.cpp" />
     <ClCompile Include="Src\Scene\InGameScene.cpp" />
     <ClCompile Include="Src\Scene\ResultScene.cpp" />
     <ClCompile Include="Src\Scene\SceneBase.cpp" />
@@ -193,7 +192,6 @@
     <ClInclude Include="Src\Gimmick\Gimmick.h" />
     <ClInclude Include="Src\Main.h" />
     <ClInclude Include="Src\Manager\SceneManager.h" />
-    <ClInclude Include="Src\Processing.h" />
     <ClInclude Include="Src\SceneDifinition.h" />
     <ClInclude Include="Src\Scene\InGameScene.h" />
     <ClInclude Include="Src\Scene\ResultScene.h" />

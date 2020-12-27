@@ -31,7 +31,7 @@ void InGameScene::Exec()
 {
 	if (UpdateKeyState() != 0) return;
 
-	camera.Update();
+	camera.Update(player.m_PosX, player.m_Speed);
 
 	player.Move();
 

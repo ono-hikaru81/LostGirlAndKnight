@@ -7,7 +7,7 @@ public:
 	Camera();
 	~Camera();
 
-	void Update();
+	void Update(int x_, int speed_);
 	int ConvertPosXWorldToScreen(int x_);
 	int ConvertPosYWorldToScreen(int y_);
 	float GetCameraX() { return m_PosX; }
