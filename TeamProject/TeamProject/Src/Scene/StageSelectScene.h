@@ -18,6 +18,7 @@ public:
 
 private:
 	int SelectGraph;
+	int Word;
 };
 
 #endif // !STAGE_SELECT_SCENE_H
