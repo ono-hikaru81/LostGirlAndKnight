@@ -5,9 +5,10 @@
 #include "../Stage/Map.h"
 #include "../Character/Player.h"
 #include "../Function/Camera.h"
+#include"../Character/BlindGirl.h"
 
 static Camera camera;
-
+static Girl girl;
 static Player player;
 static Map map;
 static StageID nextStage = StageID_1;
@@ -17,6 +18,7 @@ InGameScene::InGameScene()
 	InitTexture();
 	player.InitTexture();
 	map.InitTexture();
+	girl.InitTexture();
 
 	BgPosX = camera.ConvertPosXWorldToScreen(0);
 	BgPosY = camera.ConvertPosYWorldToScreen(0);
@@ -34,6 +36,8 @@ void InGameScene::Exec()
 	camera.Update(player.m_PosX, player.m_Speed);
 
 	player.Move();
+	girl.Move(player);
+	
 
 	if (GetKeyStatus(KEY_INPUT_1) == InputState::Pushed)
 	{
@@ -130,6 +134,7 @@ void InGameScene::Draw()
 
 	map.Draw(camera);
 	player.Draw(camera);
+	girl.Draw(player);
 }
 
 void InGameScene::ReleaseTexture()

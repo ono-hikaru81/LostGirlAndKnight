@@ -42,10 +42,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// =================
 		// 処理関数呼び出し
 		// =================
-	//	processing.Game();
+
 		pSceneMng->Exec();
 
-	//	processing.Draw();
 		pSceneMng->Draw();
 		
 		// =====================================================================

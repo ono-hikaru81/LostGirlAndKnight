@@ -26,6 +26,11 @@ Orc::~Orc()
 	}*/
 }
 
+void Orc::InitTexture()
+{
+	LoadDivGraph("Res/Monster/side/Orc/Orcs.png", m_OrcMax, 4, 3, 180, 210, m_Orcs, TRUE);
+}
+
 void Orc::Exec(int x_)
 {
 	m_MoveTime++;
@@ -99,7 +104,7 @@ void Orc::Exec(int x_)
 
 void Orc::Draw()
 {
-	LoadDivGraph("Res/Monster/side/Orc/Orcs.png", m_OrcMax, 4, 3, 180, 210, m_Orcs, TRUE);
+	
 	DrawGraph(m_PosX, m_PosY, m_Orcs[m_Orc], TRUE);
 }
 

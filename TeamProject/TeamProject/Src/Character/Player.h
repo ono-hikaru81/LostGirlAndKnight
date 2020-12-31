@@ -48,11 +48,13 @@ public:
 	static const int m_MotionMax = 4;
 	static const int m_DeiMotionMax = 3;
 	static const int m_PlayerMax = 32;
+
 	//----左向き---
-	int m_WaiMotionL[m_MotionMax] = { 0, 1, 2, 1 };
+	int m_WaiMotionL[m_MotionMax] = { 0, 1, 0, 2 };
 	int m_WlkMotionL[m_MotionMax] = { 3, 5, 4, 5 };
 	int m_AttMotionL[m_AttMotionMax] = { 7, 8, 9,10,11,10, 9 };
 	int m_DeiMotionL[m_DeiMotionMax] = { 13,14,15 };
+
 	//----右向き---
 	int m_WaiMotionR[m_MotionMax] = { 16,17,16,18 };
 	int m_WlkMotionR[m_MotionMax] = { 19,21,20,21 };
@@ -61,7 +63,8 @@ public:
 
 	// 実行確認
 	bool m_JumpExec;
-	bool m_DeiExec;
+	bool m_WalkExec;
+	bool m_WaitExec;
 	bool m_IsRight;
 
 	// 画像保存

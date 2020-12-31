@@ -28,7 +28,8 @@ Player::Player()
 
 	// 実行確認
 	m_JumpExec = false;
-	m_DeiExec = false;
+	m_WalkExec = false;
+	m_WaitExec = false;
 	m_IsRight = false;
 
 	InitTexture();
@@ -44,6 +45,9 @@ void Player::Move()
 	// 左移動
 	if (GetKeyStatus(KEY_INPUT_A) == InputState::Hold && m_PosX >= -30)
 	{
+		m_IsRight = false;
+		m_WaitExec = false;
+		m_WalkExec = true;
 		if (--m_ActStop <= 0)
 		{
 			m_Player = m_WlkMotionL[m_ActIndex];
@@ -52,9 +56,7 @@ void Player::Move()
 			m_ActIndex %= m_MotionMax;
 		}
 		m_PosX -= m_Speed;
-
-
-		m_IsRight = false;
+			
 
 		// ジャンプ
 		if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
@@ -66,6 +68,9 @@ void Player::Move()
 	// 右移動
 	else if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold)
 	{
+		m_IsRight = true;
+		m_WaitExec = false;
+		m_WalkExec = true;
 		if (--m_ActStop <= 0)
 		{
 			m_Player = m_WlkMotionR[m_ActIndex];
@@ -74,8 +79,7 @@ void Player::Move()
 			m_ActIndex %= m_MotionMax;
 		}
 		m_PosX += m_Speed;
-
-		m_IsRight = true;
+		
 		// ジャンプ
 		if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
 		{
@@ -86,6 +90,7 @@ void Player::Move()
 	// ジャンプ
 	else if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
 	{
+		m_WaitExec = false;
 		m_JumpExec = true;
 		m_Jump = -20;
 	}
@@ -128,6 +133,7 @@ void Player::Move()
 	{
 		if (--m_ActStop <= 0)
 		{
+			m_WaitExec = true;
 			if (m_IsRight == true)
 			{
 				m_Player = m_WaiMotionR[m_WaitIndex];

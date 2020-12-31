@@ -10,6 +10,7 @@ public:
 	Orc();
 	virtual ~Orc();
 
+	void InitTexture();
 	virtual void Exec(int x_);
 	virtual void Draw();
 
