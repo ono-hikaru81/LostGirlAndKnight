@@ -91,6 +91,9 @@
     <ClCompile Include="Src\Enemy\Dragon.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Function\Button.cpp">
+      <Filter>ソース ファイル\Function</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Scene\InGameScene.h">
@@ -161,6 +164,9 @@
     </ClInclude>
     <ClInclude Include="Src\StageDifinition.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Function\Button.h">
+      <Filter>ソース ファイル\Function</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

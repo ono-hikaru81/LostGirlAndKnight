@@ -75,7 +75,7 @@ void Girl::Move(Player player)
 			else
 			{
 				m_Girl = m_WlkMotionL[m_WlkIndex];
-				m_PosX -= m_Speed;
+				m_PosX -= m_Speed;							
 			}
 			m_WlkIndex++;
 			m_ActStop = m_ActSpeed;

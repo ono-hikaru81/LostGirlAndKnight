@@ -152,8 +152,16 @@ void Player::Move()
 	{
 		m_PosY += m_Jump;
 		m_Jump += 1;
-		if (m_PosY >= WindowHeight - MapChipHeight - 180)//d—Í‰Á‘¬
+		if (m_IsRight == true)
 		{
+			m_Player = 28;
+		}
+		else
+		{
+			m_Player = 12;
+		}
+		if (m_PosY >= WindowHeight - MapChipHeight - 180)//d—Í‰Á‘¬
+		{	
 			m_JumpExec = false;
 			m_Jump = 0;
 		}
