@@ -134,7 +134,7 @@ void InGameScene::Draw()
 
 	map.Draw(camera);
 	player.Draw(camera);
-	girl.Draw(player);
+	girl.Draw(player,camera);
 }
 
 void InGameScene::ReleaseTexture()

@@ -2,6 +2,7 @@
 #define BLINDGIRL
 
 #include"Player.h"
+#include "../Function/Camera.h"
 
 class Girl
 {
@@ -50,7 +51,7 @@ public:
 public:
 	void InitTexture();
 	void Move(Player player);
-	void Draw(Player player);
+	void Draw(Player player, Camera camera);
 	void ReleaseTexture();
 };
 

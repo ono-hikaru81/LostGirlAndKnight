@@ -4,7 +4,7 @@
 #include "../Character/Player.h"
 #include"../Function/Input.h"
 
-Player player;
+static Player player;
 
 Girl::Girl()
 {
@@ -120,9 +120,12 @@ void Girl::Move(Player player)
 	
 }
 
-void Girl::Draw(Player player)
+void Girl::Draw(Player player, Camera camera)
 {
-	DrawGraph(player.m_PosX - 63, player.m_PosY, m_Girls[m_Girl], TRUE);
+	int DrawPosX = camera.ConvertPosXWorldToScreen(player.m_PosX - 63);
+	int DrawPosY = camera.ConvertPosYWorldToScreen(player.m_PosY);
+
+	DrawGraph(DrawPosX, DrawPosY, m_Girls[m_Girl], TRUE);
 }
 
 void Girl::ReleaseTexture()
