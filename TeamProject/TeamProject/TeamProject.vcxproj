@@ -176,6 +176,7 @@
     <ClCompile Include="Src\Scene\StageSelectScene.cpp" />
     <ClCompile Include="Src\Scene\TitleScene.cpp" />
     <ClCompile Include="Src\Stage\Map.cpp" />
+    <ClCompile Include="Src\UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Character\BlindGirl.h" />
@@ -202,6 +203,7 @@
     <ClInclude Include="Src\Scene\TitleScene.h" />
     <ClInclude Include="Src\StageDifinition.h" />
     <ClInclude Include="Src\Stage\Map.h" />
+    <ClInclude Include="Src\UI\UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

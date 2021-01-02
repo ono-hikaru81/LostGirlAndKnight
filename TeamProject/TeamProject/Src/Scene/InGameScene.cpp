@@ -5,12 +5,15 @@
 #include "../Stage/Map.h"
 #include "../Character/Player.h"
 #include "../Function/Camera.h"
-#include"../Character/BlindGirl.h"
+#include "../Character/BlindGirl.h"
+#include "../Main.h"
+#include "../UI/UI.h"
 
 static Camera camera;
 static Girl girl;
 static Player player;
 static Map map;
+static UI ui;
 static StageID nextStage = StageID_1;
 
 InGameScene::InGameScene()
@@ -19,6 +22,7 @@ InGameScene::InGameScene()
 	player.InitTexture();
 	map.InitTexture();
 	girl.InitTexture();
+	ui.InitTexture();
 
 	BgPosX = camera.ConvertPosXWorldToScreen(0);
 	BgPosY = camera.ConvertPosYWorldToScreen(0);
@@ -36,6 +40,7 @@ void InGameScene::Exec()
 	camera.Update(player.m_PosX, player.m_Speed);
 
 	player.Move();
+//	player.CheckColliderToMap(player.m_PosX, player.m_PosY, g_Gravity, player.m_PosX, player.m_PosY, 180.0f, &player.m_JumpExec, map);
 	girl.Move(player);
 	
 
@@ -50,6 +55,38 @@ void InGameScene::Exec()
 	else if (GetKeyStatus(KEY_INPUT_3) == InputState::Pushed)
 	{
 		nextStage = StageID_3;
+	}
+	else if (GetKeyStatus(KEY_INPUT_4) == InputState::Pushed)
+	{
+		nextStage = StageID_4;
+	}
+	else if (GetKeyStatus(KEY_INPUT_5) == InputState::Pushed)
+	{
+		nextStage = StageID_5;
+	}
+	else if (GetKeyStatus(KEY_INPUT_6) == InputState::Pushed)
+	{
+		nextStage = StageID_6;
+	}
+	else if (GetKeyStatus(KEY_INPUT_7) == InputState::Pushed)
+	{
+		nextStage = StageID_7;
+	}
+	else if (GetKeyStatus(KEY_INPUT_8) == InputState::Pushed)
+	{
+		nextStage = StageID_8;
+	}
+	else if (GetKeyStatus(KEY_INPUT_9) == InputState::Pushed)
+	{
+		nextStage = StageID_9;
+	}
+	else if (GetKeyStatus(KEY_INPUT_F1) == InputState::Pushed)
+	{
+		nextStage = StageID_10;
+	}
+	else if (GetKeyStatus(KEY_INPUT_F2) == InputState::Pushed)
+	{
+		nextStage = StageID_11;
 	}
 	else if (GetKeyStatus(KEY_INPUT_F3) == InputState::Pushed)
 	{
@@ -132,6 +169,7 @@ void InGameScene::Draw()
 		map.Data(Twelve);
 	}
 
+	ui.Draw();
 	map.Draw(camera);
 	player.Draw(camera);
 	girl.Draw(player,camera);

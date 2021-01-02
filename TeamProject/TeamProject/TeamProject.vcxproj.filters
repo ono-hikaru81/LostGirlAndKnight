@@ -26,6 +26,9 @@
     <Filter Include="ソース ファイル\Stage">
       <UniqueIdentifier>{0f169e69-ae3c-4b0d-b34d-e9f3d3055114}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\UI">
+      <UniqueIdentifier>{039416d2-5a68-451f-806d-34a54a2a4a4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Scene\InGameScene.cpp">
@@ -93,6 +96,9 @@
     </ClCompile>
     <ClCompile Include="Src\Function\Button.cpp">
       <Filter>ソース ファイル\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\UI\UI.cpp">
+      <Filter>ソース ファイル\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +173,9 @@
     </ClInclude>
     <ClInclude Include="Src\Function\Button.h">
       <Filter>ソース ファイル\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\UI\UI.h">
+      <Filter>ソース ファイル\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
