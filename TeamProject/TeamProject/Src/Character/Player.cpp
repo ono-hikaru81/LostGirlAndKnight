@@ -2,6 +2,9 @@
 #include "Player.h"
 #include "../Main.h"
 #include "../Function/Input.h"
+#include "../Stage/Map.h"
+
+static Map g_map;
 
 Player::Player()
 {
@@ -165,6 +168,21 @@ void Player::Move()
 			m_JumpExec = false;
 			m_Jump = 0;
 		}
+	}
+	else if (m_JumpExec != true)
+	{
+//		m_PosY += g_Gravity;
+	}
+
+	int NewPosX = 0;
+	int NewPosWidth = NewPosX + 180;
+	int NewPosY = 0;
+	int NewPosHeight = NewPosY + 180;
+
+	if (g_map.CheckHit(NewPosX, NewPosY, NewPosX + 180, NewPosY + 180) == false)
+	{
+		m_PosX = m_NewPosX;
+		m_PosY = m_NewPosY;
 	}
 }
 

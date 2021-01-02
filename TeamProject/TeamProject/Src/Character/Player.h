@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "../Function/Camera.h"
+#include "../Stage/Map.h"
 
 // =================
 // プレイヤークラス
@@ -17,6 +18,7 @@ public:
 	void InitTexture();
 	void Draw(Camera camera);
 	void ReleaseTexture();
+	int CheckColliderToMap(int X, int Y, int DownSP, int MoveX, int MoveY, float Size, bool JumpFlag, Map map);
 
 public:
 	bool CheckHit(int x, int y, int Width, int Height);
@@ -31,6 +33,8 @@ public:
 	//Player座標
 	int m_PosX;
 	int m_PosY;
+	int m_NewPosX;
+	int m_NewPosY;
 
 	// 管理変数
 	int m_Player;

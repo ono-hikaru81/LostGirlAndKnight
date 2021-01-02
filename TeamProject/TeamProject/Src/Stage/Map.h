@@ -18,8 +18,9 @@ public:
 	void Draw(Camera camera);
 	void InitTexture();
 	void ReleaseTexture();
+	void Clamp(int* value, int min, int max);
 	int GetChipPos(int x_, int y_);
-	int CheckHit(int x_, int y_, int* MoveX, int* MoveY);
+	bool CheckHit(int x_, int y_, int width_, int height_);
 
 public:
 	int m_PosX;
