@@ -48,47 +48,52 @@ void Player::Move()
 	// 左移動
 	if (GetKeyStatus(KEY_INPUT_A) == InputState::Hold && m_PosX >= -30)
 	{
-		m_IsRight = false;
-		m_WaitExec = false;
-		m_WalkExec = true;
-		if (--m_ActStop <= 0)
-		{
-			m_Player = m_WlkMotionL[m_ActIndex];
-			m_ActIndex++;
-			m_ActStop = m_ActSpeed;
-			m_ActIndex %= m_MotionMax;
-		}
-		m_PosX -= m_Speed;
-			
-
-		// ジャンプ
+		// 左移動中ジャンプ
 		if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
 		{
+			m_WalkExec = false;
 			m_JumpExec = true;
 			m_Jump = -20;
 		}
+		else
+		{
+			m_IsRight = false;
+			m_WaitExec = false;
+			m_WalkExec = true;
+			if (--m_ActStop <= 0)
+			{
+				m_Player = m_WlkMotionL[m_ActIndex];
+				m_ActIndex++;
+				m_ActStop = m_ActSpeed;
+				m_ActIndex %= m_MotionMax;
+			}
+		}
+		m_PosX -= m_Speed;	
 	}
 	// 右移動
 	else if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold)
 	{
-		m_IsRight = true;
-		m_WaitExec = false;
-		m_WalkExec = true;
-		if (--m_ActStop <= 0)
-		{
-			m_Player = m_WlkMotionR[m_ActIndex];
-			m_ActIndex++;
-			m_ActStop = m_ActSpeed;
-			m_ActIndex %= m_MotionMax;
-		}
-		m_PosX += m_Speed;
-		
-		// ジャンプ
+		// 右移動中ジャンプ
 		if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
 		{
+			m_WalkExec = false;
 			m_JumpExec = true;
 			m_Jump = -20;
 		}
+		else
+		{
+			m_IsRight = true;
+			m_WaitExec = false;
+			m_WalkExec = true;
+			if (--m_ActStop <= 0)
+			{
+				m_Player = m_WlkMotionR[m_ActIndex];
+				m_ActIndex++;
+				m_ActStop = m_ActSpeed;
+				m_ActIndex %= m_MotionMax;
+			}
+		}
+		m_PosX += m_Speed;		
 	}
 	// ジャンプ
 	else if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)

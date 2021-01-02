@@ -84,18 +84,17 @@ void Girl::Move(Player player)
 	}
 	else if (player.m_JumpExec == true)
 	{
+		m_Jump = -20;
+		m_PosY += m_Jump;
+		m_Jump += 1;
 		if (player.m_IsRight == true)
 		{
-			m_Girl = 7;
-			m_Jump = -20;
+			m_Girl = 7;	
 		}
 		else
 		{
 			m_Girl = 18;
-			m_Jump = -20;
 		}
-		m_PosY += m_Jump;
-		m_Jump += 1;
 		if (m_PosY >= WindowHeight - MapChipHeight - 180)//d—Í‰Á‘¬
 		{
 			m_Jump = 0;
