@@ -1,9 +1,6 @@
 #include"Slime.h"
 #include"DxLib.h"
 
-#include"Slime.h"
-#include"DxLib.h"
-
 Slime::Slime()
 {
 	m_Slime = 0;
@@ -12,10 +9,12 @@ Slime::Slime()
 	m_MoveTime = 0;
 	m_ActIndex = 0;
 	m_ActSpeed = 10;
+	InitTexture();
 }
 
 Slime::~Slime()
 {
+	ReleaseTexture();
 }
 
 void Slime::Exec()
@@ -57,11 +56,25 @@ void Slime::Exec()
 	}
 }
 
-void Slime::Draw()
+void Slime::Draw(Camera camera, int x_, int y_)
+{
+	int DrawX = camera.ConvertPosXWorldToScreen(x_);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+
+	DrawGraph(DrawX, DrawY, m_Slimes[m_Slime], TRUE);
+}
+
+void Slime::InitTexture()
 {
 	LoadDivGraph("Res/Monster/side/Slime/Slimes.png", m_SlimeMax, 4, 3, 180, 210, m_Slimes, TRUE);
+}
 
-	DrawGraph(m_Posx, m_Posy, m_Slimes[m_Slime], TRUE);
+void Slime::ReleaseTexture()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		DeleteGraph(m_Slimes[i]);
+	}
 }
 
 bool Slime::CheckHit(float x, float y, float width, float height)

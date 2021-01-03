@@ -2,6 +2,7 @@
 #define SLIME_H
 
 #include"EnemyBase.h"
+#include "../Function/Camera.h"
 
 class Slime : public EnemyBase
 {
@@ -10,7 +11,10 @@ public:
 	virtual~Slime();
 
 	virtual void Exec();
-	virtual void Draw();
+	virtual void Draw(Camera camera, int x_, int y_);
+
+	void InitTexture();
+	void ReleaseTexture();
 
 	bool CheckHit(float x, float y, float width, float height);
 

@@ -11,7 +11,7 @@ Player::Player()
 	//ステータス
 	m_Hp = 10;
 	m_Attack = 0;
-	m_Speed = 4;
+	m_Speed = 12;
 	m_Jump = 0;
 
 	//Player座標
@@ -71,7 +71,7 @@ void Player::Move()
 		m_PosX -= m_Speed;	
 	}
 	// 右移動
-	else if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold)
+	else if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold && m_PosX <= FieldWidth - 180)
 	{
 		// 右移動中ジャンプ
 		if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)

@@ -2,6 +2,8 @@
 #ifndef GIMMICK_H
 #define GIMMICK_H
 
+#include "../Function/Camera.h"
+
 class Gimmick
 {
 public:
@@ -26,24 +28,30 @@ public:
 	int m_Rocks[m_RockMax];
 	int m_HitCount;
 	
-
+	int m_BrockTex;
 
 public:
 	Gimmick();
 	~Gimmick();
 
 public:
+	void InitTexture();
+	void ReleaseTexture();
+
 	void BridgeMove();
-	void BridgeDraw();
+	void BridgeDraw(Camera camera, int x_, int y_);
 
 	void BottonMove();
-	void BottonDraw();//最終的にbool CheckHit()に移行
+	void BottonDraw(Camera camera, int x_, int y_);//最終的にbool CheckHit()に移行
 
 	void TrapMove();
-	void TrapDraw();//最終的にbool CheckHit()に移行
+	void TrapDraw(Camera camera, int x_, int y_);//最終的にbool CheckHit()に移行
 
 	void RockMove();
-	void RockDraw();
+	void RockDraw(Camera camera, int x_, int y_);
+
+	void BrockExec();
+	void BrockDraw(Camera camera, int x_, int y_);
 
 public:
 	bool CheckHit();

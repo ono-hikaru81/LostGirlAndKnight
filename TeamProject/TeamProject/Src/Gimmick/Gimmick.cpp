@@ -15,10 +15,43 @@ Gimmick::Gimmick()
 	m_BottonExec = false;
 	m_TrapExec   = false;
 	m_BridgeExec = false;
+
+	InitTexture();
 }
 
 Gimmick::~Gimmick()
 {
+	ReleaseTexture();
+}
+
+void Gimmick::InitTexture()
+{
+	m_BridgeDraw = LoadGraph("Res/Gimmick/Bridge.png");
+	m_BrockTex = LoadGraph("Res/MapChip/Brock.png");
+	LoadDivGraph("Res/Gimmick/Bottons.png", m_BottonMax, 2, 1, 120, 30, m_Bottons);
+	LoadDivGraph("Res/Gimmick/Traps.png", m_TrapMax, 3, 1, 132, 70, m_Traps);
+	LoadDivGraph("Res/MapChip/Rocks.png", m_RockMax, 3, 1, 120, 360, m_Rocks);
+}
+
+void Gimmick::ReleaseTexture()
+{
+	DeleteGraph(m_BridgeDraw);
+	DeleteGraph(m_BrockTex);
+
+	for (int i = 0; i < 2; i++)
+	{
+		DeleteGraph(m_Bottons[i]);
+	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		DeleteGraph(m_Traps[i]);
+	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		DeleteGraph(m_Rocks[i]);
+	}
 }
 
 void Gimmick::BridgeMove()
@@ -37,15 +70,16 @@ void Gimmick::BridgeMove()
 	}
 }
 
-void Gimmick::BridgeDraw()
+void Gimmick::BridgeDraw(Camera camera, int x_, int y_)
 {
-	m_BridgeDraw = LoadGraph("Res/Gimmick/Bridge.png");
-	DrawRotaGraph2(200, 400, 120, 40, 1.2f, m_Radian, m_BridgeDraw, TRUE);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+
+	DrawRotaGraph2(DrawX, DrawY, 120, 40, 1.2f, m_Radian, m_BridgeDraw, TRUE);
 }
 
 void Gimmick::BottonMove()
 {
-	if (UpdateKeyState() != 0) return;
 	//if (m_BottonExec == true)
 	if (GetKeyStatus(KEY_INPUT_X) == InputState::Hold)
 	{
@@ -57,11 +91,12 @@ void Gimmick::BottonMove()
 	}
 }
 
-void Gimmick::BottonDraw()
+void Gimmick::BottonDraw(Camera camera, int x_, int y_)
 {
-	LoadDivGraph("Res/Gimmick/Bottons.png", m_BottonMax, 2, 1, 120, 30, m_Bottons);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_);
 
-	DrawGraph(120, 60, m_Bottons[m_Botton], TRUE);
+	DrawGraph(DrawX, DrawY, m_Bottons[m_Botton], TRUE);
 }
 
 void Gimmick::TrapMove()
@@ -83,11 +118,12 @@ void Gimmick::TrapMove()
 	}
 }
 
-void Gimmick::TrapDraw()
+void Gimmick::TrapDraw(Camera camera, int x_, int y_)
 {
-	LoadDivGraph("Res/Gimmick/Traps.png",m_TrapMax, 3, 1, 132, 70, m_Traps);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_);
 
-	DrawGraph(300, 70, m_Traps[m_Trap], TRUE);
+	DrawGraph(DrawX, DrawY, m_Traps[m_Trap], TRUE);
 }
 
 void Gimmick::RockMove()
@@ -101,10 +137,24 @@ void Gimmick::RockMove()
 
 }
 
-void Gimmick::RockDraw()
+void Gimmick::RockDraw(Camera camera, int x_, int y_)
 {
-	LoadDivGraph("Res/MapChip/Rocks.png", m_RockMax, 1, 3, 360, 120, m_Rocks);
-	DrawGraph(400, 70, m_Rocks[m_Rock],TRUE);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+
+	DrawGraph(DrawX, DrawY, m_Rocks[m_Rock],TRUE);
+}
+
+void Gimmick::BrockExec()
+{
+}
+
+void Gimmick::BrockDraw(Camera camera, int x_, int y_)
+{
+	int DrawX = camera.ConvertPosXWorldToScreen(x_);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+
+	DrawGraph(DrawX, DrawY, m_BrockTex, TRUE);
 }
 
 bool Gimmick::CheckHit()

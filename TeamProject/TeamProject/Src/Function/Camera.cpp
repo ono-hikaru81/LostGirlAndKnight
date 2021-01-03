@@ -23,7 +23,7 @@ void Camera::Update(int x_, int speed_)
 	{
 		m_PosX += speed_;
 	}
-	else if (GetKeyStatus(KEY_INPUT_A) == InputState::Hold)
+	else if (GetKeyStatus(KEY_INPUT_A) == InputState::Hold && x_ <= FieldWidth - WindowHalfWidth)
 	{
 		m_PosX -= speed_;
 	}

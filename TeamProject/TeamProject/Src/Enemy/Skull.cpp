@@ -9,10 +9,13 @@ Skull::Skull()
 	m_MoveTime = 0;
 	m_ActIndex = 0;
 	m_ActSpeed = 10;
+
+	InitTexture();
 }
 
 Skull::~Skull()
 {
+	ReleaseTexture();
 }
 
 void Skull::Exec()
@@ -54,11 +57,25 @@ void Skull::Exec()
 	}
 }
 
-void Skull::Draw()
+void Skull::Draw(Camera camera, int x_, int y_)
+{
+	int DrawX = camera.ConvertPosXWorldToScreen(x_);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+
+	DrawGraph(DrawX, DrawY, m_Skulls[m_Skull], TRUE);
+}
+
+void Skull::InitTexture()
 {
 	LoadDivGraph("Res/Monster/side/Skull/Skulls.png", m_SkullMax, 4, 3, 180, 210, m_Skulls, TRUE);
+}
 
-	DrawGraph(m_Posx, m_Posy, m_Skulls[m_Skull], TRUE);
+void Skull::ReleaseTexture()
+{
+	for (int i = 0; i < 12; i++)
+	{
+		DeleteGraph(m_Skulls[i]);
+	}
 }
 
 bool Skull::CheckHit(float x, float y, float width, float height)
