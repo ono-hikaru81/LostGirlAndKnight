@@ -8,8 +8,8 @@ class Dragon :public EnemyBase
 public:
 	Dragon();
 	virtual ~Dragon();
-	void InitTexture();
 
+	void InitTexture();
 	virtual void Exec();
 	virtual void Draw();
 

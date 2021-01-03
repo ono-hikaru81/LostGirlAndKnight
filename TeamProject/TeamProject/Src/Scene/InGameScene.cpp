@@ -66,9 +66,6 @@ InGameScene::InGameScene()
 	slime.InitTexture();
 	skull.InitTexture();
 	dragon.InitTexture();
-
-	BgPosX = camera.ConvertPosXWorldToScreen(0);
-	BgPosY = camera.ConvertPosYWorldToScreen(0);
 }
 
 InGameScene::~InGameScene()
@@ -92,7 +89,7 @@ void InGameScene::Exec()
 	//gimmick.RockMove();
 	slime.Exec();
 	skull.Exec();
-	orc.Exec(player.m_PosX);
+	orc.Exec(player);
 	wolfman.Exec();
 
 	dragon.Exec();
