@@ -31,7 +31,7 @@ void Orc::InitTexture()
 	LoadDivGraph("Res/Monster/side/Orc/Orcs.png", m_OrcMax, 4, 3, 180, 210, m_Orcs, TRUE);
 }
 
-void Orc::Exec(int x_)
+void Orc::Exec(Player player)
 {
 	m_MoveTime++;
 	if (m_MoveTime < 180)
@@ -70,9 +70,9 @@ void Orc::Exec(int x_)
 		m_ActIndex = 0;
 	}
 
-	if (m_PosX + 90 > x_ + 90)
+	if (m_PosX + 90 > player.m_PosX + 90)
 	{
-		if (x_ <= m_PosX + 180)//UŒ‚‚ÌğŒ(‰EŒü‚«)
+		if (player.m_PosX <= m_PosX + 180)//UŒ‚‚ÌğŒ(‰EŒü‚«)
 		{
 			if (--m_ActWait <= 0)
 			{
@@ -86,7 +86,7 @@ void Orc::Exec(int x_)
 	}
 	else
 	{
-		if (x_ + 180 >= m_PosX)//UŒ‚‚ÌğŒ(¶Œü‚«)
+		if (player.m_PosX + 180 >= m_PosX)//UŒ‚‚ÌğŒ(¶Œü‚«)
 		{
 			if (--m_ActWait <= 0)
 			{

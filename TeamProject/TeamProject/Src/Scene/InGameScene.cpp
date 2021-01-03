@@ -8,10 +8,16 @@
 #include "../Character/BlindGirl.h"
 #include "../Main.h"
 #include "../UI/UI.h"
+#include"../Enemy/Orc.h"
+#include"../Enemy/Dragon.h"
 
 static Camera camera;
+
 static Girl girl;
 static Player player;
+static Orc orc;
+static Dragon dragon;
+
 static Map map;
 static UI ui;
 static StageID nextStage = StageID_1;
@@ -23,6 +29,8 @@ InGameScene::InGameScene()
 	map.InitTexture();
 	girl.InitTexture();
 	ui.InitTexture();
+	dragon.InitTexture();
+
 
 	BgPosX = camera.ConvertPosXWorldToScreen(0);
 	BgPosY = camera.ConvertPosYWorldToScreen(0);
@@ -42,6 +50,7 @@ void InGameScene::Exec()
 	player.Move();
 //	player.CheckColliderToMap(player.m_PosX, player.m_PosY, g_Gravity, player.m_PosX, player.m_PosY, 180.0f, &player.m_JumpExec, map);
 	girl.Move(player);
+	dragon.Exec();
 	
 
 	if (GetKeyStatus(KEY_INPUT_1) == InputState::Pushed)
@@ -173,6 +182,7 @@ void InGameScene::Draw()
 	map.Draw(camera);
 	player.Draw(camera);
 	girl.Draw(player,camera);
+	dragon.Draw();
 }
 
 void InGameScene::ReleaseTexture()

@@ -19,7 +19,6 @@ Girl::Girl()
 
 	// ŠÇ—•Ï”
 	m_Girl = 0;
-	m_count = 0;
 	m_ActSpeed = 20;
 	m_WaitIndex = 0;
 	m_WlkIndex = 0;

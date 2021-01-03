@@ -38,7 +38,7 @@ public:
 
 	// ŠÇ—•Ï”
 	int m_Player;
-	int m_count;
+	int m_m_Time;
 	int m_MotionCooltime;
 	int m_ActStop;
 	int m_ActSpeed;
