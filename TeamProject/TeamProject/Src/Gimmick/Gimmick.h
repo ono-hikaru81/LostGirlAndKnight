@@ -26,7 +26,7 @@ public:
 	int m_Rock;
 	static const int m_RockMax = 3;
 	int m_Rocks[m_RockMax];
-	int m_HitCount;
+	int m_Hitm_Time;
 	
 	int m_BrockTex;
 

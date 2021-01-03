@@ -11,7 +11,7 @@ public:
 	virtual ~Orc();
 
 	void InitTexture();
-	virtual void Exec(int x_);
+	virtual void Exec(Player player);
 	virtual void Draw();
 
 	bool CheckHit(float x, float y, float width, float height);

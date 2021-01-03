@@ -20,7 +20,7 @@ Player::Player()
 
 	// ŠÇ—•Ï”
 	m_Player = 0;
-	m_count = 0;
+	m_m_Time = 0;
 	m_ActSpeed = 20;
 	m_ActIndex = 0;
 	m_AttIndex = 0;

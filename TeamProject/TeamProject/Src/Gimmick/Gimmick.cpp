@@ -11,7 +11,7 @@ Gimmick::Gimmick()
 	m_Botton = 0;
 	m_Trap   = 0;
 	m_Rock   = 0;
-	m_HitCount = 0;
+	m_Hitm_Time = 0;
 	m_BottonExec = false;
 	m_TrapExec   = false;
 	m_BridgeExec = false;
@@ -131,8 +131,8 @@ void Gimmick::RockMove()
 	//çUåÇÇéÛÇØÇÈ
 	if (GetKeyStatus(KEY_INPUT_C) == InputState::Hold)
 	{
-		m_HitCount++;
-		m_Rock = m_Rocks[m_HitCount];
+		m_Hitm_Time++;
+		m_Rock = m_Rocks[m_Hitm_Time];
 	}
 
 }

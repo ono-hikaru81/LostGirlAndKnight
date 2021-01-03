@@ -16,9 +16,6 @@ public:
 	int m_PosX;
 	int m_PosY;
 
-	// ŠÇ—•Ï”
-	int m_count;
-
 	// ÀsŠm”F
 	bool m_StopExec;
 	bool m_WalkExec;

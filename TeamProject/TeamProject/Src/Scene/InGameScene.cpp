@@ -1,4 +1,4 @@
-#include "InGameScene.h"
+Ôªø#include "InGameScene.h"
 #include "DxLib.h"
 #include "../Manager/SceneManager.h"
 #include "../Function/Input.h"
@@ -61,9 +61,14 @@ InGameScene::InGameScene()
 	map.InitTexture();
 	girl.InitTexture();
 	ui.InitTexture();
+
 	gimmick.InitTexture();
 	slime.InitTexture();
 	skull.InitTexture();
+	dragon.InitTexture();
+
+	BgPosX = camera.ConvertPosXWorldToScreen(0);
+	BgPosY = camera.ConvertPosYWorldToScreen(0);
 }
 
 InGameScene::~InGameScene()
@@ -80,6 +85,7 @@ void InGameScene::Exec()
 	player.Move();
 //	player.CheckColliderToMap(player.m_PosX, player.m_PosY, g_Gravity, player.m_PosX, player.m_PosY, 180.0f, &player.m_JumpExec, map);
 	girl.Move(player);
+	
 	//gimmick.BottonMove();
 	//gimmick.BridgeMove();
 	//gimmick.TrapMove();
@@ -89,6 +95,7 @@ void InGameScene::Exec()
 	orc.Exec(player.m_PosX);
 	wolfman.Exec();
 
+	dragon.Exec();
 
 	if (GetKeyStatus(KEY_INPUT_1) == InputState::Pushed)
 	{
@@ -291,6 +298,7 @@ void InGameScene::Draw()
 	map.Draw(camera);
 	player.Draw(camera);
 	girl.Draw(player,camera);
+	dragon.Draw();
 }
 
 void InGameScene::InitTexture()
@@ -300,7 +308,7 @@ void InGameScene::InitTexture()
 	Bg_Grass3 = LoadGraph("Res/bg/2.png");
 	Bg_Forest = LoadGraph("Res/bg/forest.png");
 	Bg_Forest2 = LoadGraph("Res/bg/forest goal.png");
-	Bg_Forest3 = LoadGraph("Res/bg/forestÅ®city.png");
+	Bg_Forest3 = LoadGraph("Res/bg/forestÔøΩÔøΩcity.png");
 	Bg_Cave = LoadGraph("Res/bg/seamless cave.png");
 	Bg_Cave2 = LoadGraph("Res/bg/cave goal.png");
 	Bg_GameClear = LoadGraph("Res/bg/gameclear.png");
