@@ -13,7 +13,7 @@ public:
 	float GetCameraX() { return m_PosX; }
 	float GetCameraY() { return m_PosY; }
 
-private:
+public:
 	int m_PosX;
 	int m_PosY;
 };

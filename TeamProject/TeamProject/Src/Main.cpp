@@ -27,8 +27,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// 以下、毎フレーム更新する処理
 	// =============================
 	
-	
-	;
 	// =============
 	// メインループ
 	// =============

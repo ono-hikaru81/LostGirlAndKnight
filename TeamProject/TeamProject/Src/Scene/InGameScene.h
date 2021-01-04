@@ -11,8 +11,9 @@ public:
 
 	virtual void Exec();
 	virtual void Draw();
-	virtual void InitTexture();
-	virtual void ReleaseTexture();
+	void InitTexture();
+	void ReleaseTexture();
+	void InitPos();
 
 	virtual bool IsEnd() const;
 

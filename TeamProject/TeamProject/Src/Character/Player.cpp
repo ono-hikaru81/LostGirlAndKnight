@@ -11,7 +11,7 @@ Player::Player()
 	//ステータス
 	m_Hp = 10;
 	m_Attack = 0;
-	m_Speed = 24;
+	m_Speed = 8;
 	m_Jump = 0;
 
 	//Player座標
@@ -179,12 +179,12 @@ void Player::Move()
 //		m_PosY += g_Gravity;
 	}
 
-	int NewPosX = 0;
+	int NewPosX = m_PosX;
+	int NewPosY = m_PosY;
 	int NewPosWidth = NewPosX + 180;
-	int NewPosY = 0;
 	int NewPosHeight = NewPosY + 180;
 
-	if (g_map.CheckHit(NewPosX, NewPosY, NewPosX + 180, NewPosY + 180) == false)
+	if (g_map.CheckHit(NewPosX, NewPosY, NewPosWidth, NewPosHeight) == false)
 	{
 		m_PosX = m_NewPosX;
 		m_PosY = m_NewPosY;

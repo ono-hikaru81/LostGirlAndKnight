@@ -10,7 +10,6 @@ TitleScene::TitleScene()
 
 TitleScene::~TitleScene()
 {
-	ReleaseTexture();
 }
 
 void TitleScene::Exec()
@@ -20,6 +19,7 @@ void TitleScene::Exec()
 	if (GetKeyStatus(KEY_INPUT_RETURN) == InputState::Pushed)
 	{
 		SceneManager::SetNextScene(SceneID_StageSelect);
+		ReleaseTexture();
 	}
 }
 
@@ -32,7 +32,9 @@ void TitleScene::Draw()
 {
 	DrawGraph(0, 0, TitleGraph, TRUE);
 
-	DrawString(960, 980, "PLEASE PUSH ENTER", GetColor(255, 0, 0));
+	SetFontSize(64);
+	DrawString(660, 980, "PLEASE PUSH ENTER", GetColor(255, 0, 0));
+	SetFontSize(32);
 }
 
 void TitleScene::ReleaseTexture()

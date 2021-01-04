@@ -126,6 +126,102 @@ void InGameScene::Exec()
 	{
 		SceneManager::SetNextScene(SceneID_Result);
 	}
+
+	if (nextStage == StageID_1)
+	{
+		if (player.m_PosX + 180 >= 4200)
+		{
+			nextStage = StageID_2;
+			InitPos();
+		}
+	}
+	else if (nextStage == StageID_2)
+	{
+		if (player.m_PosX + 180 >= 4200)
+		{
+			nextStage = StageID_3;
+			InitPos();
+		}
+	}
+	else if (nextStage == StageID_3)
+	{
+		if (player.m_PosX + 180 >= 3960)
+		{
+			nextStage = StageID_4;
+			InitPos();
+		}
+	}
+	else if (nextStage == StageID_4)
+	{
+		if (player.m_PosX + 180 >= 5760)
+		{
+			nextStage = StageID_5;
+			InitPos();
+		}
+	}
+	else if (nextStage == StageID_5)
+	{
+		if (player.m_PosX + 180 >= 7200)
+		{
+			nextStage = StageID_6;
+			InitPos();
+		}
+	}
+	else if (nextStage == StageID_6)
+	{
+		if (player.m_PosX + 180 >= 6120)
+		{
+			nextStage = StageID_7;
+			InitPos();
+		}
+	}
+	else if (nextStage == StageID_7)
+	{
+		if (player.m_PosX + 180 >= 7200)
+		{
+			nextStage = StageID_8;
+			InitPos();
+		}
+	}
+	else if (nextStage == StageID_8)
+	{
+		if (player.m_PosX + 180 >= 7200)
+		{
+			nextStage = StageID_9;
+			InitPos();
+		}
+	}
+	else if (nextStage == StageID_9)
+	{
+		if (player.m_PosX + 180 >= 7200)
+		{
+			nextStage = StageID_10;
+			InitPos();
+		}
+	}
+	else if (nextStage == StageID_10)
+	{
+		if (player.m_PosX + 180 >= 7200)
+		{
+			nextStage = StageID_11;
+			InitPos();
+		}
+	}
+	else if (nextStage == StageID_11)
+	{
+		if (player.m_PosX + 180 >= 7200)
+		{
+			nextStage = StageID_12;
+			InitPos();
+		}
+	}
+	else if (nextStage == StageID_12)
+	{
+		if (player.m_PosX + 180 >= 4400)
+		{
+			SceneManager::SetNextScene(SceneID_Result);
+		}
+	}
 }
 
 void InGameScene::Draw()
@@ -401,6 +497,14 @@ void InGameScene::ReleaseTexture()
 	DeleteGraph(Bg_Forest3);
 	DeleteGraph(Bg_Cave);
 	DeleteGraph(Bg_Cave2);
+}
+
+void InGameScene::InitPos()
+{
+	player.m_PosX = 143;
+	player.m_PosY = 780;
+	camera.m_PosX = WindowHalfWidth;
+	camera.m_PosY = WindowHalfHeight;
 }
 
 bool InGameScene::IsEnd() const

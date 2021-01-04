@@ -11,14 +11,13 @@ public:
 
 	virtual void Exec();
 	virtual void InitTexture();
-	virtual void Draw();
-	virtual void ReleaseTexture();
+	void Draw();
+	void ReleaseTexture();
 
 	virtual bool IsEnd() const;
 
 private:
-	int SelectGraph;
-	int Word;
+	int BgTex;
 };
 
 #endif // !STAGE_SELECT_SCENE_H

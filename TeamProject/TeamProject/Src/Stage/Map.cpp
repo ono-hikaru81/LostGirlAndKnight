@@ -245,7 +245,7 @@ bool Map::CheckHit(int x_, int y_, int width_, int height_)
 	{
 		for (int j = WidthRangeIDs[start]; j <= WidthRangeIDs[end]; j++)
 		{
-			if (Info[i][j] == 0)
+			if (Info1[i][j] == 6)
 			{
 				// “–‚½‚è
 				return true;

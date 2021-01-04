@@ -71,11 +71,7 @@ void Button::Update()
 		{
 			if (i == SelectNum)
 			{
-				MenuElement[i].x = 96; // ç¿ïWÇ80Ç…Ç∑ÇÈ
-			}
-			else 
-			{
-				MenuElement[i].x = 0;
+				MenuElement[i].x = MenuElement[i].x + 50;
 			}
 		}
 	}
@@ -98,19 +94,6 @@ void Button::Draw()
 		DrawGraph(MenuElement[10].x, MenuElement[10].y, Number11, TRUE);
 		DrawGraph(MenuElement[11].x, MenuElement[11].y, Number12, TRUE);
 	}
-
-	//DrawGraph(96, 0, Number1, TRUE);
-	//DrawGraph(TextureSizeX * 1 + 192, 0, Number2, TRUE);
-	//DrawGraph(TextureSizeX * 2 + 288, 0, Number3, TRUE);
-	//DrawGraph(TextureSizeX * 3 + 384, 0, Number4, TRUE);
-	//DrawGraph(96, TextureSizeY * 1 - 100, Number5, TRUE);
-	//DrawGraph(TextureSizeX * 1 + 192, TextureSizeY * 1 - 100, Number6, TRUE);
-	//DrawGraph(TextureSizeX * 2 + 288, TextureSizeY * 1 - 100, Number7, TRUE);
-	//DrawGraph(TextureSizeX * 3 + 384, TextureSizeY * 1 - 100, Number8, TRUE);
-	//DrawGraph(96, TextureSizeY * 2 - 200, Number9, TRUE);
-	//DrawGraph(TextureSizeX * 1 + 192, TextureSizeY * 2 - 200, Number10, TRUE);
-	//DrawGraph(TextureSizeX * 2 + 288, TextureSizeY * 2 - 200, Number11, TRUE);
-	//DrawGraph(TextureSizeX * 3 + 384, TextureSizeY * 2 - 200, Number12, TRUE);
 }
 
 void Button::InitTexture()

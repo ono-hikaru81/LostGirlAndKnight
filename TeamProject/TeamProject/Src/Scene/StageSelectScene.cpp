@@ -8,39 +8,36 @@ static Button button;
 
 StageSelectScene::StageSelectScene()
 {
-	SelectGraph = LoadGraph("Res/bg/forest.png");
+	InitTexture();
 	button.InitTexture();
 }
 
 StageSelectScene::~StageSelectScene()
 {
-	button.ReleaseTexture();
+
 }
 
 void StageSelectScene::Exec()
 {
 	if (UpdateKeyState() != 0) return;
 
-	if (GetKeyStatus(KEY_INPUT_SPACE) == InputState::Pushed)
-	{
-		SceneManager::SetNextScene(SceneID_Title);
-		DeleteGraph(SelectGraph);
-	}
+	button.Update();
 
 	if (GetKeyStatus(KEY_INPUT_RETURN) == InputState::Pushed)
 	{
 		SceneManager::SetNextScene(SceneID_InGame);
-		DeleteGraph(SelectGraph);
+		ReleaseTexture();
 	}
 }
 
 void StageSelectScene::InitTexture()
 {
+	BgTex = LoadGraph("Res/bg/forest.png");
 }
 
 void StageSelectScene::Draw()
 {
-	DrawGraph(0, 0, SelectGraph, TRUE);
+	DrawGraph(0, 0, BgTex, TRUE);
 	button.Draw();
 	SetFontSize(64);
 	DrawString(100, 980, "ENTER‚Å‘I‘ð", GetColor(255, 0, 0));
@@ -49,6 +46,8 @@ void StageSelectScene::Draw()
 
 void StageSelectScene::ReleaseTexture()
 {
+	DeleteGraph(BgTex);
+	button.ReleaseTexture();
 }
 
 bool StageSelectScene::IsEnd() const

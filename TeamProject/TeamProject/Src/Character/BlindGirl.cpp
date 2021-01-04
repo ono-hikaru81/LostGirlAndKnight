@@ -29,9 +29,6 @@ Girl::Girl()
 	m_StopExec = true;
 	m_WalkExec = false;
 	m_JumpExec = false;
-
-	// ‰æ‘œ•Û‘¶
-	
 }
 
 Girl::~Girl()

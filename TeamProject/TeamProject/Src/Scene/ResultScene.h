@@ -10,11 +10,16 @@ public:
 	virtual ~ResultScene();
 
 	virtual void Exec();
-	virtual void InitTexture();
 	virtual void Draw();
-	virtual void ReleaseTexture();
+	void InitTexture();
+	void ReleaseTexture();
 
 	virtual bool IsEnd() const;
+
+private:
+	int m_ClearTex;
+	int m_OutTex;
+	bool m_Clear;
 };
 
 #endif // !RESULT_SCENE_H
