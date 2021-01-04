@@ -16,10 +16,21 @@ Dragon::Dragon()
 	m_Dragon = 0;
 	m_WaitTime = 0;
 	m_AttackTime = 0;
+	m_IsAttack = false;
 }
 
 Dragon::~Dragon()
 {
+	ReleaseTexture();
+}
+
+void Dragon::ReleaseTexture()
+{
+	DeleteGraph(m_Fire);
+	for (int i = 0; i < m_DragonMax; i++)
+	{
+		DeleteGraph(m_Dragones[i]);
+	}
 }
 
 void Dragon::InitTexture()
@@ -28,6 +39,7 @@ void Dragon::InitTexture()
 	m_Dragones[1] = LoadGraph("Res/Monster/Boss/DragonBress_1.png", TRUE);
 	m_Dragones[2] = LoadGraph("Res/Monster/Boss/Dragon_Bress_2.png", TRUE);
 	m_Dragones[3] = LoadGraph("Res/Monster/Boss/Dragon_Dead.png", TRUE);
+	m_Fire = LoadGraph("Res/Effect/Fire.PNG");
 }
 
 void Dragon::Exec()
@@ -56,9 +68,11 @@ void Dragon::Exec()
 		if(m_AttackTime >= 120 && m_AttackTime < 240)
 		{
 			m_Dragon = 2;
+			m_IsAttack = true;
 		}
 		if (m_AttackTime > 240)
 		{
+			m_IsAttack = false;
 			motion = Wait;
 			m_AttackTime = 0;
 			m_Dragon = 0;
@@ -70,8 +84,14 @@ void Dragon::Exec()
 
 void Dragon::Draw(Camera camera, int x_, int y_)
 {
+
 	int DrawX = camera.ConvertPosXWorldToScreen(x_);
 	int DrawY = camera.ConvertPosYWorldToScreen(y_);
 
 	DrawGraph(DrawX, DrawY, m_Dragones[m_Dragon], TRUE);
+	if (m_IsAttack == true)
+	{
+		DrawGraph(DrawX +50, DrawY +240, m_Fire, TRUE);
+	}
+
 }

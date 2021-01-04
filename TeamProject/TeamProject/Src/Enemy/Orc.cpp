@@ -8,8 +8,8 @@
 Orc::Orc()
 {
 	m_Orc = 0;
-	m_PosX = 500;
-	m_PosY = WindowHeight - MapChipHeight - 210;
+	m_PosX = 0;
+	
 	m_MoveTime = 0;
 	m_ActIndex = 0;
 	m_ActSpeed = 10;
@@ -30,10 +30,15 @@ void Orc::InitTexture()
 
 void Orc::ReleaseTexture()
 {
-	for (int i = 0; i < m_OrcMax; i++)
+	for (int  i = 0; i < m_OrcMax; i++)
 	{
 		DeleteGraph(m_Orcs[i]);
 	}
+}
+
+void Orc::GetPos(int x_)
+{
+
 }
 
 void Orc::Exec(Player player)
@@ -91,7 +96,7 @@ void Orc::Exec(Player player)
 	}
 	else
 	{
-		if (player.m_PosX + 180 >= m_PosX)//UŒ‚‚ÌðŒ(¶Œü‚«)
+		if (player.m_PosX + 180 >= m_PosX && m_PosX + 180 <= player.m_PosX)//UŒ‚‚ÌðŒ(¶Œü‚«)
 		{
 			if (--m_ActWait <= 0)
 			{
@@ -107,10 +112,10 @@ void Orc::Exec(Player player)
 	
 }
 
-void Orc::Draw(Camera  camera, int x_, int y_)
+void Orc::Draw(Camera camera, int x_[], int y_[],int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_[number]) + m_PosX;
+	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
 
 	DrawGraph(DrawX, DrawY, m_Orcs[m_Orc], TRUE);
 }

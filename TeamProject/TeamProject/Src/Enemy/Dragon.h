@@ -10,6 +10,7 @@ public:
 	Dragon();
 	virtual ~Dragon();
 
+	void ReleaseTexture();
 	void InitTexture();
 	virtual void Exec();
 	virtual void Draw(Camera camera, int x_, int y_);
@@ -22,11 +23,12 @@ private:
 	//ŠÇ—•Ï”
 	int m_WaitTime;
 	int m_AttackTime;
-
+	bool m_IsAttack;
 	//‰æ‘œ•Û‘¶
 	static const int m_DragonMax = 4;
 	int m_Dragones[m_DragonMax];
 	int m_Dragon;
+	int m_Fire;
 };
 #endif // !DRAGON_H
 

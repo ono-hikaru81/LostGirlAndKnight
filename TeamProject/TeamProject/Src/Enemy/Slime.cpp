@@ -1,15 +1,17 @@
 #include"Slime.h"
 #include"DxLib.h"
+#include"../Scene/InGameScene.h"
+
+InGameScene inGameScene;
 
 Slime::Slime()
 {
 	m_Slime = 0;
-	m_Posx = 500;
-	m_Posy = 400;
 	m_MoveTime = 0;
 	m_ActIndex = 0;
 	m_ActSpeed = 10;
 	InitTexture();
+	posx = 0;
 }
 
 Slime::~Slime()
@@ -22,7 +24,7 @@ void Slime::Exec()
 	m_MoveTime++;
 	if (m_MoveTime < 180)
 	{
-		m_PosX++;
+		posx++;
 		if (--m_ActWait <= 0)
 		{
 			m_Slime = m_ActMotionR[m_ActIndex];
@@ -33,11 +35,11 @@ void Slime::Exec()
 	}
 	else if (180 <= m_MoveTime && m_MoveTime < 240)
 	{
-		m_Slime = 5;
+		m_Slime = 4;
 	}
-	else if (240 <= m_MoveTime && m_MoveTime < 420)
+	else if (240 <= m_MoveTime && m_MoveTime < 400)
 	{
-		m_PosX--;
+		posx--;
 		if (--m_ActWait <= 0)
 		{
 			m_Slime = m_ActMotionL[m_ActIndex];
@@ -46,7 +48,7 @@ void Slime::Exec()
 			m_ActIndex %= m_MotionMax;
 		}
 	}
-	else if (m_MoveTime < 480)
+	else if (m_MoveTime < 460)
 	{
 		m_Slime = 0;
 	}
@@ -54,12 +56,13 @@ void Slime::Exec()
 	{
 		m_MoveTime = 0;
 	}
+	
 }
 
-void Slime::Draw(Camera camera, int x_, int y_)
+void Slime::Draw(Camera camera, int x_[], int y_[],int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_[number])+ posx;
+	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
 
 	DrawGraph(DrawX, DrawY, m_Slimes[m_Slime], TRUE);
 }
@@ -74,6 +77,14 @@ void Slime::ReleaseTexture()
 	for (int i = 0; i < 10; i++)
 	{
 		DeleteGraph(m_Slimes[i]);
+	}
+}
+
+void Slime::SetPos(int Posx[])
+{
+	for (int i = 0; i < m_SlimeNumberMax; i++)
+	{
+		m_PosX[i] = Posx[i];
 	}
 }
 

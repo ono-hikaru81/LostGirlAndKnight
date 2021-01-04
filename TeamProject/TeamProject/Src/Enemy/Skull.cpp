@@ -4,8 +4,7 @@
 Skull::Skull()
 {
 	m_Skull = 0;
-	m_Posx = 500;
-	m_Posy = 400;
+	m_Posx = 0;
 	m_MoveTime = 0;
 	m_ActIndex = 0;
 	m_ActSpeed = 10;
@@ -57,10 +56,10 @@ void Skull::Exec()
 	}
 }
 
-void Skull::Draw(Camera camera, int x_, int y_)
+void Skull::Draw(Camera camera, int x_[], int y_[] , int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_[number])+m_PosX;
+	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
 
 	DrawGraph(DrawX, DrawY, m_Skulls[m_Skull], TRUE);
 }

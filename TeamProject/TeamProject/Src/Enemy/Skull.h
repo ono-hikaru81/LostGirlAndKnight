@@ -11,7 +11,7 @@ public:
 	virtual ~Skull();
 
 	virtual void Exec();
-	virtual void Draw(Camera camera, int x_, int y_);
+	virtual void Draw(Camera camera, int x_[], int y_[],int number);
 	void InitTexture();
 	void ReleaseTexture();
 

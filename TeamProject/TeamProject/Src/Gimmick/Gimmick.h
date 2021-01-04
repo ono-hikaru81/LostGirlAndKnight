@@ -3,6 +3,7 @@
 #define GIMMICK_H
 
 #include "../Function/Camera.h"
+#include"../Character/Player.h"
 
 class Gimmick
 {
@@ -10,7 +11,8 @@ public:
 	int m_BridgeDraw;		//木の画像保存
 	float m_Angle;
 	float m_Radian;
-	bool m_BridgeExec;
+	bool m_IsPush;
+
 
 	int m_Trap;
 	static const int m_TrapMax = 3;
@@ -39,22 +41,23 @@ public:
 	void ReleaseTexture();
 
 	void BridgeMove();
-	void BridgeDraw(Camera camera, int x_, int y_);
+	void BridgeDraw(Camera camera, int x_[], int y_[],int number);
 
 	void BottonMove();
-	void BottonDraw(Camera camera, int x_, int y_);//最終的にbool CheckHit()に移行
+	void BottonDraw(Camera camera, int x_[], int y_[], int number,Player player);//最終的にbool CheckHit()に移行
 
 	void TrapMove();
-	void TrapDraw(Camera camera, int x_, int y_);//最終的にbool CheckHit()に移行
+	void TrapDraw(Camera camera, int x_[], int y_[], int number);//最終的にbool CheckHit()に移行
 
 	void RockMove();
-	void RockDraw(Camera camera, int x_, int y_);
+	void RockDraw(Camera camera, int x_[], int y_[], int number);
 
 	void BrockExec();
-	void BrockDraw(Camera camera, int x_, int y_);
+	void BrockDraw(Camera camera, int x_[], int y_[], int number);
 
 public:
 	bool CheckHit();
+	bool BottonCheckHit(Player player,int x_,int y_);
 };
 
 

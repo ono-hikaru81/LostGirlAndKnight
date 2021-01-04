@@ -2,19 +2,20 @@
 #include "Gimmick.h"
 #include"../Main.h"
 #include"../Function/Input.h"
+#include"../Character/Player.h"
 
 Gimmick::Gimmick()
 {
 	m_BridgeDraw = NULL;
 	m_Angle  = 90;
-	m_Radian = 0;
+	m_Radian = 1.5;
 	m_Botton = 0;
 	m_Trap   = 0;
 	m_Rock   = 0;
 	m_Hitm_Time = 0;
 	m_BottonExec = false;
 	m_TrapExec   = false;
-	m_BridgeExec = false;
+	m_IsPush = false;
 
 	InitTexture();
 }
@@ -57,8 +58,7 @@ void Gimmick::ReleaseTexture()
 void Gimmick::BridgeMove()
 {
 
-
-	if (GetKeyStatus(KEY_INPUT_X) == InputState::Hold)
+	if (m_IsPush == true)
 	{
 		if (0 < m_Angle)
 		{
@@ -75,10 +75,10 @@ void Gimmick::BridgeMove()
 	}
 }
 
-void Gimmick::BridgeDraw(Camera camera, int x_, int y_)
+void Gimmick::BridgeDraw(Camera camera, int x_[], int y_[], int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_[number]);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
 
 	DrawRotaGraph2(DrawX, DrawY, 120, 40, 1.2f, m_Radian, m_BridgeDraw, TRUE);
 }
@@ -96,11 +96,11 @@ void Gimmick::BottonMove()
 	}
 }
 
-void Gimmick::BottonDraw(Camera camera, int x_, int y_)
+void Gimmick::BottonDraw(Camera camera, int x_[], int y_[], int number,Player player)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_);
-
+	int DrawX = camera.ConvertPosXWorldToScreen(x_[number]);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
+	BottonCheckHit(player, x_[number], x_[number]);
 	DrawGraph(DrawX, DrawY, m_Bottons[m_Botton], TRUE);
 }
 
@@ -123,10 +123,10 @@ void Gimmick::TrapMove()
 	}
 }
 
-void Gimmick::TrapDraw(Camera camera, int x_, int y_)
+void Gimmick::TrapDraw(Camera camera, int x_[], int y_[], int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_[number]);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
 
 	DrawGraph(DrawX, DrawY, m_Traps[m_Trap], TRUE);
 }
@@ -142,10 +142,10 @@ void Gimmick::RockMove()
 
 }
 
-void Gimmick::RockDraw(Camera camera, int x_, int y_)
+void Gimmick::RockDraw(Camera camera, int x_[], int y_[], int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_[number]);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
 
 	DrawGraph(DrawX, DrawY, m_Rocks[m_Rock],TRUE);
 }
@@ -154,15 +154,21 @@ void Gimmick::BrockExec()
 {
 }
 
-void Gimmick::BrockDraw(Camera camera, int x_, int y_)
+void Gimmick::BrockDraw(Camera camera, int x_[], int y_[], int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_[number]);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
 
 	DrawGraph(DrawX, DrawY, m_BrockTex, TRUE);
 }
 
 bool Gimmick::CheckHit()
 {
+	return false;
+}
+
+bool Gimmick::BottonCheckHit(Player player,int x_, int y_)
+{
+	if((player.m_PosX > x_&& y_< player.m_PosY-180))
 	return false;
 }

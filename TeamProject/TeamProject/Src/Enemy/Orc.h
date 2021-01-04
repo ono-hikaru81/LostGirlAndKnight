@@ -4,6 +4,7 @@
 #include"EnemyBase.h"
 #include "../Character/Player.h"
 #include "../Function/Camera.h"
+#include"../Scene/InGameScene.h"
 
 class Orc : public EnemyBase
 {
@@ -13,8 +14,11 @@ public:
 
 	void InitTexture();
 	void ReleaseTexture();
+
+	void GetPos(int x_);
 	virtual void Exec(Player player);
-	virtual void Draw(Camera camera, int x_, int y_);
+	virtual void Draw(Camera camera,int x_[],int y_[],int number);
+
 
 	bool CheckHit(float x, float y, float width, float height);
 
