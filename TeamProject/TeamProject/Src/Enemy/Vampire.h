@@ -2,6 +2,7 @@
 #define VAMPIRE_H
 
 #include"EnemyBase.h"
+#include "../Function/Camera.h"
 
 class Vampire : public EnemyBase
 {
@@ -10,7 +11,9 @@ public:
 	virtual ~Vampire();
 
 	virtual void Exec();
-	virtual void Draw();
+	virtual void Draw(Camera camera, int x_, int y_);
+	void InitTexture();
+	void ReleaseTexture();
 
 	bool CheckHit(float x, float y, float width, float height);
 

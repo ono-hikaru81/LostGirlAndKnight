@@ -4,15 +4,18 @@
 Vampire::Vampire()
 {
 	m_Vampire = 0;
-	m_Posx = 500;
-	m_Posy = 400;
+	m_Posx = 6360;
+	m_Posy = 570;
 	m_MoveTime = 0;
 	m_ActIndex = 0;
 	m_ActSpeed = 10;
+
+	InitTexture();
 }
 
 Vampire::~Vampire()
 {
+	ReleaseTexture();
 }
 
 void Vampire::Exec()
@@ -54,11 +57,25 @@ void Vampire::Exec()
 	}
 }
 
-void Vampire::Draw()
+void Vampire::Draw(Camera camera, int x_, int y_)
 {
-	LoadDivGraph("Res/Monster/side/Vampire/Vampires.png", m_VampireMax, 4, 3, 180, 210, m_Vampires, TRUE);
+	int DrawPosX = camera.ConvertPosXWorldToScreen(x_);
+	int DrawPosY = camera.ConvertPosYWorldToScreen(y_);
 
-	DrawGraph(m_Posx, m_Posy, m_Vampires[m_Vampire], TRUE);
+	DrawGraph(DrawPosX, DrawPosY, m_Vampires[m_Vampire], TRUE);
+}
+
+void Vampire::InitTexture()
+{
+	LoadDivGraph("Res/Monster/Mid/Vampire/Vampires.png", m_VampireMax, 4, 3, 220, 270, m_Vampires, TRUE);
+}
+
+void Vampire::ReleaseTexture()
+{
+	for (int i = 0; i < m_VampireMax; i++)
+	{
+		DeleteGraph(m_Vampires[i]);
+	}
 }
 
 bool Vampire::CheckHit(float x, float y, float width, float height)

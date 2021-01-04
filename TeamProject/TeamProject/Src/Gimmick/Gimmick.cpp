@@ -56,15 +56,20 @@ void Gimmick::ReleaseTexture()
 
 void Gimmick::BridgeMove()
 {
-	if (0 < m_Angle)
+
+
+	if (GetKeyStatus(KEY_INPUT_X) == InputState::Hold)
 	{
-		if (m_Radian <= 90)
+		if (0 < m_Angle)
 		{
-			m_Radian = (3.14 / 180 * m_Angle);
-			m_Angle--;
-			if (m_Angle == 0)
+			if (m_Radian <= 90)
 			{
-				m_Radian = 0;
+				m_Radian = (3.14 / 180 * m_Angle);
+				m_Angle--;
+				if (m_Angle == 0)
+				{
+					m_Radian = 0;
+				}
 			}
 		}
 	}

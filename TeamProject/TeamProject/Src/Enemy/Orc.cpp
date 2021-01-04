@@ -15,20 +15,25 @@ Orc::Orc()
 	m_ActSpeed = 10;
 	m_AttIndex = 0;
 	m_ActWait = m_ActSpeed;
+	InitTexture();
 }
 
 Orc::~Orc()
 {
-	//loadGraph‚Ì‰ð•ú
-	/*for (int  i = 0; i < m_OrcMax; i++)
-	{
-		DeleteGraph(m_Orcs[i]);
-	}*/
+	ReleaseTexture();
 }
 
 void Orc::InitTexture()
 {
 	LoadDivGraph("Res/Monster/side/Orc/Orcs.png", m_OrcMax, 4, 3, 180, 210, m_Orcs, TRUE);
+}
+
+void Orc::ReleaseTexture()
+{
+	for (int i = 0; i < m_OrcMax; i++)
+	{
+		DeleteGraph(m_Orcs[i]);
+	}
 }
 
 void Orc::Exec(Player player)
@@ -102,10 +107,12 @@ void Orc::Exec(Player player)
 	
 }
 
-void Orc::Draw()
+void Orc::Draw(Camera  camera, int x_, int y_)
 {
-	
-	DrawGraph(m_PosX, m_PosY, m_Orcs[m_Orc], TRUE);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+
+	DrawGraph(DrawX, DrawY, m_Orcs[m_Orc], TRUE);
 }
 
 bool Orc::CheckHit(float x, float y, float width, float height)

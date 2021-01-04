@@ -68,7 +68,10 @@ void Dragon::Exec()
 	}
 }
 
-void Dragon::Draw()
+void Dragon::Draw(Camera camera, int x_, int y_)
 {
-	DrawGraph(m_PosX, m_PosY, m_Dragones[m_Dragon], TRUE);
+	int DrawX = camera.ConvertPosXWorldToScreen(x_);
+	int DrawY = camera.ConvertPosYWorldToScreen(y_);
+
+	DrawGraph(DrawX, DrawY, m_Dragones[m_Dragon], TRUE);
 }

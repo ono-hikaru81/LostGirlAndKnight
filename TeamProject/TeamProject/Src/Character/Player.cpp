@@ -11,7 +11,7 @@ Player::Player()
 	//ステータス
 	m_Hp = 10;
 	m_Attack = 0;
-	m_Speed = 12;
+	m_Speed = 24;
 	m_Jump = 0;
 
 	//Player座標
@@ -188,6 +188,15 @@ void Player::Move()
 	{
 		m_PosX = m_NewPosX;
 		m_PosY = m_NewPosY;
+	}
+
+	if (GetKeyStatus(KEY_INPUT_UP) == InputState::Hold)
+	{
+		m_PosY -= m_Speed;
+	}
+	else if (GetKeyStatus(KEY_INPUT_DOWN) == InputState::Hold)
+	{
+		m_PosY += m_Speed;
 	}
 }
 

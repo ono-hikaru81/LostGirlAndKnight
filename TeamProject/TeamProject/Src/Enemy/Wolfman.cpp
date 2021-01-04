@@ -4,15 +4,18 @@
 Wolfman::Wolfman()
 {
 	m_Wolfman = 0;
-	m_Posx = 500;
-	m_Posy = 400;
+	m_Posx = 6000;
+	m_Posy = 470;
 	m_MoveTime = 0;
 	m_ActIndex = 0;
 	m_ActSpeed = 10;
+
+	InitTexture();
 }
 
 Wolfman::~Wolfman()
 {
+	ReleaseTexture();
 }
 
 void Wolfman::Exec()
@@ -54,11 +57,25 @@ void Wolfman::Exec()
 	}
 }
 
-void Wolfman::Draw()
+void Wolfman::Draw(Camera camera, int x_, int y_)
 {
-	LoadDivGraph("Res/Monster/side/Wolfman/Wolfmans.png", m_WolfmanMax, 4, 3, 180, 210, m_Wolfmans, TRUE);
+	int DrawPosX = camera.ConvertPosXWorldToScreen(x_);
+	int DrawPosY = camera.ConvertPosYWorldToScreen(y_);
 
-	DrawGraph(m_Posx, m_Posy, m_Wolfmans[m_Wolfman], TRUE);
+	DrawGraph(DrawPosX, DrawPosY, m_Wolfmans[m_Wolfman], TRUE);
+}
+
+void Wolfman::InitTexture()
+{
+	LoadDivGraph("Res/Monster/Mid/Wolfman/Wolfman.png", m_WolfmanMax, 4, 3, 220, 270, m_Wolfmans, TRUE);
+}
+
+void Wolfman::ReleaseTexture()
+{
+	for (int i = 0; i < m_WolfmanMax; i++)
+	{
+		DeleteGraph(m_Wolfmans[i]);
+	}
 }
 
 bool Wolfman::CheckHit(float x, float y, float width, float height)

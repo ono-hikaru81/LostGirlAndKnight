@@ -2,6 +2,7 @@
 #define DRAGON_H
 
 #include"EnemyBase.h"
+#include "../Function/Camera.h"
 
 class Dragon :public EnemyBase
 {
@@ -11,7 +12,7 @@ public:
 
 	void InitTexture();
 	virtual void Exec();
-	virtual void Draw();
+	virtual void Draw(Camera camera, int x_, int y_);
 
 private:
 	//ステータス

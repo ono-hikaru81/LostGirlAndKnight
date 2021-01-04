@@ -3,6 +3,7 @@
 
 #include"EnemyBase.h"
 #include "../Character/Player.h"
+#include "../Function/Camera.h"
 
 class Orc : public EnemyBase
 {
@@ -11,8 +12,9 @@ public:
 	virtual ~Orc();
 
 	void InitTexture();
+	void ReleaseTexture();
 	virtual void Exec(Player player);
-	virtual void Draw();
+	virtual void Draw(Camera camera, int x_, int y_);
 
 	bool CheckHit(float x, float y, float width, float height);
 
