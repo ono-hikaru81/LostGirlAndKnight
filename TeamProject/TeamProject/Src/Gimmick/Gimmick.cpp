@@ -7,16 +7,20 @@
 Gimmick::Gimmick()
 {
 	m_BridgeDraw = NULL;
-	m_Angle  = 90;
-	m_Radian = 1.5;
 	m_Botton = 0;
-	m_Trap   = 0;
-	m_Rock   = 0;
-	m_Hitm_Time = 0;
-	m_BottonExec = false;
-	m_TrapExec   = false;
-	m_IsPush = false;
+		
+	for (int i = 0; i < m_Max; i++)
+	{
+		m_Angle[i] = 90;
+		m_Radian[i] = 1.5;
+		m_RockHit[i] = 0;
+		m_Trap[i] = 0;
+		m_Rock[i] = 0;
 
+		m_BottonHit[i] = false;
+		m_IsPush[i] = false;
+		m_TrapHit[i] = false;
+	}
 	InitTexture();
 }
 
@@ -55,38 +59,49 @@ void Gimmick::ReleaseTexture()
 	}
 }
 
-void Gimmick::BridgeMove()
+void Gimmick::BridgeMove(int x_,int y_,int number)
 {
-
-	if (m_IsPush == true)
+	if (m_IsPush[number] == true)
 	{
-		if (0 < m_Angle)
+		if (0 < m_Angle[number])
 		{
-			if (m_Radian <= 90)
+			if (m_Radian[number] <= 90)
 			{
-				m_Radian = (3.14 / 180 * m_Angle);
-				m_Angle--;
-				if (m_Angle == 0)
+				m_Radian[number] = (3.14 / 180 * m_Angle[number]);
+				m_Angle[number]--;
+				if (m_Angle[number] == 0)
 				{
-					m_Radian = 0;
+					BridgeCheckHit(x_, y_, number);
+					m_Radian[number] = 0;
 				}
 			}
 		}
 	}
 }
 
-void Gimmick::BridgeDraw(Camera camera, int x_[], int y_[], int number)
+void Gimmick::BridgeDraw(Camera camera,int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_[number]);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
-
-	DrawRotaGraph2(DrawX, DrawY, 120, 40, 1.2f, m_Radian, m_BridgeDraw, TRUE);
+	int DrawX = camera.ConvertPosXWorldToScreen(m_BridgePosX[number]);
+	int DrawY = camera.ConvertPosYWorldToScreen(m_BridgePosY[number]);
+	
+	DrawRotaGraph2(DrawX, DrawY, 120, 40, 1.2f, m_Radian[number], m_BridgeDraw, TRUE);
 }
 
-void Gimmick::BottonMove()
+void Gimmick::BottonMove(int x1_, int y1_,int number)
 {
-	//if (m_BottonExec == true)
-	if (GetKeyStatus(KEY_INPUT_X) == InputState::Hold)
+	bool IsHit = false;
+	if (BottonCheckHit(x1_,y1_,number) == true)
+	{
+		IsHit = true;
+		m_IsPush[number] = true;
+		m_BottonHit[number] = true;
+	}
+	else
+	{
+		IsHit = false;
+	}
+	//if (GetKeyStatus(KEY_INPUT_X) == InputState::Hold)
+	if (IsHit == true)
 	{
 		m_Botton = 1;
 	}
@@ -96,70 +111,114 @@ void Gimmick::BottonMove()
 	}
 }
 
-void Gimmick::BottonDraw(Camera camera, int x_[], int y_[], int number,Player player)
+void Gimmick::BottonDraw(Camera camera,int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_[number]);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
-	BottonCheckHit(player, x_[number], x_[number]);
-	DrawGraph(DrawX, DrawY, m_Bottons[m_Botton], TRUE);
+
+	int DrawX = camera.ConvertPosXWorldToScreen(m_BottonPosX[number]);
+	int DrawY = camera.ConvertPosYWorldToScreen(m_BottonPosY[number]);
+
+	DrawFormatString(200, 500, GetColor(0, 255, 255), "%d,%d", m_BottonPosX[0], m_BottonPosY[0]);
+	DrawFormatString(200, 600, GetColor(0, 255, 255), "%d,%d", m_BottonPosX[1], m_BottonPosY[1]);
+	if (m_BottonHit[number] == true)
+	{
+		DrawGraph(DrawX, DrawY, m_Bottons[1], TRUE);
+	}
+	else
+	{
+		DrawGraph(DrawX, DrawY, m_Bottons[0], TRUE);
+	}
+	
 }
 
-void Gimmick::TrapMove()
+void Gimmick::TrapMove(int x_,int y_ ,int number)
 {
-	//if (m_TrapExec == true)
-	if (GetKeyStatus(KEY_INPUT_Z) == InputState::Pushed)
+	if (TrapCheckHit(x_,y_ ,number)==true)
 	{
-		m_TrapExec = true;
+		m_TrapHit[number] = true;
 	}
 
-	if (m_TrapExec == true)
+	if (m_TrapHit[number] == true)
 	{
-		m_Trap++;
-		if (m_Trap == 3)
+		m_Trap[number]++;
+		if (m_Trap[number] == 3)
 		{
-			m_TrapExec = false;
-			m_Trap = 2;
+			m_Trap[number] = 2;
 		}
 	}
 }
 
-void Gimmick::TrapDraw(Camera camera, int x_[], int y_[], int number)
+void Gimmick::TrapDraw(Camera camera, int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_[number]);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
+	int DrawX = camera.ConvertPosXWorldToScreen(m_TrapPosX[number]);
+	int DrawY = camera.ConvertPosYWorldToScreen(m_TrapPosY[number]);
 
-	DrawGraph(DrawX, DrawY, m_Traps[m_Trap], TRUE);
+	DrawGraph(DrawX, DrawY, m_Traps[m_Trap[number]], TRUE);
 }
 
-void Gimmick::RockMove()
+void Gimmick::RockMove(int x_, int y_, int number)
 {
 	//UŒ‚‚ðŽó‚¯‚é
-	if (GetKeyStatus(KEY_INPUT_C) == InputState::Hold)
+	if (RockCheckHit(x_, y_, number) == true)
 	{
-		m_Hitm_Time++;
-		m_Rock = m_Rocks[m_Hitm_Time];
+		if (m_Rock[number] <= 2)
+		{
+			m_Rock[number]++;
+		}
 	}
-
 }
 
-void Gimmick::RockDraw(Camera camera, int x_[], int y_[], int number)
+void Gimmick::RockDraw(Camera camera, int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_[number]);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
+	int DrawX = camera.ConvertPosXWorldToScreen(m_RockPosX[number]);
+	int DrawY = camera.ConvertPosYWorldToScreen(m_RockPosY[number]);
 
-	DrawGraph(DrawX, DrawY, m_Rocks[m_Rock],TRUE);
+	DrawGraph(DrawX, DrawY, m_Rocks[m_Rock[number]],TRUE);
 }
 
-void Gimmick::BrockExec()
+void Gimmick::BrockExec(int x_, int y_, int number)
 {
+	if (BrockCheckHit(x_, y_, number) == true)
+	{
+		m_num[number] = true;
+	}
+	else
+	{
+		m_num[number] = false;
+	}
 }
 
-void Gimmick::BrockDraw(Camera camera, int x_[], int y_[], int number)
+void Gimmick::BrockDraw(Camera camera, int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_[number]);
-	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
+	int DrawX = camera.ConvertPosXWorldToScreen(m_BrockPosX[number]);
+	int DrawY = camera.ConvertPosYWorldToScreen(m_BrockPosY[number]);
 
 	DrawGraph(DrawX, DrawY, m_BrockTex, TRUE);
+	if (m_num[number] == true)
+	{
+		DrawString(DrawX, DrawY, "Hit", GetColor(255, 0, 0));
+	}
+	else
+	{
+		DrawString(DrawX, DrawY, "NoHit", GetColor(255, 0, 0));
+	}
+}
+
+void Gimmick::GetArray(int BottonX_[], int BottonY_[], int BridgeX_[], int BridgeY_[], int TrapX_[], int TrapY_[], int RockX_[], int RockY_[], int BrockX_[], int BrockY_[])
+{
+	for (int i = 0; i < m_Max; i++)
+	{
+		m_BottonPosX[i] = BottonX_[i];
+		m_BottonPosY[i] = BottonY_[i];
+		m_BridgePosX[i] = BridgeX_[i];
+		m_BridgePosY[i] = BridgeY_[i];
+		m_TrapPosX[i] = TrapX_[i];
+		m_TrapPosY[i] = TrapY_[i];
+		m_RockPosX[i] = RockX_[i];
+		m_RockPosY[i] = RockY_[i];
+		m_BrockPosX[i] = BrockX_[i];
+		m_BrockPosY[i] = BrockY_[i];
+	}
+	
 }
 
 bool Gimmick::CheckHit()
@@ -167,8 +226,61 @@ bool Gimmick::CheckHit()
 	return false;
 }
 
-bool Gimmick::BottonCheckHit(Player player,int x_, int y_)
+bool Gimmick::BottonCheckHit(int x1_,int y1_,int number)
 {
-	if((player.m_PosX > x_&& y_< player.m_PosY-180))
+	
+	if ((x1_ + 120> m_BottonPosX[number] && y1_ < m_BottonPosY[number]) ||
+		(x1_ + 120> m_BottonPosX[number] && y1_ + 180 < m_BottonPosY[number]+30)||
+		(x1_ + 50 > m_BottonPosX[number] + 120&& y1_ < m_BottonPosY[number]) ||
+		(x1_ + 50 > m_BottonPosX[number] + 120 && y1_ +180 < m_BottonPosY[number] +30))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Gimmick::BridgeCheckHit(int x_, int y_, int number)
+{
+	if ((x_ > m_BridgePosX[number] && y_ + 180 < m_BridgePosY[number]) ||
+		(x_ + 180 > m_BridgePosX[number] && y_ + 180 < m_BridgePosY[number]))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Gimmick::TrapCheckHit(int x_, int y_, int number)
+{//70
+	if ((x_ +120> m_TrapPosX[number] && y_ < m_TrapPosY[number])||
+		(x_ +120> m_TrapPosX[number] && y_ + 180 < m_TrapPosY[number]+70) ||
+		(x_ +50 > m_TrapPosX[number] + 132	&&   y_ < m_TrapPosY[number])||
+		(x_ +50 > m_TrapPosX[number] + 132 && y_ + 180 < m_TrapPosY[number]+70))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Gimmick::RockCheckHit(int x_, int y_, int number)
+{
+	if ((x_ + 120 > m_RockPosX[number] && y_ < m_RockPosY[number]) ||
+		(x_ + 120 > m_RockPosX[number] && y_ + 180 < m_RockPosY[number] + 370) ||
+		(x_ +50 > m_RockPosX[number] + 120 && y_ < m_RockPosY[number] ) ||
+		(x_ +50 > m_RockPosX[number] + 120 && y_ + 180 < m_RockPosY[number] + 370))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Gimmick::BrockCheckHit(int x_, int y_, int number)
+{
+	if ((x_ + 120> m_BrockPosX[number] && y_< m_BrockPosY[number]) ||
+		(x_ + 120> m_BrockPosX[number] && y_ + 180 < m_BrockPosY[number] + 130)||
+		(x_ > m_BrockPosX[number] + 120 && y_ < m_BrockPosY[number]) ||
+		(x_ > m_BrockPosX[number] + 120 && y_ + 180 < m_BrockPosY[number] + 130))
+	{
+		 return true;
+	}	
 	return false;
 }

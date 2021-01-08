@@ -46,6 +46,11 @@ InGameScene::InGameScene()
 	vampire.InitTexture();
 	dragon.InitTexture();
 	orc.InitTexture();
+	gimmick.GetArray(m_PosxBot,m_PosyBot, m_PosxBri, m_PosyBri,
+					 m_PosxTrp, m_PosyTrp, m_PosxRok, m_PosyRok,
+					m_PosxBrk, m_PosyBrk);
+	
+	bottonNumber = 0;
 }
 
 InGameScene::~InGameScene()
@@ -59,20 +64,184 @@ void InGameScene::Exec()
 
 	camera.Update(player.m_PosX, player.m_Speed);
 
-	slime.SetPos(m_PosxSl);
+	
+	//slime.SetPos(m_PosxSl);
 	player.Move();
 	girl.Move(player);
 	
-	gimmick.BottonMove();
-	gimmick.BridgeMove();
-	gimmick.TrapMove();
+	//gimmick.BottonMove(player.m_PosX,player.m_PosY,);
+	if (nextStage == StageID_1)
+	{
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 0);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 1);
+		gimmick.BridgeMove(player.m_PosX, player.m_PosY, 0);
+		gimmick.BridgeMove(player.m_PosX, player.m_PosY, 1);
+		slime.Exec(player.m_PosX,player.m_PosY, 0);
+		slime.Exec(player.m_PosX, player.m_PosY, 1);
+	}
+	else if (nextStage == StageID_2)
+	{
+//		slime.Move(player.PosX,player.PosY, 1);
+//		slime.Move(player.PosX,player.PosY, 2);
+//		slime.Move(player.PosX,player.PosY, 3);
+		gimmick.RockMove(player.m_PosX, player.m_PosY, 0);
+		gimmick.BrockExec(player.m_PosX, player.m_PosY, 0);
+		gimmick.BrockExec(player.m_PosX, player.m_PosY, 1);
+	}
+	else if (nextStage == StageID_3)
+	{
+		skull.Draw(camera, m_PosxSk, m_PosySk, 0);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 2);
+		gimmick.BridgeMove(player.m_PosX,player.m_PosY ,2);
+
+		//slime.Draw(camera, m_PosxSl, m_PosySl, 4);
+		//slime.Draw(camera, m_PosxSl, m_PosySl, 5);
+		//slime.Draw(camera, m_PosxSl, m_PosySl, 6);
+		//slime.Draw(camera, m_PosxSl, m_PosySl, 7);
+		//slime.Draw(camera, m_PosxSl, m_PosySl, 8);
+		//slime.Draw(camera, m_PosxSl, m_PosySl, 9);
+		//slime.Draw(camera, m_PosxSl, m_PosySl, 10);
+		//slime.Draw(camera, m_PosxSl, m_PosySl, 11);
+		//slime.Draw(camera, m_PosxSl, m_PosySl, 12);
+		//slime.Draw(camera, m_PosxSl, m_PosySl, 13);
+		//slime.Draw(camera, m_PosxSl, m_PosySl, 14);
+	}
+	else if (nextStage == StageID_4)
+	{
+		gimmick.TrapMove(player.m_PosX, player.m_PosY, 0);
+		gimmick.TrapMove(player.m_PosX, player.m_PosY, 1);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 3);
+		gimmick.BridgeMove(player.m_PosX, player.m_PosY, 3);
+		//skull.Exec(camera, m_PosxSk, m_PosySk, 1);
+		//skull.Exec(camera, m_PosxSk, m_PosySk, 2);
+		//skull.Exec(camera, m_PosxSk, m_PosySk, 3);
+		//skull.Exec(camera, m_PosxSk, m_PosySk, 4);
+	}
+	else if (nextStage == StageID_5)
+	{
+		gimmick.RockMove(player.m_PosX, player.m_PosY, 1);
+		gimmick.RockMove(player.m_PosX, player.m_PosY, 2);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 4);
+		gimmick.BridgeMove(player.m_PosX, player.m_PosY, 4);
+		//slime.Exec(camera, m_PosxSl, m_PosySl, 15);
+		//slime.Exec(camera, m_PosxSl, m_PosySl, 16);
+		//slime.Exec(camera, m_PosxSl, m_PosySl, 17);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 0);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 1);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 2);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 3);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 4);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 5);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 6);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 7);
+	}
+	else if (nextStage == StageID_6)
+	{
+		gimmick.RockMove(player.m_PosX, player.m_PosY, 3);
+		gimmick.BridgeMove(player.m_PosX, player.m_PosY, 9);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 5);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 6);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 7);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 8);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 9);
+		//skull.Exec(camera, m_PosxSk, m_PosySk, 5);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 8);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 9);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 10);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 11);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 12);
+		//slime.Exec(camera, m_PosxSl, m_PosySl, 18);
+	}
+	else if (nextStage == StageID_7)
+	{
+		gimmick.TrapMove(player.m_PosX, player.m_PosY, 2);
+		gimmick.BridgeMove(player.m_PosX, player.m_PosY, 10);
+		gimmick.BridgeMove(player.m_PosX, player.m_PosY, 11);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 10);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 11);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 13);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 14);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 15);
+		//skull.Exec(camera, m_PosxSk, m_PosySk, 6);
+		//skull.Exec(camera, m_PosxSk, m_PosySk, 7);
+		//wolfman.Exec(camera, wolfman.m_Posx, wolfman.m_Posy);
+	}
+	else if (nextStage == StageID_8)
+	{
+		if (player.m_PosX >= 960 || girl.m_PosX >= 960)
+		{
+			//orc.Exec(camera, m_PosxOc, m_PosyOc, 16);
+			//orc.Exec(camera, m_PosxOc, m_PosyOc, 17);
+			//orc.Exec(camera, m_PosxOc, m_PosyOc, 18);
+			//orc.Exec(camera, m_PosxOc, m_PosyOc, 19);
+			//orc.Exec(camera, m_PosxOc, m_PosyOc, 20);
+		}
+
+		if (player.m_PosX >= 3840 || girl.m_PosX >= 3840)
+		{
+			//skull.Exec(camera, m_PosxSk, m_PosySk, 8);
+			//skull.Exec(camera, m_PosxSk, m_PosySk, 9);
+			//skull.Exec(camera, m_PosxSk, m_PosySk, 10);
+			//skull.Exec(camera, m_PosxSk, m_PosySk, 11);
+			//skull.Exec(camera, m_PosxSk, m_PosySk, 12);
+		}
+	}
+	else if (nextStage == StageID_9)
+	{
+		//slime.Exec(camera, m_PosxSl, m_PosySl, 19);
+		//slime.Exec(camera, m_PosxSl, m_PosySl, 20);
+		//slime.Exec(camera, m_PosxSl, m_PosySl, 21);
+		gimmick.BrockExec(player.m_PosX, player.m_PosY, 2);
+		gimmick.BrockExec(player.m_PosX, player.m_PosY, 3);
+		gimmick.BrockExec(player.m_PosX, player.m_PosY, 4);
+		gimmick.BrockExec(player.m_PosX, player.m_PosY, 5);
+		gimmick.BrockExec(player.m_PosX, player.m_PosY, 6);
+		gimmick.RockMove(player.m_PosX, player.m_PosY,  4);
+		gimmick.BridgeMove(player.m_PosX, player.m_PosY, 12);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 12);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 21);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 22);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 23);
+	}
+	else if (nextStage == StageID_10)
+	{
+	gimmick.BridgeMove(player.m_PosX, player.m_PosY, 13);
+	gimmick.BridgeMove(player.m_PosX, player.m_PosY, 14);
+	gimmick.BottonMove(player.m_PosX, player.m_PosY, 13);
+	gimmick.BottonMove(player.m_PosX, player.m_PosY, 14);
+	//slime.Exec(camera, m_PosxSl, m_PosySl, 22);
+	//orc.Exec(camera, m_PosxOc, m_PosyOc, 24);
+	//orc.Exec(camera, m_PosxOc, m_PosyOc, 25);
+	//orc.Exec(camera, m_PosxOc, m_PosyOc, 26);
+	//vampire.Exec(camera, vampire.m_Posx, vampire.m_Posy);
+	}
+	else if (nextStage == StageID_11)
+	{
+		gimmick.BrockExec(player.m_PosX, player.m_PosY, 7);
+		gimmick.BrockExec(player.m_PosX, player.m_PosY, 9);
+		gimmick.BrockExec(player.m_PosX, player.m_PosY, 8);
+		gimmick.BridgeMove(player.m_PosX, player.m_PosY, 15);
+		gimmick.BottonMove(player.m_PosX, player.m_PosY, 15);
+		//skull.Exec(camera, m_PosxSk, m_PosySk, 13);
+		//skull.Exec(camera, m_PosxSk, m_PosySk, 14);
+		//skull.Exec(camera, m_PosxSk, m_PosySk, 15);
+		//slime.Exec(camera, m_PosxSl, m_PosySl, 23);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 27);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 28);
+		//orc.Exec(camera, m_PosxOc, m_PosyOc, 29);
+	}
+	else if (nextStage == StageID_12)
+	{
+	//dragon.Exec(camera, 2400, 360);
+	}
+	/*gimmick.TrapMove();
 	gimmick.RockMove();
 	slime.Exec();
 	skull.Exec();
 	orc.Exec(player);
 	wolfman.Exec();
 	vampire.Exec();
-	dragon.Exec();
+	dragon.Exec();*/
 
 	if (GetKeyStatus(KEY_INPUT_1) == InputState::Pushed)
 	{
@@ -242,10 +411,10 @@ void InGameScene::Draw()
 		DrawGraph(Bg3PosX, BgPosY, Bg_Grass, TRUE);
 		map.Data(nextStage);
 
-		gimmick.BridgeDraw(camera,m_PosxBri,m_PosyBri, 0);
-		gimmick.BottonDraw(camera,m_PosxBot,m_PosyBot, 0,player);
-		gimmick.BridgeDraw(camera,m_PosxBri,m_PosyBri, 1);
-		gimmick.BottonDraw(camera,m_PosxBot,m_PosyBot, 1, player);
+		gimmick.BridgeDraw(camera, 0);
+		gimmick.BridgeDraw(camera, 1);
+		gimmick.BottonDraw(camera, 0);
+		gimmick.BottonDraw(camera, 1);
 		slime.Draw(camera, m_PosxSl,m_PosySl,0);
 		
 	}
@@ -258,10 +427,12 @@ void InGameScene::Draw()
 
 		slime.Draw(camera,m_PosxSl,m_PosySl, 1);
 		slime.Draw(camera,m_PosxSl,m_PosySl, 2);
-		gimmick.RockDraw(camera, m_PosxRok,m_PosyRok, 0);
-		gimmick.BrockDraw(camera,m_PosxBrk,m_PosyBrk, 0);
-		gimmick.BrockDraw(camera,m_PosxBrk,m_PosyBrk, 1);
+
 		slime.Draw(camera,m_PosxSl,m_PosySl, 3);
+		gimmick.RockDraw(camera,  0);
+		gimmick.BrockDraw(camera, 0);
+		gimmick.BrockDraw(camera, 1);
+
 	}
 	else if (nextStage == StageID_3)
 	{
@@ -270,10 +441,9 @@ void InGameScene::Draw()
 		DrawGraph(Bg3PosX, BgPosY, Bg_Grass3, TRUE);
 		map.Data(nextStage);
 
-		gimmick.BridgeDraw(camera,m_PosxBri,m_PosyBri, 2);
-		gimmick.BottonDraw(camera,m_PosxBot,m_PosyBot, 2, player);
 		skull.Draw(camera, m_PosxSk, m_PosySk,0);
-
+		gimmick.BridgeDraw(camera, 2);
+		gimmick.BottonDraw(camera, 2);
 		slime.Draw(camera,m_PosxSl,m_PosySl, 4);
 		slime.Draw(camera,m_PosxSl,m_PosySl, 5);
 		slime.Draw(camera,m_PosxSl,m_PosySl, 6);
@@ -295,14 +465,14 @@ void InGameScene::Draw()
 		map.Data(nextStage);
 
 
-		gimmick.TrapDraw(camera, m_PosxTrp, m_PosyTrp, 0);
+		gimmick.TrapDraw(camera,0);
+		gimmick.TrapDraw(camera,1);
+		gimmick.BottonDraw(camera,3);
+		gimmick.BridgeDraw(camera, 3);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 1);
-		gimmick.TrapDraw(camera, m_PosxTrp, m_PosyTrp, 1);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 2);
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 3);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 3);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 4);
-		gimmick.BottonDraw(camera, m_PosxBot, m_PosxBot,3,player);
 	}
 	else if (nextStage == StageID_5)
 	{
@@ -313,7 +483,10 @@ void InGameScene::Draw()
 		DrawGraph(Bg4PosX, BgPosY, Bg_Cave, TRUE);
 		map.Data(nextStage);
 
-		gimmick.RockDraw(camera, m_PosxRok, m_PosyRok,1);
+		gimmick.RockDraw(camera,1);
+		gimmick.RockDraw(camera,2);
+		gimmick.BottonDraw(camera, 4);//橋追加
+		gimmick.BridgeDraw(camera, 4);
 		slime.Draw(camera,m_PosxSl, m_PosySl, 15);
 		slime.Draw(camera,m_PosxSl,m_PosySl,16);
 		slime.Draw(camera,m_PosxSl,m_PosySl,17);
@@ -325,8 +498,6 @@ void InGameScene::Draw()
 		orc.Draw(camera, m_PosxOc, m_PosyOc, 5);
 		orc.Draw(camera, m_PosxOc, m_PosyOc, 6);
 		orc.Draw(camera, m_PosxOc, m_PosyOc, 7);
-		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 4, player);
-		gimmick.RockDraw(camera, m_PosxRok,m_PosyRok ,2);
 	}
 	else if (nextStage == StageID_6)
 	{
@@ -336,19 +507,20 @@ void InGameScene::Draw()
 		DrawGraph(Bg4PosX, BgPosY, Bg_Forest, TRUE);
 		map.Data(nextStage);
 
+		gimmick.RockDraw(camera,3);
+		gimmick.BridgeDraw(camera, 9);
+		gimmick.BottonDraw(camera, 5);	
+		gimmick.BottonDraw(camera, 6);
+		gimmick.BottonDraw(camera, 7);
+		gimmick.BottonDraw(camera, 8);
+		gimmick.BottonDraw(camera,9);
+		skull.Draw(camera, m_PosxSk, m_PosySk, 5);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 8);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 9);
-		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 5, player);
-		skull.Draw(camera, m_PosxSk, m_PosySk, 5);
-		gimmick.BottonDraw(camera,m_PosxBot, m_PosyBot, 6, player);
-		gimmick.BottonDraw(camera,m_PosxBot, m_PosyBot, 7, player);
-		gimmick.BottonDraw(camera,m_PosxBot, m_PosyBot, 8, player);
-		slime.Draw(camera, m_PosxSl, m_PosySl, 18);
-		gimmick.RockDraw(camera, m_PosxRok, m_PosyRok, 3);
-		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 9, player);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 10);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 11);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 12);
+		slime.Draw(camera, m_PosxSl, m_PosySl, 18);
 	}
 	else if (nextStage == StageID_7)
 	{
@@ -358,15 +530,15 @@ void InGameScene::Draw()
 		DrawGraph(Bg4PosX, BgPosY, Bg_Forest, TRUE);
 		map.Data(nextStage);
 
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 4);
+		gimmick.TrapDraw(camera,2);
+		gimmick.BridgeDraw(camera, 10);
+		gimmick.BridgeDraw(camera, 11);
+		gimmick.BottonDraw(camera, 10);
+		gimmick.BottonDraw(camera, 11);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 13);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 14);
-		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 10, player);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 15);
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 5);
-		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 11, player);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 6);
-		gimmick.TrapDraw(camera, m_PosxTrp, m_PosyTrp, 2);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 7);
 		wolfman.Draw(camera, wolfman.m_Posx, wolfman.m_Posy);
 	}
@@ -406,18 +578,18 @@ void InGameScene::Draw()
 
 		slime.Draw(camera, m_PosxSl, m_PosySl, 19);
 		slime.Draw(camera, m_PosxSl, m_PosySl, 20);
-		gimmick.BrockDraw(camera, m_PosxBrk, m_PosyBrk, 2);
-		gimmick.BrockDraw(camera,m_PosxBrk,m_PosyBrk, 3);
-		gimmick.BrockDraw(camera,m_PosxBrk,m_PosyBrk, 4);
-		orc.Draw(camera, m_PosxOc, m_PosyOc, 21);
 		slime.Draw(camera, m_PosxSl, m_PosySl, 21);
-		gimmick.BrockDraw(camera,m_PosxBrk,m_PosyBrk, 5);
-		gimmick.BrockDraw(camera,m_PosxBrk,m_PosyBrk, 6);
+		gimmick.BrockDraw(camera,2);
+		gimmick.BrockDraw(camera,3);
+		gimmick.BrockDraw(camera,4);
+		gimmick.BrockDraw(camera,5);
+		gimmick.BrockDraw(camera,6);
+		gimmick.RockDraw(camera, 4);
+		gimmick.BridgeDraw(camera,12);
+		gimmick.BottonDraw(camera,12);
+		orc.Draw(camera, m_PosxOc, m_PosyOc, 21);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 22);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 23);
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 6);
-		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 12, player);
-		gimmick.RockDraw(camera, m_PosxRok, m_PosyRok, 4);
 	}
 	else if (nextStage == StageID_10)
 	{
@@ -427,12 +599,12 @@ void InGameScene::Draw()
 		DrawGraph(Bg4PosX, BgPosY, Bg_Forest, TRUE);
 		map.Data(nextStage);
 
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 7);
-		orc.Draw(camera, m_PosxOc, m_PosyOc, 24);
-		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 13, player);
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 8);
-		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 14, player);
+		gimmick.BridgeDraw(camera,13);
+		gimmick.BridgeDraw(camera,14);
+		gimmick.BottonDraw(camera,13);
+		gimmick.BottonDraw(camera,14);
 		slime.Draw(camera, m_PosxSl, m_PosySl, 22);
+		orc.Draw(camera, m_PosxOc, m_PosyOc, 24);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 25);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 26);
 		vampire.Draw(camera, vampire.m_Posx, vampire.m_Posy);
@@ -445,18 +617,18 @@ void InGameScene::Draw()
 		DrawGraph(Bg4PosX, BgPosY, Bg_Forest, TRUE);
 		map.Data(nextStage);
 
-		orc.Draw(camera,m_PosxOc, m_PosyOc, 27);
-		orc.Draw(camera,m_PosxOc, m_PosyOc, 28);
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 9);
-		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 15, player);
+		gimmick.BrockDraw(camera, 7);
+		gimmick.BrockDraw(camera,9);
+		gimmick.BrockDraw(camera,8);
+		gimmick.BridgeDraw(camera,15);
+		gimmick.BottonDraw(camera,15);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 13);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 14);
-		gimmick.BrockDraw(camera, m_PosxBrk, m_PosyBrk, 7);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 15);
-		orc.Draw(camera, m_PosxOc, m_PosyOc, 29);
 		slime.Draw(camera, m_PosxSl, m_PosySl, 23);
-		gimmick.BrockDraw(camera,m_PosxBrk,m_PosyBrk, 8);
-		gimmick.BrockDraw(camera,m_PosxBrk,m_PosyBrk, 9);
+		orc.Draw(camera,m_PosxOc, m_PosyOc, 27);
+		orc.Draw(camera,m_PosxOc, m_PosyOc, 28);
+		orc.Draw(camera, m_PosxOc, m_PosyOc, 29);
 	}
 	else if (nextStage == StageID_12)
 	{

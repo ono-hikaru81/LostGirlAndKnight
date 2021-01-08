@@ -11,23 +11,21 @@ public:
 	Slime();
 	virtual~Slime();
 
-	virtual void Exec();
+	virtual void Exec(int x_,int y_,int number);
 	virtual void Draw(Camera camera ,int x_[] ,int y_[],int number);
 
 	void InitTexture();
 	void ReleaseTexture();
-	void SetPos(int Posx[]);
-	bool CheckHit(float x, float y, float width, float height);
+	void GetSlimeArray(int array_[]);
+	bool CheckHit(float x, float y,int number);
 	
-	int posx;
-	int posy;
-	int m_Slime;
 	static const int m_SlimeNumberMax = 50;
 	int m_PosX[m_SlimeNumberMax];
 	int m_PosY[m_SlimeNumberMax];
-	int m_MoveTime;
-	int m_ActIndex;
-	int m_ActWait;
+	int m_Slime[m_SlimeNumberMax];
+	int m_MoveTime[m_SlimeNumberMax];
+	int m_ActIndex[m_SlimeNumberMax];
+	int m_ActWait [m_SlimeNumberMax];
 	int m_ActSpeed;
 	static const int m_MotionMax = 3;
 	static const int m_SlimeMax = 10;

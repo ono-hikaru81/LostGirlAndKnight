@@ -6,12 +6,17 @@ InGameScene inGameScene;
 
 Slime::Slime()
 {
-	m_Slime = 0;
-	m_MoveTime = 0;
-	m_ActIndex = 0;
+	
+	for (int i = 0; i < m_SlimeNumberMax; i++)
+	{
+		m_Slime[i] = 0;
+		m_MoveTime[i] = 0;
+		m_ActIndex[i] = 0;
+		m_PosX[i] = 0;
+		m_PosY[i] = 0;
+	}
 	m_ActSpeed = 10;
 	InitTexture();
-	posx = 0;
 }
 
 Slime::~Slime()
@@ -19,52 +24,57 @@ Slime::~Slime()
 	ReleaseTexture();
 }
 
-void Slime::Exec()
+void Slime::Exec(int x_ ,int y_ ,int number)
 {
-	m_MoveTime++;
-	if (m_MoveTime < 180)
+	m_MoveTime[number]++;
+	if (m_MoveTime[number] < 180)
 	{
-		posx++;
-		if (--m_ActWait <= 0)
+		m_PosX[number]++;
+		if (--m_ActWait[number] <= 0)
 		{
-			m_Slime = m_ActMotionR[m_ActIndex];
-			m_ActIndex++;
-			m_ActWait = m_ActSpeed;
-			m_ActIndex %= m_MotionMax;
+			m_Slime[number] = m_ActMotionR[m_ActIndex[number]];
+			m_ActIndex[number]++;
+			m_ActWait[number]= m_ActSpeed;
+			m_ActIndex[number] %= m_MotionMax;
 		}
 	}
-	else if (180 <= m_MoveTime && m_MoveTime < 240)
+	else if (180 <= m_MoveTime[number] && m_MoveTime[number] < 300)
 	{
-		m_Slime = 4;
+		m_Slime[number] = 4;
 	}
-	else if (240 <= m_MoveTime && m_MoveTime < 400)
+	else if (300 <= m_MoveTime[number] && m_MoveTime[number] < 480)
 	{
-		posx--;
-		if (--m_ActWait <= 0)
+		m_PosX[number]--;
+		if (--m_ActWait[number] <= 0)
 		{
-			m_Slime = m_ActMotionL[m_ActIndex];
-			m_ActIndex++;
-			m_ActWait = m_ActSpeed;
-			m_ActIndex %= m_MotionMax;
+			m_Slime[number] = m_ActMotionL[m_ActIndex[number]];
+			m_ActIndex[number]++;
+			m_ActWait[number] = m_ActSpeed;
+			m_ActIndex[number] %= m_MotionMax;
 		}
 	}
-	else if (m_MoveTime < 460)
+	else if (m_MoveTime[number] < 600)
 	{
-		m_Slime = 0;
+		m_Slime[number] = 0;
 	}
 	else
 	{
-		m_MoveTime = 0;
+		m_MoveTime[number] = 0;
 	}
 	
 }
 
 void Slime::Draw(Camera camera, int x_[], int y_[],int number)
 {
-	int DrawX = camera.ConvertPosXWorldToScreen(x_[number])+ posx;
+	int DrawX = camera.ConvertPosXWorldToScreen(x_[number])+ m_PosX[number];
 	int DrawY = camera.ConvertPosYWorldToScreen(y_[number]);
 
-	DrawGraph(DrawX, DrawY, m_Slimes[m_Slime], TRUE);
+	DrawPixel(DrawX, DrawY, GetColor(255, 255, 255));				//¶ã
+	DrawPixel(DrawX + 180, DrawY, GetColor(255, 255, 255));			//‰Eã
+	DrawPixel(DrawX, DrawY + 210, GetColor(255, 255, 255));		//¶‰º
+	DrawPixel(DrawX + 180, DrawY + 210, GetColor(255, 255, 255));	//‰E‰º
+
+	DrawGraph(DrawX, DrawY, m_Slimes[m_Slime[number]], TRUE);
 }
 
 void Slime::InitTexture()
@@ -80,15 +90,22 @@ void Slime::ReleaseTexture()
 	}
 }
 
-void Slime::SetPos(int Posx[])
+void Slime::GetSlimeArray(int array_[])
 {
 	for (int i = 0; i < m_SlimeNumberMax; i++)
 	{
-		m_PosX[i] = Posx[i];
+		m_PosX[i] = array_[i];
 	}
 }
 
-bool Slime::CheckHit(float x, float y, float width, float height)
+bool Slime::CheckHit(float x, float y,int number)
 {
+	if ((x + 120 > m_PosX[number] && y < m_PosY[number]) ||
+		(x + 120 > m_PosX[number] && y + 180 < m_PosY[number] + 130) ||
+		(x > m_PosX[number] + 120 && y < m_PosY[number]) ||
+		(x > m_PosX[number] + 120 && y + 180 < m_PosY[number] + 130))
+	{
+
+	}
 	return false;
 }

@@ -235,13 +235,27 @@ void Player::Draw(Camera camera)
 	int DrawPosX = camera.ConvertPosXWorldToScreen(m_PosX);
 	int DrawPosY = camera.ConvertPosYWorldToScreen(m_PosY);
 
+	DrawFormatString(200, 700, GetColor(0, 255, 255), "座標[ %d,%d ]", m_PosX, m_PosY);
 	DrawBox(DrawPosX + 60, DrawPosY, DrawPosX + 120, DrawPosY + 180, GetColor(200, 200, 200), FALSE);
 	DrawGraph(DrawPosX, DrawPosY, m_Players[m_Player], TRUE);
-	DrawFormatString(0, 0, GetColor(255, 0, 0), "座標[%d,%d]",m_PosX,m_PosY);
+
+	//ルーズな当たり判定(点描画)
+	DrawPixel(DrawPosX, DrawPosY, GetColor(255, 255, 255));				//左上
+	DrawPixel(DrawPosX + 180, DrawPosY, GetColor(255, 255, 255));		//右上
+	DrawPixel(DrawPosX, DrawPosY + 180, GetColor(255, 255, 255));		//左下
+	DrawPixel(DrawPosX + 180, DrawPosY + 180, GetColor(255, 255, 255));	//右下
+	
+
+	//タイトな当たり判定(点描画)
+	/*DrawPixel(DrawPosX + 50, DrawPosY, GetColor(255, 255, 255));		//左上
+	DrawPixel(DrawPosX + 120, DrawPosY, GetColor(255, 255, 255));		//右上
+	DrawPixel(DrawPosX + 50, DrawPosY + 180, GetColor(255, 255, 255));	//左下
+	DrawPixel(DrawPosX + 120, DrawPosY + 180, GetColor(255, 255, 255));	//右下*/
 }
 
 void Player::InitTexture()
 {
+	
 	LoadDivGraph("Res/Character/Players.png", m_PlayerMax, 4, 8, 180, 180, m_Players);
 }
 
