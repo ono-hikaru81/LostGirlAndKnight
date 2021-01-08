@@ -5,6 +5,7 @@
 #include "../Stage/Map.h"
 
 static Map g_map;
+const int InitialSpeed = 20; 
 
 Player::Player()
 {
@@ -12,11 +13,13 @@ Player::Player()
 	m_Hp = 10;
 	m_Attack = 0;
 	m_Speed = 8;
-	m_Jump = 0;
+	m_JumpVelocity = 0;
 
 	//Player座標
-	m_PosX = 143;
-	m_PosY = WindowHeight - MapChipHeight - 180;
+	m_PosX = 120;
+	m_PosY = 700;
+	m_CenterPosX = (m_PosX + 180) / 2;
+	m_CenterPosY = (m_PosY + 180) / 2;
 
 	// 管理変数
 	m_Player = 0;
@@ -30,36 +33,141 @@ Player::Player()
 	m_ActStop = m_ActSpeed;
 
 	// 実行確認
-	m_JumpExec = false;
-	m_WalkExec = false;
-	m_WaitExec = false;
-	m_IsRight = false;
+	m_IsMove = false;
+	m_IsRight = true;
+	m_IsFloatingAir = false;
+	m_JumpVelocity = 0;
 
 	InitTexture();
 }
 
 Player::~Player()
 {
-	ReleaseTexture();
+
+}
+
+int Player::GetPosX()
+{
+	return m_PosX;
+}
+
+int Player::GetPosY()
+{
+	return m_PosY;
+}
+
+int Player::GetCenterPosX()
+{
+	return m_CenterPosX;
+}
+
+int Player::GetCenterPosY()
+{
+	return m_CenterPosY;
 }
 
 void Player::Move()
 {
+	int NewPosX = m_PosX;
+	int NewPosY = m_PosY;
+
+	int Horizontal = 0;
+	int Vertical = 0;
+
 	// 左移動
-	if (GetKeyStatus(KEY_INPUT_A) == InputState::Hold && m_PosX >= -30)
+	if (GetKeyStatus(KEY_INPUT_A) == InputState::Hold)
 	{
-		// 左移動中ジャンプ
-		if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
+		m_IsRight = false;
+		Horizontal -= m_Speed;
+		m_IsMove = true;
+	}
+	// 右移動
+	else if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold)
+	{
+		m_IsRight = true;
+		Horizontal += m_Speed;
+		m_IsMove = true;
+	}
+	// ジャンプ処理
+	if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed/* && (int)m_IsFloatingAir == false*/)
+	{
+		m_IsFloatingAir = true;
+		m_JumpVelocity = InitialSpeed;
+	}
+
+	if (m_IsFloatingAir == true)
+	{
+		Vertical = (m_PosY - m_PrevPosY) - m_JumpVelocity;
+		m_JumpVelocity -= 1;
+	}
+
+	if (m_IsFloatingAir == false)
+	{
+		Vertical = 0;
+		m_JumpVelocity = 0;
+	}
+
+	Vertical += g_Gravity;
+
+	int RectX = m_PosX + 60;
+	int RectY = m_PosY;
+	int RectWidth = m_PosX + 120;
+	int RectHeight = m_PosY + 180;
+
+	EdgeType ContactEdge = InValid;
+	int ContactPos = 0;
+
+	// X軸の判定
+	if (g_map.CheckHit(RectX, RectY, RectWidth, RectHeight, Horizontal, 0, ContactEdge, ContactPos) == false)
+	{
+		m_PosX += Horizontal;
+	}
+	else if(g_map.CheckHit(RectX, RectY, RectWidth, RectHeight, Horizontal, 0, ContactEdge, ContactPos) == true)
+	{
+		AdjustToMapChipEdgePosition(ContactEdge, ContactPos);
+	}
+
+	// Y軸の判定
+	if (g_map.CheckHit(RectX, RectY, RectWidth, RectHeight, 0, Vertical, ContactEdge, ContactPos) == false)
+	{
+		m_PosY += Vertical;
+		m_IsFloatingAir = true;
+	}
+	else if(g_map.CheckHit(RectX, RectY, RectWidth, RectHeight, Horizontal, 0, ContactEdge, ContactPos) == true)
+	{
+		AdjustToMapChipEdgePosition(ContactEdge, ContactPos);
+	}
+
+	m_PrevPosX = m_PosX;
+	m_PrevPosY = m_PosY;
+
+	if (m_PosX < 0 || m_PosY < 0 || m_PosX > FieldWidth || m_PosY > FieldHeight)
+	{
+		m_Hp = 0;
+	}
+
+	// アニメーション
+	if (m_IsMove == false)
+	{
+		if (--m_ActStop <= 0)
 		{
-			m_WalkExec = false;
-			m_JumpExec = true;
-			m_Jump = -20;
+			if (m_IsRight == false)
+			{
+				m_Player = m_WaiMotionL[m_WaitIndex];
+			}
+			else if (m_IsRight == true)
+			{
+				m_Player = m_WaiMotionR[m_WaitIndex];
+			}
+			m_WaitIndex++;
+			m_ActStop = m_ActSpeed;
+			m_WaitIndex %= m_MotionMax;
 		}
-		else
+	}
+	else if (m_IsMove == true)
+	{
+		if (m_IsRight == false && m_IsFloatingAir == false)
 		{
-			m_IsRight = false;
-			m_WaitExec = false;
-			m_WalkExec = true;
 			if (--m_ActStop <= 0)
 			{
 				m_Player = m_WlkMotionL[m_ActIndex];
@@ -68,42 +176,25 @@ void Player::Move()
 				m_ActIndex %= m_MotionMax;
 			}
 		}
-		m_PosX -= m_Speed;	
-	}
-	// 右移動
-	else if (GetKeyStatus(KEY_INPUT_D) == InputState::Hold && m_PosX <= FieldWidth - 180)
-	{
-		// 右移動中ジャンプ
-		if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
+		else if (m_IsRight == true && m_IsFloatingAir == false)
 		{
-			m_WalkExec = false;
-			m_JumpExec = true;
-			m_Jump = -20;
+			m_Player = m_WlkMotionR[m_ActIndex];
+			m_ActIndex++;
+			m_ActStop = m_ActSpeed;
+			m_ActIndex %= m_MotionMax;
 		}
-		else
+		else if (m_IsRight == false && m_IsFloatingAir == true)
 		{
-			m_IsRight = true;
-			m_WaitExec = false;
-			m_WalkExec = true;
-			if (--m_ActStop <= 0)
-			{
-				m_Player = m_WlkMotionR[m_ActIndex];
-				m_ActIndex++;
-				m_ActStop = m_ActSpeed;
-				m_ActIndex %= m_MotionMax;
-			}
+			m_Player = 12;
 		}
-		m_PosX += m_Speed;		
+		else if (m_IsRight == true && m_IsFloatingAir == true)
+		{
+			m_Player = 28;
+		}
 	}
-	// ジャンプ
-	else if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_PosY >= WindowHeight - MapChipHeight - 180)
-	{
-		m_WaitExec = false;
-		m_JumpExec = true;
-		m_Jump = -20;
-	}
+
 	//攻撃
-	else if (GetKeyStatus(KEY_INPUT_SPACE) == InputState::Hold && m_PosY >= WindowHeight - MapChipHeight - 180)
+	if (GetKeyStatus(KEY_INPUT_SPACE) == InputState::Hold)
 	{
 		if (--m_ActStop <= 0)
 		{
@@ -137,72 +228,6 @@ void Player::Move()
 			m_DeiIndex %= m_DeiMotionMax;
 		}
 	}
-	else
-	{
-		if (--m_ActStop <= 0)
-		{
-			m_WaitExec = true;
-			if (m_IsRight == true)
-			{
-				m_Player = m_WaiMotionR[m_WaitIndex];
-			}
-			else
-			{
-				m_Player = m_WaiMotionL[m_WaitIndex];
-			}
-			m_WaitIndex++;
-			m_ActStop = m_ActSpeed;
-			m_WaitIndex %= m_MotionMax;
-		}
-	}
-
-	if (m_JumpExec == true)
-	{
-		m_PosY += m_Jump;
-		m_Jump += 1;
-		if (m_IsRight == true)
-		{
-			m_Player = 28;
-		}
-		else
-		{
-			m_Player = 12;
-		}
-		if (m_PosY >= WindowHeight - MapChipHeight - 180)//重力加速
-		{	
-			m_JumpExec = false;
-			m_Jump = 0;
-		}
-	}
-	else if (m_JumpExec != true)
-	{
-//		m_PosY += g_Gravity;
-	}
-
-	int NewPosX = m_PosX;
-	int NewPosY = m_PosY;
-	int NewPosWidth = NewPosX + 180;
-	int NewPosHeight = NewPosY + 180;
-
-	if (g_map.CheckHit(NewPosX, NewPosY, NewPosWidth, NewPosHeight) == false)
-	{
-		m_PosX = m_NewPosX;
-		m_PosY = m_NewPosY;
-	}
-
-	if (GetKeyStatus(KEY_INPUT_UP) == InputState::Hold)
-	{
-		m_PosY -= m_Speed;
-	}
-	else if (GetKeyStatus(KEY_INPUT_DOWN) == InputState::Hold)
-	{
-		m_PosY += m_Speed;
-	}
-}
-
-void Player::InitTexture()
-{
-	LoadDivGraph("Res/Character/Players.png", m_PlayerMax, 4, 8, 180, 180, m_Players);
 }
 
 void Player::Draw(Camera camera)
@@ -210,11 +235,45 @@ void Player::Draw(Camera camera)
 	int DrawPosX = camera.ConvertPosXWorldToScreen(m_PosX);
 	int DrawPosY = camera.ConvertPosYWorldToScreen(m_PosY);
 
+	DrawBox(DrawPosX + 60, DrawPosY, DrawPosX + 120, DrawPosY + 180, GetColor(200, 200, 200), FALSE);
 	DrawGraph(DrawPosX, DrawPosY, m_Players[m_Player], TRUE);
+	DrawFormatString(0, 0, GetColor(255, 0, 0), "座標[%d,%d]",m_PosX,m_PosY);
+}
+
+void Player::InitTexture()
+{
+	LoadDivGraph("Res/Character/Players.png", m_PlayerMax, 4, 8, 180, 180, m_Players);
 }
 
 void Player::ReleaseTexture()
 {
+	for (int i = 0; i < m_PlayerMax; i++)
+	{
+		DeleteGraph(m_Players[i]);
+	}
+}
+
+void Player::AdjustToMapChipEdgePosition(EdgeType contact_edge_, int contact_pos_)
+{
+	int OffSetX = m_PosX + 120;
+	int OffSetY = m_PosY + 180;
+
+	switch (contact_edge_)
+	{
+	case Top:
+		m_PosY = contact_pos_ - OffSetY;
+		m_IsFloatingAir = false;
+		break;
+	case Left:
+		m_PosX = contact_pos_ - OffSetX;
+		break;
+	case Right:
+		m_PosX = contact_pos_;
+		break;
+	case Bottom:
+		m_PosY = contact_pos_;
+		break;
+	}
 }
 
 bool Player::CheckHit(int x, int y, int Width, int Height)

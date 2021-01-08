@@ -8,7 +8,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	// ＤＸライブラリ初期化処理
 	SetOutApplicationLogValidFlag(FALSE);
-	ChangeWindowMode(FALSE);
+	ChangeWindowMode(TRUE);
 	SetGraphMode(WindowWidth, WindowHeight, 32);
 	SetBackgroundColor(0, 0, 120);
 	SetMainWindowText("井本組のゲーム");

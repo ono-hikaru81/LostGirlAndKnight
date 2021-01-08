@@ -28,6 +28,6 @@ const int FieldWidth = MapChipWidth * MaxMapWidth;
 const int FieldHeight = MapChipHeight * MaxMapHeight;
 
 // èdóÕ
-static int g_Gravity = 4;
+static int g_Gravity = 1;
 
 #endif // !MAIN_H

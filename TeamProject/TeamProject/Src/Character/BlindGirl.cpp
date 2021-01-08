@@ -42,7 +42,7 @@ void Girl::InitTexture()
 
 void Girl::Move(Player player)
 {
-	if (player.m_WaitExec == true)
+	if (player.m_IsMove == false)
 	{
 		if (--m_ActStop <= 0)
 		{
@@ -59,7 +59,7 @@ void Girl::Move(Player player)
 			m_WaitIndex %= m_MotionMax;
 		}
 	}
-	else if (player.m_WalkExec == true)
+	else if (player.m_IsMove == true)
 	{
 		if (--m_ActStop <= 0)
 		{
@@ -78,7 +78,7 @@ void Girl::Move(Player player)
 			m_WlkIndex %= m_MotionMax;
 		}
 	}
-	else if (player.m_JumpExec == true)
+	else if (player.m_IsFloatingAir == true)
 	{
 		m_Jump = -20;
 		m_PosY += m_Jump;
