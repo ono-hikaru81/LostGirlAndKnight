@@ -7,6 +7,17 @@
 
 const int g_MapChipNumber = 6;
 
+enum EdgeType
+{
+	Left,
+	Right,
+	Top,
+	Bottom,
+
+	Max,
+	InValid = -1,
+};
+
 class Map
 {
 public:
@@ -14,13 +25,13 @@ public:
 	~Map();
 
 public:
-	void Data(Stage number_);
+	void Data(StageID number_);
 	void Draw(Camera camera);
 	void InitTexture();
 	void ReleaseTexture();
 	void Clamp(int* value, int min, int max);
-	int GetChipPos(int x_, int y_);
-	bool CheckHit(int x_, int y_, int width_, int height_);
+	void GetContactParameter(EdgeType edge_, int chip_id_x_, int chip_id_y_, EdgeType& contact_edge_, int& contact_pos_);
+	bool CheckHit(int left_, int top_, int right_, int bottom_, int vector_x_, int vector_y_, EdgeType& contact_egde_, int contact_edge_pos_);
 
 public:
 	int m_PosX;

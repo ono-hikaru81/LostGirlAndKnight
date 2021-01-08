@@ -130,7 +130,7 @@ void InGameScene::Exec()
 
 	if (nextStage == StageID_1)
 	{
-		if (player.m_PosX + 180 >= 4200)
+		if (player.m_PosX + 120 >= 4200)
 		{
 			nextStage = StageID_2;
 			InitPos();
@@ -240,7 +240,7 @@ void InGameScene::Draw()
 		DrawGraph(BgPosX, BgPosY, Bg_Grass, TRUE);
 		DrawGraph(Bg2PosX, BgPosY, Bg_Grass, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Grass, TRUE);
-		map.Data(One);
+		map.Data(nextStage);
 
 		gimmick.BridgeDraw(camera,m_PosxBri,m_PosyBri, 0);
 		gimmick.BottonDraw(camera,m_PosxBot,m_PosyBot, 0,player);
@@ -254,37 +254,37 @@ void InGameScene::Draw()
 		DrawGraph(BgPosX, BgPosY, Bg_Grass, TRUE);
 		DrawGraph(Bg2PosX, BgPosY, Bg_Grass, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Grass, TRUE);
-		map.Data(Two);
+		map.Data(nextStage);
 
-		//slime.Draw(camera,m_PosxSl,m_PosySl, 1);
-		//slime.Draw(camera,m_PosxSl,m_PosySl, 2);
+		slime.Draw(camera,m_PosxSl,m_PosySl, 1);
+		slime.Draw(camera,m_PosxSl,m_PosySl, 2);
 		gimmick.RockDraw(camera, m_PosxRok,m_PosyRok, 0);
 		gimmick.BrockDraw(camera,m_PosxBrk,m_PosyBrk, 0);
 		gimmick.BrockDraw(camera,m_PosxBrk,m_PosyBrk, 1);
-		//slime.Draw(camera,m_PosxSl,m_PosySl, 3);
+		slime.Draw(camera,m_PosxSl,m_PosySl, 3);
 	}
 	else if (nextStage == StageID_3)
 	{
 		DrawGraph(BgPosX, BgPosY, Bg_Grass3, TRUE);
 		DrawGraph(Bg2PosX, BgPosY, Bg_Grass3, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Grass3, TRUE);
-		map.Data(Three);
+		map.Data(nextStage);
 
-		gimmick.BridgeDraw(camera,m_PosxBri,m_PosyBri, 3);
+		gimmick.BridgeDraw(camera,m_PosxBri,m_PosyBri, 2);
 		gimmick.BottonDraw(camera,m_PosxBot,m_PosyBot, 2, player);
 		skull.Draw(camera, m_PosxSk, m_PosySk,0);
 
-		//slime.Draw(camera,m_PosxSl,m_PosySl, 4);
-		//slime.Draw(camera,m_PosxSl,m_PosySl, 5);
-		//slime.Draw(camera,m_PosxSl,m_PosySl, 6);
-		//slime.Draw(camera,m_PosxSl,m_PosySl, 7);
-		//slime.Draw(camera,m_PosxSl,m_PosySl, 8);
-		//slime.Draw(camera,m_PosxSl,m_PosySl, 9);
-		//slime.Draw(camera,m_PosxSl,m_PosySl,10);
-		//slime.Draw(camera,m_PosxSl,m_PosySl,11);
-		//slime.Draw(camera,m_PosxSl,m_PosySl,12);
-		//slime.Draw(camera,m_PosxSl,m_PosySl,13);
-		//slime.Draw(camera,m_PosxSl,m_PosySl,14);
+		slime.Draw(camera,m_PosxSl,m_PosySl, 4);
+		slime.Draw(camera,m_PosxSl,m_PosySl, 5);
+		slime.Draw(camera,m_PosxSl,m_PosySl, 6);
+		slime.Draw(camera,m_PosxSl,m_PosySl, 7);
+		slime.Draw(camera,m_PosxSl,m_PosySl, 8);
+		slime.Draw(camera,m_PosxSl,m_PosySl, 9);
+		slime.Draw(camera,m_PosxSl,m_PosySl,10);
+		slime.Draw(camera,m_PosxSl,m_PosySl,11);
+		slime.Draw(camera,m_PosxSl,m_PosySl,12);
+		slime.Draw(camera,m_PosxSl,m_PosySl,13);
+		slime.Draw(camera,m_PosxSl,m_PosySl,14);
 	}
 	else if (nextStage == StageID_4)
 	{
@@ -292,14 +292,14 @@ void InGameScene::Draw()
 		DrawGraph(Bg2PosX, BgPosY, Bg_Grass3, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Grass3, TRUE);
 		DrawGraph(Bg4PosX, BgPosY, Bg_Grass3, TRUE);
-		map.Data(Four);
+		map.Data(nextStage);
 
 
 		gimmick.TrapDraw(camera, m_PosxTrp, m_PosyTrp, 0);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 1);
 		gimmick.TrapDraw(camera, m_PosxTrp, m_PosyTrp, 1);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 2);
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 4);
+		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 3);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 3);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 4);
 		gimmick.BottonDraw(camera, m_PosxBot, m_PosxBot,3,player);
@@ -311,7 +311,7 @@ void InGameScene::Draw()
 		DrawGraph(Bg2PosX, BgPosY, Bg_Cave, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Cave, TRUE);
 		DrawGraph(Bg4PosX, BgPosY, Bg_Cave, TRUE);
-		map.Data(Five);
+		map.Data(nextStage);
 
 		gimmick.RockDraw(camera, m_PosxRok, m_PosyRok,1);
 		slime.Draw(camera,m_PosxSl, m_PosySl, 15);
@@ -334,7 +334,7 @@ void InGameScene::Draw()
 		DrawGraph(Bg2PosX, BgPosY, Bg_Cave, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Cave, TRUE);
 		DrawGraph(Bg4PosX, BgPosY, Bg_Forest, TRUE);
-		map.Data(Six);
+		map.Data(nextStage);
 
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 8);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 9);
@@ -356,14 +356,14 @@ void InGameScene::Draw()
 		DrawGraph(Bg2PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg4PosX, BgPosY, Bg_Forest, TRUE);
-		map.Data(Seven);
+		map.Data(nextStage);
 
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 5);
+		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 4);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 13);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 14);
 		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 10, player);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 15);
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 6);
+		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 5);
 		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 11, player);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 6);
 		gimmick.TrapDraw(camera, m_PosxTrp, m_PosyTrp, 2);
@@ -376,7 +376,7 @@ void InGameScene::Draw()
 		DrawGraph(Bg2PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg4PosX, BgPosY, Bg_Forest, TRUE);
-		map.Data(Eight);
+		map.Data(nextStage);
 
 		if (player.m_PosX >= 960 || girl.m_PosX >= 960)
 		{
@@ -402,7 +402,7 @@ void InGameScene::Draw()
 		DrawGraph(Bg2PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg4PosX, BgPosY, Bg_Forest, TRUE);
-		map.Data(Nine);
+		map.Data(nextStage);
 
 		slime.Draw(camera, m_PosxSl, m_PosySl, 19);
 		slime.Draw(camera, m_PosxSl, m_PosySl, 20);
@@ -415,7 +415,7 @@ void InGameScene::Draw()
 		gimmick.BrockDraw(camera,m_PosxBrk,m_PosyBrk, 6);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 22);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 23);
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 7);
+		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 6);
 		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 12, player);
 		gimmick.RockDraw(camera, m_PosxRok, m_PosyRok, 4);
 	}
@@ -425,12 +425,12 @@ void InGameScene::Draw()
 		DrawGraph(Bg2PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg4PosX, BgPosY, Bg_Forest, TRUE);
-		map.Data(Ten);
+		map.Data(nextStage);
 
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 8);
+		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 7);
 		orc.Draw(camera, m_PosxOc, m_PosyOc, 24);
 		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 13, player);
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 9);
+		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 8);
 		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 14, player);
 		slime.Draw(camera, m_PosxSl, m_PosySl, 22);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 25);
@@ -443,11 +443,11 @@ void InGameScene::Draw()
 		DrawGraph(Bg2PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg4PosX, BgPosY, Bg_Forest, TRUE);
-		map.Data(Eleven);
+		map.Data(nextStage);
 
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 27);
 		orc.Draw(camera,m_PosxOc, m_PosyOc, 28);
-		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 10);
+		gimmick.BridgeDraw(camera, m_PosxBri, m_PosyBri, 9);
 		gimmick.BottonDraw(camera, m_PosxBot, m_PosyBot, 15, player);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 13);
 		skull.Draw(camera, m_PosxSk, m_PosySk, 14);
@@ -464,7 +464,7 @@ void InGameScene::Draw()
 		DrawGraph(Bg2PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg3PosX, BgPosY, Bg_Forest, TRUE);
 		DrawGraph(Bg4PosX, BgPosY, Bg_Forest, TRUE);
-		map.Data(Twelve);
+		map.Data(nextStage);
 
 		dragon.Draw(camera, 2400, 360);
 	}
@@ -499,6 +499,20 @@ void InGameScene::ReleaseTexture()
 	DeleteGraph(Bg_Forest3);
 	DeleteGraph(Bg_Cave);
 	DeleteGraph(Bg_Cave2);
+
+	player.ReleaseTexture();
+	map.ReleaseTexture();
+	girl.ReleaseTexture();
+	ui.ReleaseTexture();
+
+	gimmick.ReleaseTexture();
+	slime.ReleaseTexture();
+	skull.ReleaseTexture();
+	orc.ReleaseTexture();
+	wolfman.ReleaseTexture();
+	vampire.ReleaseTexture();
+	dragon.ReleaseTexture();
+	orc.ReleaseTexture();
 }
 
 void InGameScene::InitPos()

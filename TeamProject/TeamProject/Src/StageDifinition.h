@@ -20,20 +20,4 @@ enum StageID
 	StageID_InValid
 };
 
-enum Stage
-{
-	One,
-	Two,
-	Three,
-	Four,
-	Five,
-	Six,
-	Seven,
-	Eight,
-	Nine,
-	Ten,
-	Eleven,
-	Twelve
-};
-
 #endif // !STAGE_DIFINITION_H
