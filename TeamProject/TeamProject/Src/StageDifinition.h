@@ -17,7 +17,7 @@ enum StageID
 	StageID_12,
 
 	StageID_Max,
-	StageID_InValid
+	StageID_InValid = -1,
 };
 
 #endif // !STAGE_DIFINITION_H

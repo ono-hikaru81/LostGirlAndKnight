@@ -318,9 +318,9 @@ bool Map::CheckHit(int left_, int top_, int right_, int bottom_, int vector_x_, 
 
 		for (int y = EdgeListY[i][start]; y <= EdgeListY[i][end]; y++)
 		{
-			for (int x = EdgeListX[i][start]; x <= EdgeListX[i][start]; x++)
+			for (int x = EdgeListX[i][start]; x <= EdgeListX[i][end]; x++)
 			{
-				if (Info1[y][x] == 0 || Info1[y][x] == 2)
+				if (Info[y][x] == 0 || Info[y][x] == 2)
 				{
 					GetContactParameter((EdgeType)i, x, y, contact_egde_, contact_edge_pos_);
 

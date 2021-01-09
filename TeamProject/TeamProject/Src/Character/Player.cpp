@@ -4,9 +4,6 @@
 #include "../Function/Input.h"
 #include "../Stage/Map.h"
 
-static Map g_map;
-const int InitialSpeed = 20; 
-
 Player::Player()
 {
 	//ステータス
@@ -36,6 +33,7 @@ Player::Player()
 	m_IsMove = false;
 	m_IsRight = true;
 	m_IsFloatingAir = false;
+	m_Alive = true;
 	m_JumpVelocity = 0;
 
 	InitTexture();
@@ -89,7 +87,7 @@ void Player::Move()
 		m_IsMove = true;
 	}
 	// ジャンプ処理
-	if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed/* && (int)m_IsFloatingAir == false*/)
+	if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_IsFloatingAir == false)
 	{
 		m_IsFloatingAir = true;
 		m_JumpVelocity = InitialSpeed;
@@ -115,14 +113,14 @@ void Player::Move()
 	int RectHeight = m_PosY + 180;
 
 	EdgeType ContactEdge = InValid;
-	int ContactPos = 0;
+	int ContactPos = m_PrevPosY;
 
 	// X軸の判定
 	if (g_map.CheckHit(RectX, RectY, RectWidth, RectHeight, Horizontal, 0, ContactEdge, ContactPos) == false)
 	{
 		m_PosX += Horizontal;
 	}
-	else if(g_map.CheckHit(RectX, RectY, RectWidth, RectHeight, Horizontal, 0, ContactEdge, ContactPos) == true)
+	else
 	{
 		AdjustToMapChipEdgePosition(ContactEdge, ContactPos);
 	}
@@ -133,7 +131,7 @@ void Player::Move()
 		m_PosY += Vertical;
 		m_IsFloatingAir = true;
 	}
-	else if(g_map.CheckHit(RectX, RectY, RectWidth, RectHeight, Horizontal, 0, ContactEdge, ContactPos) == true)
+	else
 	{
 		AdjustToMapChipEdgePosition(ContactEdge, ContactPos);
 	}
@@ -171,14 +169,14 @@ void Player::Move()
 			if (--m_ActStop <= 0)
 			{
 				m_Player = m_WlkMotionL[m_ActIndex];
-				m_ActIndex++;
-				m_ActStop = m_ActSpeed;
-				m_ActIndex %= m_MotionMax;
 			}
 		}
 		else if (m_IsRight == true && m_IsFloatingAir == false)
 		{
-			m_Player = m_WlkMotionR[m_ActIndex];
+			if (--m_ActStop <= 0)
+			{
+				m_Player = m_WlkMotionR[m_ActIndex];
+			}
 			m_ActIndex++;
 			m_ActStop = m_ActSpeed;
 			m_ActIndex %= m_MotionMax;
@@ -228,6 +226,11 @@ void Player::Move()
 			m_DeiIndex %= m_DeiMotionMax;
 		}
 	}
+
+	if (m_Hp <= 0 || m_PosY >= 1080)
+	{
+		m_Alive = false;
+	}
 }
 
 void Player::Draw(Camera camera)
@@ -255,7 +258,6 @@ void Player::Draw(Camera camera)
 
 void Player::InitTexture()
 {
-	
 	LoadDivGraph("Res/Character/Players.png", m_PlayerMax, 4, 8, 180, 180, m_Players);
 }
 
@@ -269,17 +271,14 @@ void Player::ReleaseTexture()
 
 void Player::AdjustToMapChipEdgePosition(EdgeType contact_edge_, int contact_pos_)
 {
-	int OffSetX = m_PosX + 120;
-	int OffSetY = m_PosY + 180;
-
 	switch (contact_edge_)
 	{
 	case Top:
-		m_PosY = contact_pos_ - OffSetY;
+		m_PosY = contact_pos_;
 		m_IsFloatingAir = false;
 		break;
 	case Left:
-		m_PosX = contact_pos_ - OffSetX;
+		m_PosX = contact_pos_;
 		break;
 	case Right:
 		m_PosX = contact_pos_;

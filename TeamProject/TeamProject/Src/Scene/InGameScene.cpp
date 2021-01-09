@@ -292,7 +292,7 @@ void InGameScene::Exec()
 		nextStage = StageID_12;
 	}
 
-	if (GetKeyStatus(KEY_INPUT_RETURN) == InputState::Pushed)
+	if (GetKeyStatus(KEY_INPUT_RETURN) == InputState::Pushed || player.m_Alive == false)
 	{
 		SceneManager::SetNextScene(SceneID_Result);
 	}
@@ -689,7 +689,7 @@ void InGameScene::ReleaseTexture()
 
 void InGameScene::InitPos()
 {
-	player.m_PosX = 143;
+	player.m_PosX = 120;
 	player.m_PosY = 780;
 	camera.m_PosX = WindowHalfWidth;
 	camera.m_PosY = WindowHalfHeight;
@@ -697,5 +697,5 @@ void InGameScene::InitPos()
 
 bool InGameScene::IsEnd() const
 {
-	return (GetKeyStatus(KEY_INPUT_RETURN) == TRUE);
+	return (player.m_Alive == false);
 }

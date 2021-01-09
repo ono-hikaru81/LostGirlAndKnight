@@ -4,6 +4,9 @@
 #include "../Function/Camera.h"
 #include "../Stage/Map.h"
 
+static Map g_map;
+const int InitialSpeed = 20; 
+
 // =================
 // プレイヤークラス
 // =================
@@ -76,6 +79,7 @@ public:
 	bool m_IsMove;
 	bool m_IsRight;
 	bool m_IsFloatingAir;
+	bool m_Alive;
 
 	// 画像保存
 	int m_Players[m_PlayerMax];
