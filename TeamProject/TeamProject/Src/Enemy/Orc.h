@@ -12,28 +12,34 @@ public:
 	Orc();
 	virtual ~Orc();
 
+	virtual void Exec(int x_,int y_,int number);
+	virtual void Draw(Camera camera,int number);
+
 	void InitTexture();
 	void ReleaseTexture();
-
-	void GetPos(int x_);
-	virtual void Exec(Player player);
-	virtual void Draw(Camera camera,int x_[],int y_[],int number);
-
-
-	bool CheckHit(float x, float y, float width, float height);
+	void GetOrcArray(int arrayX_[],int arrayY_[]);
+	bool CheckHit(int x_, int y_, int number);
 
 private:
-	int m_Orc;
-	int m_PosX;
-	int m_PosY;
-	int m_MoveTime;
-	int m_ActIndex;
-	int m_ActWait;
-	int m_ActSpeed;
-	int m_AttIndex;
 	static const int m_OrcMax = 12;
 	static const int m_MotionMax = 4;
 	static const int m_AttackMax = 2;
+	static const int m_NumberMax = 50;
+
+	bool m_Hit[m_NumberMax];
+	bool m_IsRight[m_NumberMax];
+	bool m_IsAlive[m_NumberMax];
+	bool m_IsAttack[m_NumberMax];
+	int m_PosX[m_NumberMax];
+	int m_PosY[m_NumberMax];
+	int m_MoveTime[m_NumberMax];
+	int m_ActIndex[m_NumberMax];
+	int m_ActWait[m_NumberMax];
+	int m_ActSpeed;
+	int m_AttIndex[m_NumberMax];
+	int m_Back[m_NumberMax];
+	int m_KnockBack[m_NumberMax];
+	int m_Orc[m_NumberMax];
 	int m_Orcs[m_OrcMax];
 	int m_ActMotionL[m_MotionMax] = { 1,0,2,0 };
 	int m_ActMotionR[m_MotionMax] = { 6,5,7,5 };

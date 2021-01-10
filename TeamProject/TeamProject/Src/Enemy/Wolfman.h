@@ -10,12 +10,12 @@ public:
 	Wolfman();
 	virtual ~Wolfman();
 
-	virtual void Exec();
+	virtual void Exec(int x_, int y_);
 	virtual void Draw(Camera camera, int x_, int y_);
 	void InitTexture();
 	void ReleaseTexture();
 
-	bool CheckHit(float x, float y, float width, float height);
+	bool CheckHit(int x_ ,int y_);
 
 	int m_Wolfman;
 	int m_Posx;
@@ -24,6 +24,13 @@ public:
 	int m_ActIndex;
 	int m_ActWait;
 	int m_ActSpeed;
+	int m_AttIndex;
+	int m_KnockBack;
+	int m_Back;
+	bool m_IsAttack;
+	bool m_Hit;
+	bool m_IsAlive;
+	bool m_IsRight;
 	static const int m_MotionMax = 2;
 	static const int m_WolfmanMax = 12;
 	int m_Wolfmans[m_WolfmanMax];
