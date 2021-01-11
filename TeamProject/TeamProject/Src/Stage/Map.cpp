@@ -210,7 +210,7 @@ void Map::GetContactParameter(EdgeType edge_, int chip_id_x_, int chip_id_y_, Ed
 		break;
 	case Right:
 		contact_edge_ = EdgeType::Left;
-		contact_pos_ = ChipPosY;
+		contact_pos_ = ChipPosX;
 		break;
 	case Top:
 		contact_edge_ = EdgeType::Bottom;

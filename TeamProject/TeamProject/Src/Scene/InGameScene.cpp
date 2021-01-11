@@ -293,7 +293,7 @@ void InGameScene::Exec()
 		nextStage = StageID_12;
 	}
 
-	if (GetKeyStatus(KEY_INPUT_RETURN) == InputState::Pushed || player.m_Alive == false)
+	if (GetKeyStatus(KEY_INPUT_RETURN) == InputState::Pushed)
 	{
 		SceneManager::SetNextScene(SceneID_Result);
 	}
@@ -696,5 +696,5 @@ void InGameScene::InitPos()
 
 bool InGameScene::IsEnd() const
 {
-	return (player.m_Alive == false);
+	return (GetKeyStatus(KEY_INPUT_RETURN) == TRUE);
 }

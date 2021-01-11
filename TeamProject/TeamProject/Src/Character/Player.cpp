@@ -113,27 +113,28 @@ void Player::Move()
 	int RectHeight = m_PosY + 180;
 
 	EdgeType ContactEdge = InValid;
-	int ContactPos = m_PrevPosY;
+	int ContactPosX = m_PrevPosX;
+	int ContactPosY = m_PrevPosY;
 
 	// XŽ²‚Ì”»’è
-	if (g_map.CheckHit(RectX, RectY, RectWidth, RectHeight, Horizontal, 0, ContactEdge, ContactPos) == false)
+	if (g_map.CheckHit(RectX, RectY, RectWidth, RectHeight, Horizontal, 0, ContactEdge, ContactPosX) == false)
 	{
 		m_PosX += Horizontal;
 	}
 	else
 	{
-		AdjustToMapChipEdgePosition(ContactEdge, ContactPos);
+		AdjustToMapChipEdgePosition(ContactEdge, ContactPosX);
 	}
 
 	// YŽ²‚Ì”»’è
-	if (g_map.CheckHit(RectX, RectY, RectWidth, RectHeight, 0, Vertical, ContactEdge, ContactPos) == false)
+	if (g_map.CheckHit(RectX, RectY, RectWidth, RectHeight, 0, Vertical, ContactEdge, ContactPosY) == false)
 	{
 		m_PosY += Vertical;
 		m_IsFloatingAir = true;
 	}
 	else
 	{
-		AdjustToMapChipEdgePosition(ContactEdge, ContactPos);
+		AdjustToMapChipEdgePosition(ContactEdge, ContactPosY);
 	}
 
 	m_PrevPosX = m_PosX;
