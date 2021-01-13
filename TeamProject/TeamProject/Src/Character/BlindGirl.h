@@ -4,6 +4,15 @@
 #include"Player.h"
 #include "../Function/Camera.h"
 
+enum ActionType
+{
+	Wait,
+	Move,
+	Jump,
+	Damage,
+	Death
+};
+
 class Girl
 {
 public:
@@ -40,6 +49,8 @@ private:
 	int m_WlkMotionL[m_MotionMax] = { 14,15,16,17 };
 	int m_DedMotionR[m_DedMotionMax] = {8,9,10};
 	int m_DedMotionL[m_DedMotionMax] = {19,20,21};
+
+	ActionType m_CurrentAction;
 
 public:
 	Girl();
