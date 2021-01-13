@@ -87,10 +87,14 @@ void Player::Move()
 		m_IsMove = true;
 	}
 	// ÉWÉÉÉìÉvèàóù
-	if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_IsFloatingAir == false)
+	else if (GetKeyStatus(KEY_INPUT_W) == InputState::Pushed && m_IsFloatingAir == false)
 	{
 		m_IsFloatingAir = true;
 		m_JumpVelocity = InitialSpeed;
+	}
+	else
+	{
+		m_IsMove = false;
 	}
 
 	if (m_IsFloatingAir == true)
@@ -163,18 +167,15 @@ void Player::Move()
 			m_WaitIndex %= m_MotionMax;
 		}
 	}
-	else if (m_IsMove == true)
+	else
 	{
-		if (m_IsRight == false && m_IsFloatingAir == false)
+		if (--m_ActStop <= 0)
 		{
-			if (--m_ActStop <= 0)
+			if (m_IsRight == false)
 			{
 				m_Player = m_WlkMotionL[m_ActIndex];
 			}
-		}
-		else if (m_IsRight == true && m_IsFloatingAir == false)
-		{
-			if (--m_ActStop <= 0)
+			else
 			{
 				m_Player = m_WlkMotionR[m_ActIndex];
 			}
@@ -182,11 +183,15 @@ void Player::Move()
 			m_ActStop = m_ActSpeed;
 			m_ActIndex %= m_MotionMax;
 		}
-		else if (m_IsRight == false && m_IsFloatingAir == true)
+	}
+	
+	if (m_IsFloatingAir == true)
+	{
+		if (m_IsRight == false)
 		{
 			m_Player = 12;
 		}
-		else if (m_IsRight == true && m_IsFloatingAir == true)
+		else
 		{
 			m_Player = 28;
 		}
