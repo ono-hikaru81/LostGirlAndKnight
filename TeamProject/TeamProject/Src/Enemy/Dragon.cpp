@@ -1,6 +1,6 @@
 #include"Dragon.h"
 #include"DxLib.h"
-#include"../Main.h"
+#include"../Difinition.h"
 
 enum Motion
 {

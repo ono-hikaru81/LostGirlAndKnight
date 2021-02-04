@@ -19,16 +19,23 @@ public:
 	// ステータス
 	int m_Hp;
 	int m_Speed;
-	int m_Jump = 0;
+	int m_JumpVelocity;
+
+	static const int InitialSpeed = 20;
 
 	// 位置座標
 	int m_PosX;
 	int m_PosY;
+	int m_PrevPosX;
+	int m_PrevPosY;
+	int m_CenterPosX;
+	int m_CenterPosY;
 
 	// 実行確認
 	bool m_StopExec;
 	bool m_WalkExec;
 	bool m_JumpExec;
+	bool m_IsFloatingAir;
 
 private:
 	// 画像保存
@@ -57,10 +64,17 @@ public:
 	virtual ~Girl();
 
 public:
-	void InitTexture();
+
 	void Move(Player player);
 	void Draw(Player player, Camera camera);
+
+	int GetPosX();
+	int GetPosY();
+	int GetCenterPosX();
+	int GetCenterPosY();
+	void InitTexture();
 	void ReleaseTexture();
+	void AdjustToMapChipEdgePosition(EdgeType contact_edge_, int contact_pos_);
 };
 
 #endif // !BLINDGIRL

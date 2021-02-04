@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef DIFINITION_H
+#define DIFINITION_H
 
 // =====================
 // ウィンドウ縦幅、横幅
@@ -30,4 +30,4 @@ const int FieldHeight = MapChipHeight * MaxMapHeight;
 // 重力
 static int g_Gravity = 1;
 
-#endif // !MAIN_H
+#endif // !DIFINITION_H

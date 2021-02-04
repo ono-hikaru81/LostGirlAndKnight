@@ -6,7 +6,7 @@
 #include "../Character/Player.h"
 #include "../Function/Camera.h"
 #include "../Character/BlindGirl.h"
-#include "../Main.h"
+#include "../Difinition.h"
 #include "../UI/UI.h"
 #include "../Gimmick/Gimmick.h"
 #include "../Enemy/Slime.h"

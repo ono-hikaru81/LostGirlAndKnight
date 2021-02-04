@@ -1,7 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "../Main.h"
+#include "../Difinition.h"
 #include "../StageDifinition.h"
 #include "../Function/Camera.h"
 
@@ -32,6 +32,7 @@ public:
 	void Clamp(int* value, int min, int max);
 	void GetContactParameter(EdgeType edge_, int chip_id_x_, int chip_id_y_, EdgeType& contact_edge_, int& contact_pos_);
 	bool CheckHit(int left_, int top_, int right_, int bottom_, int vector_x_, int vector_y_, EdgeType& contact_egde_, int contact_edge_pos_);
+	bool IsClear();
 
 public:
 	int m_PosX;

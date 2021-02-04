@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include "Gimmick.h"
-#include"../Main.h"
+#include"../Difinition.h"
 #include"../Function/Input.h"
 #include"../Character/Player.h"
 
@@ -117,8 +117,7 @@ void Gimmick::BottonDraw(Camera camera,int number)
 	int DrawX = camera.ConvertPosXWorldToScreen(m_BottonPosX[number]);
 	int DrawY = camera.ConvertPosYWorldToScreen(m_BottonPosY[number]);
 
-	DrawFormatString(200, 500, GetColor(0, 255, 255), "%d,%d", m_BottonPosX[0], m_BottonPosY[0]);
-	DrawFormatString(200, 600, GetColor(0, 255, 255), "%d,%d", m_BottonPosX[1], m_BottonPosY[1]);
+	
 	if (m_BottonHit[number] == true)
 	{
 		DrawGraph(DrawX, DrawY, m_Bottons[1], TRUE);
@@ -193,14 +192,7 @@ void Gimmick::BrockDraw(Camera camera, int number)
 	int DrawY = camera.ConvertPosYWorldToScreen(m_BrockPosY[number]);
 
 	DrawGraph(DrawX, DrawY, m_BrockTex, TRUE);
-	if (m_num[number] == true)
-	{
-		DrawString(DrawX, DrawY, "Hit", GetColor(255, 0, 0));
-	}
-	else
-	{
-		DrawString(DrawX, DrawY, "NoHit", GetColor(255, 0, 0));
-	}
+	
 }
 
 void Gimmick::GetArray(int BottonX_[], int BottonY_[], int BridgeX_[], int BridgeY_[], int TrapX_[], int TrapY_[], int RockX_[], int RockY_[], int BrockX_[], int BrockY_[])

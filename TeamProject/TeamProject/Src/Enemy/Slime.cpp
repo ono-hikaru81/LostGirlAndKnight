@@ -146,15 +146,7 @@ void Slime::Draw(Camera camera,int number)
 	int DrawX = camera.ConvertPosXWorldToScreen(m_PosX[number]);
 	int DrawY = camera.ConvertPosYWorldToScreen(m_PosY[number]);
 
-	//DrawPixel(DrawX, DrawY, GetColor(255, 255, 255));				//ç∂è„
-	//DrawPixel(DrawX + 180, DrawY, GetColor(255, 255, 255));			//âEè„
-	//DrawPixel(DrawX, DrawY + 210, GetColor(255, 255, 255));			//ç∂â∫
-	//DrawPixel(DrawX + 180, DrawY + 210, GetColor(255, 255, 255));	//âEâ∫
-
-	//DrawFormatString(200, 400, GetColor(0, 255, 255), "%d", m_PosX[number] + 230);
-
-	//DrawBox(DrawX + 230, DrawY, DrawX + 90 , DrawY + 210, GetColor(0, 200, 200), FALSE);
-	//DrawBox(DrawX -50, DrawY, DrawX + 90, DrawY + 210, GetColor(200, 0, 200), FALSE);
+	
 	if (m_IsAlive[number] == true)
 	{
 		DrawGraph(DrawX, DrawY, m_Slimes[m_Slime[number]], TRUE);

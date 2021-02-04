@@ -1,4 +1,4 @@
-#include "../Main.h"
+#include "../Difinition.h"
 #include "DxLib.h"
 #include "Fade.h"
 

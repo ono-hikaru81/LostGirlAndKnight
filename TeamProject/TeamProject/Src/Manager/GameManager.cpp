@@ -22,11 +22,11 @@ void GameManager::Exec()
 {
 	if (m_pStage == nullptr) { return; }
 	m_pStage->Data(m_NextStageID);
-	//if (m_pStage->IsEnd())
-	//{
-	//	delete m_pStage;
-	//	m_pStage = create_NextStage();
-	//}
+	if (m_pStage->IsClear())
+	{
+		delete m_pStage;
+		m_pStage = create_NextStage();
+	}
 }
 
 void GameManager::Draw()
@@ -53,6 +53,7 @@ Map* GameManager::create_NextStage()
 	case StageID_1: next = new Map(); break;
 	case StageID_2: next = new Map(); break;
 	case StageID_3: next = new Map(); break;
+	case StageID_4: next = new Map(); break;
 	case StageID_5: next = new Map(); break;
 	case StageID_6: next = new Map(); break;
 	case StageID_7: next = new Map(); break;

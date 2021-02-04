@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include "Input.h"
 #include "DxLib.h"
-#include "../Main.h"
+#include "../Difinition.h"
 #include "../Character/Player.h"
 
 static Player player;

@@ -320,7 +320,7 @@ bool Map::CheckHit(int left_, int top_, int right_, int bottom_, int vector_x_, 
 		{
 			for (int x = EdgeListX[i][start]; x <= EdgeListX[i][end]; x++)
 			{
-				if (Info[y][x] == 0 || Info[y][x] == 2)
+				if (Info12[y][x] == 0 || Info12[y][x] == 2)
 				{
 					GetContactParameter((EdgeType)i, x, y, contact_egde_, contact_edge_pos_);
 
@@ -331,4 +331,10 @@ bool Map::CheckHit(int left_, int top_, int right_, int bottom_, int vector_x_, 
 	}
 
 	return false;
+}
+
+bool Map::IsClear()
+{
+
+	return true;
 }

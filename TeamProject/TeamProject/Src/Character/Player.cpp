@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include "Player.h"
-#include "../Main.h"
+#include "../Difinition.h"
 #include "../Function/Input.h"
 #include "../Stage/Map.h"
 
@@ -14,7 +14,7 @@ Player::Player()
 
 	//Player座標
 	m_PosX = 120;
-	m_PosY = 700;
+	m_PosY = 750;
 	m_CenterPosX = (m_PosX + 180) / 2;
 	m_CenterPosY = (m_PosY + 180) / 2;
 
@@ -34,7 +34,6 @@ Player::Player()
 	m_IsRight = true;
 	m_IsFloatingAir = false;
 	m_Alive = true;
-	m_JumpVelocity = 0;
 
 	InitTexture();
 }
@@ -244,22 +243,10 @@ void Player::Draw(Camera camera)
 	int DrawPosX = camera.ConvertPosXWorldToScreen(m_PosX);
 	int DrawPosY = camera.ConvertPosYWorldToScreen(m_PosY);
 
-	DrawFormatString(200, 700, GetColor(0, 255, 255), "座標[ %d,%d ]", m_PosX, m_PosY);
-	DrawBox(DrawPosX + 60, DrawPosY, DrawPosX + 120, DrawPosY + 180, GetColor(200, 200, 200), FALSE);
+	//DrawFormatString(200, 700, GetColor(0, 255, 255), "座標[ %d,%d ]", m_PosX, m_PosY);
+	//DrawBox(DrawPosX + 60, DrawPosY, DrawPosX + 120, DrawPosY + 180, GetColor(200, 200, 200), FALSE);
 	DrawGraph(DrawPosX, DrawPosY, m_Players[m_Player], TRUE);
 
-	//ルーズな当たり判定(点描画)
-	DrawPixel(DrawPosX, DrawPosY, GetColor(255, 255, 255));				//左上
-	DrawPixel(DrawPosX + 180, DrawPosY, GetColor(255, 255, 255));		//右上
-	DrawPixel(DrawPosX, DrawPosY + 180, GetColor(255, 255, 255));		//左下
-	DrawPixel(DrawPosX + 180, DrawPosY + 180, GetColor(255, 255, 255));	//右下
-	
-
-	//タイトな当たり判定(点描画)
-	/*DrawPixel(DrawPosX + 50, DrawPosY, GetColor(255, 255, 255));		//左上
-	DrawPixel(DrawPosX + 120, DrawPosY, GetColor(255, 255, 255));		//右上
-	DrawPixel(DrawPosX + 50, DrawPosY + 180, GetColor(255, 255, 255));	//左下
-	DrawPixel(DrawPosX + 120, DrawPosY + 180, GetColor(255, 255, 255));	//右下*/
 }
 
 void Player::InitTexture()

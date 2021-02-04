@@ -1,7 +1,7 @@
 #include"Orc.h"
 #include"DxLib.h"
 #include"../Character/Player.h"
-#include"../Main.h"
+#include"../Difinition.h"
 
 //static Player player;
 

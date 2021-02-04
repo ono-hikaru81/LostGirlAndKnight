@@ -194,7 +194,7 @@
     <ClInclude Include="Src\Function\Fade.h" />
     <ClInclude Include="Src\Function\Input.h" />
     <ClInclude Include="Src\Gimmick\Gimmick.h" />
-    <ClInclude Include="Src\Main.h" />
+    <ClInclude Include="Src\Difinition.h" />
     <ClInclude Include="Src\Manager\GameManager.h" />
     <ClInclude Include="Src\Manager\SceneManager.h" />
     <ClInclude Include="Src\SceneDifinition.h" />
