@@ -233,7 +233,7 @@ void InGameScene::Exec()
 	}
 	else if (nextStage == StageID_12)
 	{
-		//dragon.Exec(camera, 2400, 360);
+		dragon.Exec();
 	}
 	/*gimmick.TrapMove();
 	gimmick.RockMove();

@@ -13,7 +13,6 @@ public:
 
 	// ¶‚«‚Ä‚éH
 	bool m_SlimeAlive;
-	
 
 public:
 	EnemyBase();

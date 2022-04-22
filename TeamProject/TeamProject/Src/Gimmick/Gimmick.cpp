@@ -221,10 +221,10 @@ bool Gimmick::CheckHit()
 bool Gimmick::BottonCheckHit(int x1_,int y1_,int number)
 {
 	
-	if ((x1_ + 120> m_BottonPosX[number] && y1_ < m_BottonPosY[number]) ||
-		(x1_ + 120> m_BottonPosX[number] && y1_ + 180 < m_BottonPosY[number]+30)||
-		(x1_ + 50 > m_BottonPosX[number] + 120&& y1_ < m_BottonPosY[number]) ||
-		(x1_ + 50 > m_BottonPosX[number] + 120 && y1_ +180 < m_BottonPosY[number] +30))
+	if ((x1_ + 120 > m_BottonPosX[number] && y1_ < m_BottonPosY[number]) ||
+		(x1_ + 120 > m_BottonPosX[number] && y1_ + 180 < m_BottonPosY[number]+ 30)||
+		(x1_ + 50 > m_BottonPosX[number] + 120 && y1_ < m_BottonPosY[number]) ||
+		(x1_ + 50 > m_BottonPosX[number] + 120 && y1_ +180 < m_BottonPosY[number] + 30))
 	{
 		return true;
 	}
