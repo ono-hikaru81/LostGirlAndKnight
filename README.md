@@ -1,8 +1,7 @@
-環境
-DxLibraryを使用して作成。
+# LostGirlAndKnight
 
 ## 概要
-Unityで作成の3Dゲーム。  
+DxLibraryで作成の2Dゲーム。  
 女の子を導くダークアクションゲーム
 
 ## 制作人数
