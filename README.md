@@ -1,8 +1,8 @@
 # LostGirlAndKnight
 
 ## 概要
-DxLibraryで作成の2Dゲーム。  
-女の子を導くダークアクションゲーム
+DxLibraryを使用した2Dアクションゲーム。  
+GFFに提出することを目的に作成。
 
 ## 制作人数
 プランナー：3名  
